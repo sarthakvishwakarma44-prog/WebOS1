@@ -87,6 +87,8 @@ minimizeFiles.addEventListener("click", function () {
 
     filesWindow.style.display = "none";
 
+    createFilesTaskbarButton();
+
 });
 
 
