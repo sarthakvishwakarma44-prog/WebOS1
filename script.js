@@ -491,3 +491,249 @@ function removeNotesTaskbarButton() {
     }
 
 }
+// =========================
+// CALCULATOR APP
+// =========================
+
+const calculatorApp =
+    document.getElementById("calculatorApp");
+
+const calculatorWindow =
+    document.getElementById("calculatorWindow");
+
+const calculatorDisplay =
+    document.getElementById("calculatorDisplay");
+
+const closeCalculator =
+    document.getElementById("closeCalculator");
+
+const minimizeCalculator =
+    document.getElementById("minimizeCalculator");
+
+const maximizeCalculator =
+    document.getElementById("maximizeCalculator");
+
+const calculatorButtons =
+    document.querySelectorAll(
+        ".calculatorButtons button"
+    );
+
+let calculatorTaskbarButton = null;
+
+
+// =========================
+// OPEN CALCULATOR
+// =========================
+
+calculatorApp.addEventListener("click", function () {
+
+    startMenu.style.display = "none";
+
+    calculatorWindow.style.display = "block";
+
+    calculatorWindow.style.zIndex = 1002;
+
+    createCalculatorTaskbarButton();
+
+});
+
+
+// =========================
+// CLOSE
+// =========================
+
+closeCalculator.addEventListener("click", function () {
+
+    calculatorWindow.style.display = "none";
+
+    removeCalculatorTaskbarButton();
+
+});
+
+
+// =========================
+// MINIMIZE
+// =========================
+
+minimizeCalculator.addEventListener(
+    "click",
+    function () {
+
+        calculatorWindow.style.display = "none";
+
+        createCalculatorTaskbarButton();
+
+    }
+);
+
+
+// =========================
+// MAXIMIZE
+// =========================
+
+maximizeCalculator.addEventListener(
+    "click",
+    function () {
+
+        calculatorWindow.classList.toggle(
+            "maximized"
+        );
+
+    }
+);
+
+
+// =========================
+// CALCULATOR BUTTONS
+// =========================
+
+calculatorButtons.forEach(function (button) {
+
+    button.addEventListener(
+        "click",
+        function () {
+
+            const value =
+                button.dataset.value;
+
+            if (value === "C") {
+
+                calculatorDisplay.value = "0";
+
+                return;
+            }
+
+            if (value === "=") {
+
+                calculateResult();
+
+                return;
+            }
+
+            if (calculatorDisplay.value === "0") {
+
+                calculatorDisplay.value = value;
+
+            } else {
+
+                calculatorDisplay.value += value;
+
+            }
+
+        }
+    );
+
+});
+
+
+// =========================
+// CALCULATE
+// =========================
+
+function calculateResult() {
+
+    const expression =
+        calculatorDisplay.value;
+
+    // Only allow calculator characters.
+    if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
+
+        calculatorDisplay.value = "Error";
+
+        return;
+    }
+
+    try {
+
+        const result =
+            Function(
+                `"use strict"; return (${expression})`
+            )();
+
+        if (
+            typeof result !== "number" ||
+            !Number.isFinite(result)
+        ) {
+
+            calculatorDisplay.value = "Error";
+
+            return;
+        }
+
+        calculatorDisplay.value = result;
+
+    } catch {
+
+        calculatorDisplay.value = "Error";
+
+    }
+
+}
+
+
+// =========================
+// TASKBAR BUTTON
+// =========================
+
+function createCalculatorTaskbarButton() {
+
+    if (calculatorTaskbarButton) {
+        return;
+    }
+
+    calculatorTaskbarButton =
+        document.createElement("button");
+
+    calculatorTaskbarButton.className =
+        "taskbarApp";
+
+    calculatorTaskbarButton.textContent =
+        "🧮 Calculator";
+
+    calculatorTaskbarButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                calculatorWindow.style.display ===
+                "none"
+            ) {
+
+                calculatorWindow.style.display =
+                    "block";
+
+                calculatorWindow.style.zIndex =
+                    1002;
+
+            } else {
+
+                calculatorWindow.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+    taskbarApps.appendChild(
+        calculatorTaskbarButton
+    );
+
+}
+
+
+// =========================
+// REMOVE TASKBAR BUTTON
+// =========================
+
+function removeCalculatorTaskbarButton() {
+
+    if (calculatorTaskbarButton) {
+
+        calculatorTaskbarButton.remove();
+
+        calculatorTaskbarButton = null;
+
+    }
+
+}
