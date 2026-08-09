@@ -102,3 +102,126 @@ maximizeFiles.addEventListener("click", function () {
     }
 
 });
+// =========================
+// FILE MANAGER WINDOW
+// =========================
+
+const filesApp = document.getElementById("filesApp");
+const filesWindow = document.getElementById("filesWindow");
+
+const closeFiles = document.getElementById("closeFiles");
+const minimizeFiles = document.getElementById("minimizeFiles");
+const maximizeFiles = document.getElementById("maximizeFiles");
+
+const windowHeader = filesWindow.querySelector(".windowHeader");
+
+
+// =========================
+// OPEN WINDOW
+// =========================
+
+filesApp.addEventListener("click", function () {
+
+    startMenu.style.display = "none";
+
+    filesWindow.style.display = "block";
+
+    bringToFront();
+
+});
+
+
+// =========================
+// CLOSE WINDOW
+// =========================
+
+closeFiles.addEventListener("click", function () {
+
+    filesWindow.style.display = "none";
+
+});
+
+
+// =========================
+// MINIMIZE WINDOW
+// =========================
+
+minimizeFiles.addEventListener("click", function () {
+
+    filesWindow.style.display = "none";
+
+});
+
+
+// =========================
+// MAXIMIZE / RESTORE
+// =========================
+
+maximizeFiles.addEventListener("click", function () {
+
+    filesWindow.classList.toggle("maximized");
+
+});
+
+
+// =========================
+// BRING WINDOW TO FRONT
+// =========================
+
+function bringToFront() {
+
+    filesWindow.style.zIndex = 1000;
+
+}
+
+filesWindow.addEventListener("mousedown", bringToFront);
+
+
+// =========================
+// DRAG WINDOW
+// =========================
+
+let isDragging = false;
+
+let offsetX = 0;
+let offsetY = 0;
+
+
+windowHeader.addEventListener("mousedown", function (event) {
+
+    if (filesWindow.classList.contains("maximized")) {
+        return;
+    }
+
+    isDragging = true;
+
+    const rect = filesWindow.getBoundingClientRect();
+
+    offsetX = event.clientX - rect.left;
+    offsetY = event.clientY - rect.top;
+
+    bringToFront();
+
+});
+
+
+document.addEventListener("mousemove", function (event) {
+
+    if (!isDragging) {
+        return;
+    }
+
+    filesWindow.style.left =
+        (event.clientX - offsetX) + "px";
+
+    filesWindow.style.top =
+        (event.clientY - offsetY) + "px";
+
+});
+
+
+document.addEventListener("mouseup", function () {
+
+    isDragging = false;
+
+});
