@@ -467,3 +467,87 @@ body {
 
     color: #444;
 }
+/* =========================
+   TASK MANAGER
+   ========================= */
+
+#taskManagerWindow {
+    width: 650px;
+    height: 520px;
+}
+
+.taskManagerContent {
+    height: calc(100% - 45px);
+
+    padding: 20px;
+
+    overflow-y: auto;
+}
+
+.monitorCards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin: 20px 0;
+}
+
+.monitorCard {
+    padding: 15px;
+
+    background: #f1f1f1;
+
+    border-radius: 10px;
+}
+
+.monitorCard span {
+    display: block;
+
+    font-size: 13px;
+
+    color: #666;
+}
+
+.monitorCard strong {
+    display: block;
+
+    margin-top: 8px;
+}
+
+#runningApps {
+    margin: 15px 0;
+}
+
+.runningApp {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px;
+
+    margin-bottom: 8px;
+
+    background: #f1f1f1;
+
+    border-radius: 8px;
+}
+
+.appStatus {
+    color: #16803c;
+
+    font-size: 13px;
+}
+
+#refreshTaskManager {
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
