@@ -301,3 +301,72 @@ body {
 .taskbarApp.active {
     background: rgba(255, 255, 255, 0.22);
 }
+/* =========================
+   NOTES APP
+   ========================= */
+
+#notesWindow {
+    width: 650px;
+    height: 450px;
+}
+
+.notesContent {
+    height: calc(100% - 45px);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 15px;
+}
+
+.notesToolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.notesToolbar button {
+    padding: 8px 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #e8e8e8;
+
+    cursor: pointer;
+}
+
+.notesToolbar button:hover {
+    background: #d5d5d5;
+}
+
+#notesEditor {
+    flex: 1;
+
+    width: 100%;
+
+    resize: none;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    padding: 12px;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+
+    outline: none;
+}
+
+#notesEditor:focus {
+    border-color: #777;
+}
+
+#saveStatus {
+    height: 25px;
+
+    padding-top: 6px;
+
+    font-size: 12px;
+    color: #666;
+}
