@@ -128,8 +128,9 @@ filesApp.addEventListener("click", function () {
 
     bringToFront();
 
-});
+    createFilesTaskbarButton();
 
+});
 
 // =========================
 // CLOSE WINDOW
