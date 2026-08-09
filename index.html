@@ -217,6 +217,52 @@
 
     </div>
 
+</div>
+<div id="taskManagerWindow" class="window">
+
+    <div class="windowHeader">
+        <span>📊 Task Manager</span>
+
+        <div class="windowControls">
+            <button id="minimizeTaskManager">−</button>
+            <button id="maximizeTaskManager">□</button>
+            <button id="closeTaskManager">×</button>
+        </div>
+    </div>
+
+    <div class="taskManagerContent">
+
+        <h2>System Monitor</h2>
+
+        <div class="monitorCards">
+
+            <div class="monitorCard">
+                <span>🕐 Uptime</span>
+                <strong id="webosUptime">0 seconds</strong>
+            </div>
+
+            <div class="monitorCard">
+                <span>🌐 Network</span>
+                <strong id="taskNetwork">Checking...</strong>
+            </div>
+
+            <div class="monitorCard">
+                <span>📦 Storage</span>
+                <strong id="taskStorage">Checking...</strong>
+            </div>
+
+        </div>
+
+        <h3>Running WebOS Apps</h3>
+
+        <div id="runningApps"></div>
+
+        <button id="refreshTaskManager">
+            🔄 Refresh
+        </button>
+
+    </div>
+
 </div>        
     </main>
 
