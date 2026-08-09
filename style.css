@@ -255,3 +255,14 @@ body {
 
     line-height: 1.5;
 }
+/* =========================
+   WINDOW DRAGGING
+   ========================= */
+
+.windowHeader {
+    user-select: none;
+}
+
+.windowHeader span {
+    pointer-events: none;
+}
