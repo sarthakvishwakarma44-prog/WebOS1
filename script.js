@@ -77,6 +77,8 @@ closeFiles.addEventListener("click", function () {
 
     filesWindow.style.display = "none";
 
+    removeFilesTaskbarButton();
+
 });
 
 
