@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>WebOS</title>
+    <title>WebOS v1.0</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -20,7 +20,7 @@
 
 
 <!-- =====================================================
-     WEBOS DESKTOP
+     DESKTOP
      ===================================================== -->
 
 <main id="desktop">
@@ -30,7 +30,7 @@
          DESKTOP ICONS
          ================================================= -->
 
-    <div class="desktop-icon">
+    <div class="desktop-icon" id="filesDesktopIcon">
 
         <div class="icon">
             📁
@@ -43,7 +43,7 @@
     </div>
 
 
-    <div class="desktop-icon">
+    <div class="desktop-icon" id="notesDesktopIcon">
 
         <div class="icon">
             📝
@@ -56,7 +56,7 @@
     </div>
 
 
-    <div class="desktop-icon">
+    <div class="desktop-icon" id="calculatorDesktopIcon">
 
         <div class="icon">
             🧮
@@ -74,16 +74,13 @@
          FILES WINDOW
          ================================================= -->
 
-    <div id="filesWindow"
-         class="window">
-
+    <div id="filesWindow" class="window">
 
         <div class="windowHeader">
 
             <span>
                 📁 Files
             </span>
-
 
             <div class="windowControls">
 
@@ -109,7 +106,6 @@
             <h2>
                 File Manager
             </h2>
-
 
             <div class="fileArea">
 
@@ -139,16 +135,13 @@
          NOTES WINDOW
          ================================================= -->
 
-    <div id="notesWindow"
-         class="window">
-
+    <div id="notesWindow" class="window">
 
         <div class="windowHeader">
 
             <span>
                 📝 Notes
             </span>
-
 
             <div class="windowControls">
 
@@ -171,13 +164,11 @@
 
         <div class="notesContent">
 
-
             <div class="notesToolbar">
 
                 <button id="saveNote">
                     💾 Save
                 </button>
-
 
                 <button id="clearNote">
                     🗑️ Clear
@@ -196,7 +187,6 @@
                 Ready
             </div>
 
-
         </div>
 
     </div>
@@ -207,16 +197,13 @@
          CALCULATOR WINDOW
          ================================================= -->
 
-    <div id="calculatorWindow"
-         class="window">
-
+    <div id="calculatorWindow" class="window">
 
         <div class="windowHeader">
 
             <span>
                 🧮 Calculator
             </span>
-
 
             <div class="windowControls">
 
@@ -239,7 +226,6 @@
 
         <div class="calculatorContent">
 
-
             <input
                 id="calculatorDisplay"
                 type="text"
@@ -250,89 +236,72 @@
 
             <div class="calculatorButtons">
 
-
                 <button data-value="C">
                     C
                 </button>
-
 
                 <button data-value="(">
                     (
                 </button>
 
-
                 <button data-value=")">
                     )
                 </button>
-
 
                 <button data-value="/">
                     ÷
                 </button>
 
 
-
                 <button data-value="7">
                     7
                 </button>
-
 
                 <button data-value="8">
                     8
                 </button>
 
-
                 <button data-value="9">
                     9
                 </button>
-
 
                 <button data-value="*">
                     ×
                 </button>
 
 
-
                 <button data-value="4">
                     4
                 </button>
-
 
                 <button data-value="5">
                     5
                 </button>
 
-
                 <button data-value="6">
                     6
                 </button>
-
 
                 <button data-value="-">
                     −
                 </button>
 
 
-
                 <button data-value="1">
                     1
                 </button>
-
 
                 <button data-value="2">
                     2
                 </button>
 
-
                 <button data-value="3">
                     3
                 </button>
 
-
                 <button data-value="+">
                     +
                 </button>
-
 
 
                 <button
@@ -343,11 +312,9 @@
 
                 </button>
 
-
                 <button data-value=".">
                     .
                 </button>
-
 
                 <button
                     data-value="="
@@ -356,7 +323,6 @@
                     =
 
                 </button>
-
 
             </div>
 
@@ -370,16 +336,13 @@
          SETTINGS WINDOW
          ================================================= -->
 
-    <div id="settingsWindow"
-         class="window">
-
+    <div id="settingsWindow" class="window">
 
         <div class="windowHeader">
 
             <span>
                 ⚙️ Settings
             </span>
-
 
             <div class="windowControls">
 
@@ -402,21 +365,16 @@
 
         <div class="settingsContent">
 
-
             <h2>
                 Settings
             </h2>
 
-
-
-            <!-- BATTERY -->
 
             <div class="settingsSection">
 
                 <h3>
                     🔋 Battery
                 </h3>
-
 
                 <p id="settingsBattery">
                     Checking battery...
@@ -425,25 +383,19 @@
             </div>
 
 
-
-            <!-- SYSTEM -->
-
             <div class="settingsSection">
 
                 <h3>
                     💻 System
                 </h3>
 
-
                 <p id="systemPlatform">
                     Loading...
                 </p>
 
-
                 <p id="systemBrowser">
                     Loading...
                 </p>
-
 
                 <p id="systemLanguage">
                     Loading...
@@ -452,20 +404,15 @@
             </div>
 
 
-
-            <!-- DISPLAY -->
-
             <div class="settingsSection">
 
                 <h3>
                     🖥️ Display
                 </h3>
 
-
                 <p id="screenResolution">
                     Loading...
                 </p>
-
 
                 <p id="screenPixelRatio">
                     Loading...
@@ -474,15 +421,11 @@
             </div>
 
 
-
-            <!-- NETWORK -->
-
             <div class="settingsSection">
 
                 <h3>
                     🌐 Network
                 </h3>
-
 
                 <p id="networkStatus">
                     Checking...
@@ -491,32 +434,21 @@
             </div>
 
 
-
-            <!-- ABOUT -->
-
             <div class="settingsSection">
 
                 <h3>
                     ℹ️ About WebOS
                 </h3>
 
-
                 <p>
                     WebOS Version: 1.0
                 </p>
-
 
                 <p>
                     Browser-based operating system project
                 </p>
 
-
-                <p>
-                    WebOS v1.0
-                </p>
-
             </div>
-
 
         </div>
 
@@ -525,19 +457,16 @@
 
 
     <!-- =================================================
-         TASK MANAGER WINDOW
+         TASK MANAGER
          ================================================= -->
 
-    <div id="taskManagerWindow"
-         class="window">
-
+    <div id="taskManagerWindow" class="window">
 
         <div class="windowHeader">
 
             <span>
                 📊 Task Manager
             </span>
-
 
             <div class="windowControls">
 
@@ -560,14 +489,10 @@
 
         <div class="taskManagerContent">
 
-
             <h2>
                 System Monitor
             </h2>
 
-
-
-            <!-- MONITOR CARDS -->
 
             <div class="monitorCards">
 
@@ -578,13 +503,11 @@
                         🕐 Uptime
                     </span>
 
-
                     <strong id="webosUptime">
                         0 seconds
                     </strong>
 
                 </div>
-
 
 
                 <div class="monitorCard">
@@ -593,13 +516,11 @@
                         🌐 Network
                     </span>
 
-
                     <strong id="taskNetwork">
                         Checking...
                     </strong>
 
                 </div>
-
 
 
                 <div class="monitorCard">
@@ -608,19 +529,14 @@
                         📦 Storage
                     </span>
 
-
                     <strong id="taskStorage">
                         Checking...
                     </strong>
 
                 </div>
 
-
             </div>
 
-
-
-            <!-- RUNNING APPS -->
 
             <h3>
                 Running WebOS Apps
@@ -631,15 +547,9 @@
             </div>
 
 
-
-            <!-- REFRESH -->
-
             <button id="refreshTaskManager">
-
                 🔄 Refresh
-
             </button>
-
 
         </div>
 
@@ -657,8 +567,6 @@
 <footer id="taskbar">
 
 
-    <!-- START BUTTON -->
-
     <button id="startButton">
         ⊞
     </button>
@@ -672,24 +580,13 @@
     <div id="startMenu">
 
 
-        <!-- SEARCH -->
-
         <div id="searchBox">
-
             🔎 Search apps...
-
         </div>
 
 
-
-        <!-- =================================================
-             APPLICATIONS
-             ================================================= -->
-
         <div class="startApps">
 
-
-            <!-- FILES -->
 
             <button
                 class="appButton"
@@ -704,9 +601,6 @@
             </button>
 
 
-
-            <!-- NOTES -->
-
             <button
                 class="appButton"
                 id="notesApp">
@@ -719,9 +613,6 @@
 
             </button>
 
-
-
-            <!-- CALCULATOR -->
 
             <button
                 class="appButton"
@@ -736,9 +627,6 @@
             </button>
 
 
-
-            <!-- SETTINGS -->
-
             <button
                 class="appButton"
                 id="settingsApp">
@@ -752,9 +640,6 @@
             </button>
 
 
-
-            <!-- GAMES -->
-
             <button
                 class="appButton"
                 id="gamesApp">
@@ -767,9 +652,6 @@
 
             </button>
 
-
-
-            <!-- TASK MANAGER -->
 
             <button
                 class="appButton"
@@ -787,23 +669,15 @@
         </div>
 
 
-
-        <!-- =================================================
-             START MENU BOTTOM
-             ================================================= -->
-
         <div id="startBottom">
-
 
             <span>
                 👤 WebOS User
             </span>
 
-
             <button id="powerButton">
                 ⏻
             </button>
-
 
         </div>
 
@@ -812,31 +686,24 @@
 
 
 
-    <!-- =================================================
-         TASKBAR APPLICATIONS
-         ================================================= -->
+    <!-- TASKBAR RUNNING APPS -->
 
     <div id="taskbarApps">
     </div>
 
 
 
-    <!-- =================================================
-         SYSTEM TRAY
-         ================================================= -->
+    <!-- SYSTEM TRAY -->
 
     <div id="systemTray">
 
-
         <span id="battery">
-            🔋 --%
+            🔋 --
         </span>
-
 
         <span id="clock">
             00:00
         </span>
-
 
     </div>
 
@@ -849,8 +716,1297 @@
      JAVASCRIPT
      ===================================================== -->
 
-<script src="script.js"></script>
+<script>
 
+
+/* =====================================================
+   WEBOS v1.0 JAVASCRIPT
+   ===================================================== */
+
+
+/* -----------------------------------------------------
+   BASIC ELEMENTS
+   ----------------------------------------------------- */
+
+const desktop =
+    document.getElementById("desktop");
+
+const startButton =
+    document.getElementById("startButton");
+
+const startMenu =
+    document.getElementById("startMenu");
+
+const taskbarApps =
+    document.getElementById("taskbarApps");
+
+const clockDisplay =
+    document.getElementById("clock");
+
+const batteryDisplay =
+    document.getElementById("battery");
+
+
+/* -----------------------------------------------------
+   START MENU
+   ----------------------------------------------------- */
+
+startMenu.style.display = "none";
+
+
+startButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        if (
+            startMenu.style.display === "block"
+        ) {
+
+            startMenu.style.display = "none";
+
+        } else {
+
+            startMenu.style.display = "block";
+
+        }
+
+    }
+);
+
+
+startMenu.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function() {
+
+        startMenu.style.display = "none";
+
+    }
+);
+
+
+/* -----------------------------------------------------
+   CLOCK
+   ----------------------------------------------------- */
+
+function updateClock() {
+
+    const now = new Date();
+
+    let hours =
+        String(now.getHours())
+        .padStart(2, "0");
+
+    let minutes =
+        String(now.getMinutes())
+        .padStart(2, "0");
+
+    clockDisplay.textContent =
+        hours + ":" + minutes;
+
+}
+
+
+updateClock();
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+/* -----------------------------------------------------
+   BATTERY
+   ----------------------------------------------------- */
+
+async function setupBattery() {
+
+    if (!navigator.getBattery) {
+
+        batteryDisplay.textContent =
+            "🔋 N/A";
+
+        return;
+
+    }
+
+
+    try {
+
+        const battery =
+            await navigator.getBattery();
+
+
+        function updateBattery() {
+
+            const level =
+                Math.round(
+                    battery.level * 100
+                );
+
+
+            batteryDisplay.textContent =
+                (
+                    battery.charging
+                        ? "⚡ "
+                        : "🔋 "
+                ) +
+                level +
+                "%";
+
+        }
+
+
+        updateBattery();
+
+
+        battery.addEventListener(
+            "levelchange",
+            updateBattery
+        );
+
+
+        battery.addEventListener(
+            "chargingchange",
+            updateBattery
+        );
+
+    } catch {
+
+        batteryDisplay.textContent =
+            "🔋 N/A";
+
+    }
+
+}
+
+
+setupBattery();
+
+
+/* -----------------------------------------------------
+   WINDOWS
+   ----------------------------------------------------- */
+
+const windows = {
+
+    files:
+        document.getElementById(
+            "filesWindow"
+        ),
+
+    notes:
+        document.getElementById(
+            "notesWindow"
+        ),
+
+    calculator:
+        document.getElementById(
+            "calculatorWindow"
+        ),
+
+    settings:
+        document.getElementById(
+            "settingsWindow"
+        ),
+
+    taskManager:
+        document.getElementById(
+            "taskManagerWindow"
+        )
+
+};
+
+
+let highestZ = 100;
+
+
+/* Hide all windows initially */
+
+Object.values(windows).forEach(
+    function(windowElement) {
+
+        windowElement.style.display =
+            "none";
+
+    }
+);
+
+
+/* -----------------------------------------------------
+   OPEN WINDOW
+   ----------------------------------------------------- */
+
+function openWindow(name) {
+
+    const windowElement =
+        windows[name];
+
+    if (!windowElement) return;
+
+
+    windowElement.style.display =
+        "block";
+
+
+    highestZ++;
+
+
+    windowElement.style.zIndex =
+        highestZ;
+
+
+    startMenu.style.display =
+        "none";
+
+}
+
+
+/* -----------------------------------------------------
+   CLOSE WINDOW
+   ----------------------------------------------------- */
+
+function closeWindow(name) {
+
+    const windowElement =
+        windows[name];
+
+    if (!windowElement) return;
+
+
+    windowElement.style.display =
+        "none";
+
+
+    removeTaskbarButton(name);
+
+}
+
+
+/* -----------------------------------------------------
+   MINIMIZE WINDOW
+   ----------------------------------------------------- */
+
+function minimizeWindow(name) {
+
+    const windowElement =
+        windows[name];
+
+    if (!windowElement) return;
+
+
+    windowElement.style.display =
+        "none";
+
+}
+
+
+/* -----------------------------------------------------
+   MAXIMIZE WINDOW
+   ----------------------------------------------------- */
+
+function maximizeWindow(name) {
+
+    const windowElement =
+        windows[name];
+
+    if (!windowElement) return;
+
+
+    windowElement.classList.toggle(
+        "maximized"
+    );
+
+
+    highestZ++;
+
+
+    windowElement.style.zIndex =
+        highestZ;
+
+}
+
+
+/* -----------------------------------------------------
+   WINDOW FOCUS
+   ----------------------------------------------------- */
+
+Object.entries(windows).forEach(
+    function([name, windowElement]) {
+
+        windowElement.addEventListener(
+            "mousedown",
+            function() {
+
+                highestZ++;
+
+                windowElement.style.zIndex =
+                    highestZ;
+
+            }
+        );
+
+    }
+);
+
+
+/* -----------------------------------------------------
+   TASKBAR BUTTONS
+   ----------------------------------------------------- */
+
+const taskbarButtonData = {};
+
+
+function addTaskbarButton(
+    name,
+    title,
+    icon
+) {
+
+    if (
+        taskbarButtonData[name]
+    ) {
+
+        return;
+
+    }
+
+
+    const button =
+        document.createElement("button");
+
+
+    button.className =
+        "taskbarApp";
+
+
+    button.textContent =
+        icon + " " + title;
+
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            const windowElement =
+                windows[name];
+
+
+            if (
+                windowElement.style.display ===
+                "none"
+            ) {
+
+                openWindow(name);
+
+            } else {
+
+                minimizeWindow(name);
+
+            }
+
+        }
+    );
+
+
+    taskbarApps.appendChild(button);
+
+
+    taskbarButtonData[name] =
+        button;
+
+}
+
+
+function removeTaskbarButton(name) {
+
+    if (
+        taskbarButtonData[name]
+    ) {
+
+        taskbarButtonData[name].remove();
+
+        delete taskbarButtonData[name];
+
+    }
+
+}
+
+
+/* -----------------------------------------------------
+   OPEN APP
+   ----------------------------------------------------- */
+
+function openApp(
+    name,
+    title,
+    icon
+) {
+
+    openWindow(name);
+
+    addTaskbarButton(
+        name,
+        title,
+        icon
+    );
+
+}
+
+
+/* =====================================================
+   FILES
+   ===================================================== */
+
+document.getElementById(
+    "filesApp"
+).addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "files",
+            "Files",
+            "📁"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "filesDesktopIcon"
+).addEventListener(
+    "dblclick",
+    function() {
+
+        openApp(
+            "files",
+            "Files",
+            "📁"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "minimizeFiles"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow("files");
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeFiles"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow("files");
+
+    }
+);
+
+
+document.getElementById(
+    "closeFiles"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow("files");
+
+    }
+);
+
+
+/* =====================================================
+   NOTES
+   ===================================================== */
+
+const notesEditor =
+    document.getElementById(
+        "notesEditor"
+    );
+
+
+const saveStatus =
+    document.getElementById(
+        "saveStatus"
+    );
+
+
+function loadNote() {
+
+    const saved =
+        localStorage.getItem(
+            "webosNote"
+        );
+
+
+    if (
+        saved !== null
+    ) {
+
+        notesEditor.value =
+            saved;
+
+    }
+
+}
+
+
+document.getElementById(
+    "notesApp"
+).addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "notes",
+            "Notes",
+            "📝"
+        );
+
+        loadNote();
+
+    }
+);
+
+
+document.getElementById(
+    "notesDesktopIcon"
+).addEventListener(
+    "dblclick",
+    function() {
+
+        openApp(
+            "notes",
+            "Notes",
+            "📝"
+        );
+
+        loadNote();
+
+    }
+);
+
+
+document.getElementById(
+    "saveNote"
+).addEventListener(
+    "click",
+    function() {
+
+        localStorage.setItem(
+            "webosNote",
+            notesEditor.value
+        );
+
+
+        saveStatus.textContent =
+            "Saved ✓";
+
+    }
+);
+
+
+document.getElementById(
+    "clearNote"
+).addEventListener(
+    "click",
+    function() {
+
+        notesEditor.value =
+            "";
+
+        localStorage.removeItem(
+            "webosNote"
+        );
+
+        saveStatus.textContent =
+            "Cleared";
+
+    }
+);
+
+
+document.getElementById(
+    "minimizeNotes"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow("notes");
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeNotes"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow("notes");
+
+    }
+);
+
+
+document.getElementById(
+    "closeNotes"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow("notes");
+
+    }
+);
+
+
+/* =====================================================
+   CALCULATOR
+   ===================================================== */
+
+const calculatorDisplay =
+    document.getElementById(
+        "calculatorDisplay"
+    );
+
+
+document.getElementById(
+    "calculatorApp"
+).addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "calculator",
+            "Calculator",
+            "🧮"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "calculatorDesktopIcon"
+).addEventListener(
+    "dblclick",
+    function() {
+
+        openApp(
+            "calculator",
+            "Calculator",
+            "🧮"
+        );
+
+    }
+);
+
+
+document.querySelectorAll(
+    ".calculatorButtons button"
+).forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const value =
+                    button.dataset.value;
+
+
+                if (
+                    value === "C"
+                ) {
+
+                    calculatorDisplay.value =
+                        "0";
+
+                    return;
+
+                }
+
+
+                if (
+                    value === "="
+                ) {
+
+                    calculate();
+
+                    return;
+
+                }
+
+
+                if (
+                    calculatorDisplay.value ===
+                    "0"
+                ) {
+
+                    calculatorDisplay.value =
+                        value;
+
+                } else {
+
+                    calculatorDisplay.value +=
+                        value;
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+function calculate() {
+
+    const expression =
+        calculatorDisplay.value;
+
+
+    if (
+        !/^[0-9+\-*/().\s]+$/
+        .test(expression)
+    ) {
+
+        calculatorDisplay.value =
+            "Error";
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            Function(
+                '"use strict";return(' +
+                expression +
+                ')'
+            )();
+
+
+        if (
+            !Number.isFinite(result)
+        ) {
+
+            calculatorDisplay.value =
+                "Error";
+
+            return;
+
+        }
+
+
+        calculatorDisplay.value =
+            result;
+
+    } catch {
+
+        calculatorDisplay.value =
+            "Error";
+
+    }
+
+}
+
+
+document.getElementById(
+    "minimizeCalculator"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow("calculator");
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeCalculator"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow("calculator");
+
+    }
+);
+
+
+document.getElementById(
+    "closeCalculator"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow("calculator");
+
+    }
+);
+
+
+/* =====================================================
+   SETTINGS
+   ===================================================== */
+
+document.getElementById(
+    "settingsApp"
+).addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "settings",
+            "Settings",
+            "⚙️"
+        );
+
+        updateSettings();
+
+    }
+);
+
+
+async function updateSettings() {
+
+    document.getElementById(
+        "systemPlatform"
+    ).textContent =
+        "Platform: " +
+        navigator.platform;
+
+
+    document.getElementById(
+        "systemBrowser"
+    ).textContent =
+        "Browser: " +
+        navigator.userAgent;
+
+
+    document.getElementById(
+        "systemLanguage"
+    ).textContent =
+        "Language: " +
+        navigator.language;
+
+
+    document.getElementById(
+        "screenResolution"
+    ).textContent =
+        "Screen: " +
+        screen.width +
+        " × " +
+        screen.height;
+
+
+    document.getElementById(
+        "screenPixelRatio"
+    ).textContent =
+        "Pixel ratio: " +
+        window.devicePixelRatio;
+
+
+    document.getElementById(
+        "networkStatus"
+    ).textContent =
+        navigator.onLine
+            ? "Status: Online"
+            : "Status: Offline";
+
+
+    if (
+        navigator.getBattery
+    ) {
+
+        try {
+
+            const battery =
+                await navigator.getBattery();
+
+
+            const level =
+                Math.round(
+                    battery.level * 100
+                );
+
+
+            document.getElementById(
+                "settingsBattery"
+            ).textContent =
+                level +
+                "% — " +
+                (
+                    battery.charging
+                        ? "Charging"
+                        : "Not charging"
+                );
+
+        } catch {
+
+            document.getElementById(
+                "settingsBattery"
+            ).textContent =
+                "Unavailable";
+
+        }
+
+    } else {
+
+        document.getElementById(
+            "settingsBattery"
+        ).textContent =
+            "Unavailable";
+
+    }
+
+}
+
+
+document.getElementById(
+    "minimizeSettings"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow("settings");
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeSettings"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow("settings");
+
+    }
+);
+
+
+document.getElementById(
+    "closeSettings"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow("settings");
+
+    }
+);
+
+
+/* =====================================================
+   TASK MANAGER
+   ===================================================== */
+
+const startTime =
+    Date.now();
+
+
+document.getElementById(
+    "taskManagerApp"
+).addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "taskManager",
+            "Task Manager",
+            "📊"
+        );
+
+        updateTaskManager();
+
+    }
+);
+
+
+function updateTaskManager() {
+
+    const seconds =
+        Math.floor(
+            (
+                Date.now() -
+                startTime
+            ) / 1000
+        );
+
+
+    document.getElementById(
+        "webosUptime"
+    ).textContent =
+        seconds +
+        " seconds";
+
+
+    document.getElementById(
+        "taskNetwork"
+    ).textContent =
+        navigator.onLine
+            ? "Online"
+            : "Offline";
+
+
+    if (
+        navigator.storage &&
+        navigator.storage.estimate
+    ) {
+
+        navigator.storage
+            .estimate()
+            .then(
+                function(info) {
+
+                    const used =
+                        (
+                            info.usage || 0
+                        ) /
+                        1024 /
+                        1024;
+
+
+                    document.getElementById(
+                        "taskStorage"
+                    ).textContent =
+                        used.toFixed(2) +
+                        " MB used";
+
+                }
+            );
+
+    } else {
+
+        document.getElementById(
+            "taskStorage"
+        ).textContent =
+            "Unavailable";
+
+    }
+
+
+    const runningApps =
+        document.getElementById(
+            "runningApps"
+        );
+
+
+    runningApps.innerHTML =
+        "";
+
+
+    const appList = [
+
+        ["files", "📁 Files"],
+        ["notes", "📝 Notes"],
+        ["calculator", "🧮 Calculator"],
+        ["settings", "⚙️ Settings"],
+        ["taskManager", "📊 Task Manager"]
+
+    ];
+
+
+    appList.forEach(
+        function(app) {
+
+            const windowElement =
+                windows[app[0]];
+
+
+            if (
+                windowElement &&
+                windowElement.style.display !==
+                "none"
+            ) {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "runningApp";
+
+
+                row.textContent =
+                    app[1] +
+                    " — Running";
+
+
+                runningApps.appendChild(
+                    row
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+document.getElementById(
+    "refreshTaskManager"
+).addEventListener(
+    "click",
+    updateTaskManager
+);
+
+
+setInterval(
+    function() {
+
+        updateTaskManager();
+
+    },
+    1000
+);
+
+
+document.getElementById(
+    "minimizeTaskManager"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow(
+            "taskManager"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeTaskManager"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow(
+            "taskManager"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "closeTaskManager"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow(
+            "taskManager"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   GAMES
+   ===================================================== */
+
+document.getElementById(
+    "gamesApp"
+).addEventListener(
+    "click",
+    function() {
+
+        startMenu.style.display =
+            "none";
+
+
+        alert(
+            "🎮 WebOS Games Hub will be added in a future version."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   POWER
+   ===================================================== */
+
+document.getElementById(
+    "powerButton"
+).addEventListener(
+    "click",
+    function() {
+
+        startMenu.style.display =
+            "none";
+
+
+        alert(
+            "WebOS cannot shut down the real computer from a normal webpage."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ONLINE / OFFLINE
+   ===================================================== */
+
+window.addEventListener(
+    "online",
+    updateSettings
+);
+
+
+window.addEventListener(
+    "offline",
+    updateSettings
+);
+
+
+/* =====================================================
+   WEBOS READY
+   ===================================================== */
+
+console.log(
+    "WebOS v1.0 is running."
+);
+
+
+</script>
 
 </body>
 
