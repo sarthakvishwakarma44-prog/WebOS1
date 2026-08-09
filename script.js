@@ -922,3 +922,21 @@ const WebOSWindowManager = {
     }
 
 };
+// =========================
+// REGISTER WINDOWS
+// =========================
+
+WebOSWindowManager.register(
+    "files",
+    filesWindow
+);
+
+WebOSWindowManager.register(
+    "notes",
+    notesWindow
+);
+
+WebOSWindowManager.register(
+    "calculator",
+    calculatorWindow
+);
