@@ -50,3 +50,55 @@ startButton.addEventListener("click", function () {
     }
 
 });
+// =========================
+// FILE MANAGER WINDOW
+// =========================
+
+const filesApp = document.getElementById("filesApp");
+const filesWindow = document.getElementById("filesWindow");
+
+const closeFiles = document.getElementById("closeFiles");
+const minimizeFiles = document.getElementById("minimizeFiles");
+const maximizeFiles = document.getElementById("maximizeFiles");
+
+
+// Open Files
+filesApp.addEventListener("click", function () {
+
+    startMenu.style.display = "none";
+
+    filesWindow.style.display = "block";
+
+});
+
+
+// Close Files
+closeFiles.addEventListener("click", function () {
+
+    filesWindow.style.display = "none";
+
+});
+
+
+// Minimize Files
+minimizeFiles.addEventListener("click", function () {
+
+    filesWindow.style.display = "none";
+
+});
+
+
+// Maximize Files
+maximizeFiles.addEventListener("click", function () {
+
+    if (filesWindow.classList.contains("maximized")) {
+
+        filesWindow.classList.remove("maximized");
+
+    } else {
+
+        filesWindow.classList.add("maximized");
+
+    }
+
+});
