@@ -940,3 +940,315 @@ WebOSWindowManager.register(
     "calculator",
     calculatorWindow
 );
+// =========================
+// SETTINGS APP
+// =========================
+
+const settingsApp =
+    document.getElementById("settingsApp");
+
+const settingsWindow =
+    document.getElementById("settingsWindow");
+
+const closeSettings =
+    document.getElementById("closeSettings");
+
+const minimizeSettings =
+    document.getElementById("minimizeSettings");
+
+const maximizeSettings =
+    document.getElementById("maximizeSettings");
+
+const settingsBattery =
+    document.getElementById("settingsBattery");
+
+const systemPlatform =
+    document.getElementById("systemPlatform");
+
+const systemBrowser =
+    document.getElementById("systemBrowser");
+
+const systemLanguage =
+    document.getElementById("systemLanguage");
+
+const screenResolution =
+    document.getElementById("screenResolution");
+
+const screenPixelRatio =
+    document.getElementById("screenPixelRatio");
+
+const networkStatus =
+    document.getElementById("networkStatus");
+
+let settingsTaskbarButton = null;
+
+
+// =========================
+// OPEN SETTINGS
+// =========================
+
+settingsApp.addEventListener("click", function () {
+
+    startMenu.style.display = "none";
+
+    settingsWindow.style.display = "block";
+
+    settingsWindow.style.zIndex = 1003;
+
+    createSettingsTaskbarButton();
+
+    updateSystemInformation();
+
+});
+
+
+// =========================
+// CLOSE
+// =========================
+
+closeSettings.addEventListener("click", function () {
+
+    settingsWindow.style.display = "none";
+
+    removeSettingsTaskbarButton();
+
+});
+
+
+// =========================
+// MINIMIZE
+// =========================
+
+minimizeSettings.addEventListener(
+    "click",
+    function () {
+
+        settingsWindow.style.display = "none";
+
+        createSettingsTaskbarButton();
+
+    }
+);
+
+
+// =========================
+// MAXIMIZE
+// =========================
+
+maximizeSettings.addEventListener(
+    "click",
+    function () {
+
+        settingsWindow.classList.toggle(
+            "maximized"
+        );
+
+    }
+);
+
+
+// =========================
+// SYSTEM INFORMATION
+// =========================
+
+async function updateSystemInformation() {
+
+    systemPlatform.textContent =
+        "Platform: " +
+        navigator.platform;
+
+    systemBrowser.textContent =
+        "Browser: " +
+        navigator.userAgent;
+
+    systemLanguage.textContent =
+        "Language: " +
+        navigator.language;
+
+
+    screenResolution.textContent =
+        "Screen: " +
+        screen.width +
+        " × " +
+        screen.height;
+
+    screenPixelRatio.textContent =
+        "Pixel ratio: " +
+        window.devicePixelRatio;
+
+
+    if ("onLine" in navigator) {
+
+        networkStatus.textContent =
+            navigator.onLine
+                ? "Status: Online"
+                : "Status: Offline";
+
+    }
+
+
+    if ("getBattery" in navigator) {
+
+        try {
+
+            const battery =
+                await navigator.getBattery();
+
+            updateSettingsBattery(battery);
+
+            battery.addEventListener(
+                "levelchange",
+                function () {
+
+                    updateSettingsBattery(
+                        battery
+                    );
+
+                }
+            );
+
+            battery.addEventListener(
+                "chargingchange",
+                function () {
+
+                    updateSettingsBattery(
+                        battery
+                    );
+
+                }
+            );
+
+        } catch {
+
+            settingsBattery.textContent =
+                "Battery information unavailable.";
+
+        }
+
+    } else {
+
+        settingsBattery.textContent =
+            "Battery information is not supported by this browser.";
+
+    }
+
+}
+
+
+// =========================
+// BATTERY
+// =========================
+
+function updateSettingsBattery(battery) {
+
+    const percentage =
+        Math.round(
+            battery.level * 100
+        );
+
+    const charging =
+        battery.charging
+            ? "Charging"
+            : "Not charging";
+
+    settingsBattery.textContent =
+        percentage +
+        "% — " +
+        charging;
+
+}
+
+
+// =========================
+// NETWORK EVENTS
+// =========================
+
+window.addEventListener(
+    "online",
+    function () {
+
+        networkStatus.textContent =
+            "Status: Online";
+
+    }
+);
+
+window.addEventListener(
+    "offline",
+    function () {
+
+        networkStatus.textContent =
+            "Status: Offline";
+
+    }
+);
+
+
+// =========================
+// SETTINGS TASKBAR
+// =========================
+
+function createSettingsTaskbarButton() {
+
+    if (settingsTaskbarButton) {
+        return;
+    }
+
+    settingsTaskbarButton =
+        document.createElement("button");
+
+    settingsTaskbarButton.className =
+        "taskbarApp";
+
+    settingsTaskbarButton.textContent =
+        "⚙️ Settings";
+
+    settingsTaskbarButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                settingsWindow.style.display ===
+                "none"
+            ) {
+
+                settingsWindow.style.display =
+                    "block";
+
+                settingsWindow.style.zIndex =
+                    1003;
+
+                updateSystemInformation();
+
+            } else {
+
+                settingsWindow.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+    taskbarApps.appendChild(
+        settingsTaskbarButton
+    );
+
+}
+
+
+// =========================
+// REMOVE TASKBAR BUTTON
+// =========================
+
+function removeSettingsTaskbarButton() {
+
+    if (settingsTaskbarButton) {
+
+        settingsTaskbarButton.remove();
+
+        settingsTaskbarButton = null;
+
+    }
+
+}
