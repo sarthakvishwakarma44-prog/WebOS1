@@ -1,17 +1,18 @@
-```css id="1c8x7m"
+```css
 /* =====================================================
-   WEBOS v1.0
-   Complete CSS
-   v0.1 → v1.0
+   WebOS v1.0
+   COMPLETE STYLE SHEET
    ===================================================== */
 
 
 /* =====================================================
-   GLOBAL
+   1. GLOBAL RESET
    ===================================================== */
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -19,152 +20,132 @@ html,
 body {
     width: 100%;
     height: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    overflow: hidden;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
 }
 
 
 body {
-    background: #1e293b;
-
-    color: #111827;
-
-    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    background: #0b1020;
+    color: white;
 }
 
 
 /* =====================================================
-   DESKTOP
+   2. DESKTOP
    ===================================================== */
 
 #desktop {
-
     position: fixed;
+    inset: 0;
 
-    left: 0;
-    top: 0;
-
-    width: 100%;
-    height: 100%;
-
-    padding: 20px;
-
-    padding-bottom: 70px;
-
-    overflow: hidden;
+    padding: 25px;
 
     background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #4f46e5,
-            #7c3aed
+        radial-gradient(
+            circle at 20% 20%,
+            #243b70 0%,
+            #10182f 35%,
+            #070b16 100%
         );
 
+    overflow: hidden;
 }
 
 
 /* =====================================================
-   DESKTOP ICONS
+   3. DESKTOP ICONS
    ===================================================== */
 
 .desktop-icon {
-
-    width: 80px;
+    width: 90px;
 
     margin-bottom: 20px;
 
-    padding: 8px;
+    padding: 10px 5px;
 
-    border-radius: 8px;
-
-    color: white;
+    border-radius: 10px;
 
     text-align: center;
 
     cursor: pointer;
 
+    user-select: none;
+
+    transition:
+        background 0.15s,
+        transform 0.15s;
 }
 
 
 .desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.12);
 
-    background:
-        rgba(255, 255, 255, 0.15);
+    transform: scale(1.03);
+}
 
+
+.desktop-icon:active {
+    background: rgba(255, 255, 255, 0.20);
 }
 
 
 .desktop-icon .icon {
+    font-size: 42px;
 
-    font-size: 38px;
-
-    margin-bottom: 5px;
-
+    margin-bottom: 6px;
 }
 
 
 .desktop-icon span {
-
     display: block;
 
-    font-size: 13px;
+    font-size: 14px;
+
+    color: white;
 
     text-shadow:
-        0 1px 3px
-        rgba(0, 0, 0, 0.5);
-
+        0 1px 3px black;
 }
 
 
 /* =====================================================
-   WINDOWS
+   4. WINDOWS
    ===================================================== */
 
 .window {
-
     position: absolute;
 
-    left: 180px;
     top: 100px;
+    left: 180px;
 
-    width: 500px;
-    height: 350px;
+    width: 620px;
+    height: 430px;
 
-    display: none;
-
-    overflow: hidden;
-
-    background: white;
+    background: #151a2b;
 
     border:
         1px solid
-        rgba(0, 0, 0, 0.25);
+        rgba(255, 255, 255, 0.20);
 
-    border-radius: 10px;
+    border-radius: 12px;
 
     box-shadow:
-        0 15px 40px
-        rgba(0, 0, 0, 0.35);
+        0 20px 60px
+        rgba(0, 0, 0, 0.55);
 
+    overflow: hidden;
+
+    color: white;
 }
 
 
 /* =====================================================
-   WINDOW HEADER
+   5. WINDOW HEADER
    ===================================================== */
 
 .windowHeader {
-
-    height: 45px;
+    height: 48px;
 
     display: flex;
 
@@ -172,188 +153,192 @@ body {
 
     justify-content: space-between;
 
-    padding: 0 8px 0 15px;
+    padding: 0 10px 0 16px;
 
     background:
-        #f3f4f6;
+        linear-gradient(
+            180deg,
+            #29314b,
+            #1c2236
+        );
 
     border-bottom:
         1px solid
-        #d1d5db;
+        rgba(255, 255, 255, 0.12);
 
-    font-weight: bold;
-
-    cursor: move;
-
+    user-select: none;
 }
 
 
-.windowControls {
+.windowHeader > span {
+    font-size: 15px;
 
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   6. WINDOW CONTROLS
+   ===================================================== */
+
+.windowControls {
     display: flex;
 
-    gap: 4px;
-
+    gap: 5px;
 }
 
 
 .windowControls button {
-
     width: 32px;
     height: 30px;
 
     border: none;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
-    background: transparent;
+    background:
+        rgba(255, 255, 255, 0.08);
 
-    font-size: 17px;
+    color: white;
+
+    font-size: 16px;
 
     cursor: pointer;
-
 }
 
 
 .windowControls button:hover {
-
-    background: #e5e7eb;
-
+    background:
+        rgba(255, 255, 255, 0.18);
 }
 
 
 .windowControls button:last-child:hover {
-
-    background: #ef4444;
-
-    color: white;
-
+    background: #d83b3b;
 }
 
 
 /* =====================================================
-   MAXIMIZED WINDOW
+   7. MAXIMIZED WINDOW
    ===================================================== */
 
 .window.maximized {
-
-    left: 0 !important;
     top: 0 !important;
+    left: 0 !important;
 
     width: 100% !important;
-
-    height:
-        calc(100% - 55px) !important;
+    height: calc(100% - 52px) !important;
 
     border-radius: 0;
-
 }
 
 
 /* =====================================================
-   FILES
+   8. GENERAL WINDOW CONTENT
    ===================================================== */
 
-.windowContent {
-
-    height:
-        calc(100% - 45px);
+.windowContent,
+.notesContent,
+.calculatorContent,
+.settingsContent,
+.taskManagerContent {
+    height: calc(100% - 48px);
 
     padding: 20px;
 
-    overflow-y: auto;
-
+    overflow: auto;
 }
 
 
-.windowContent h2 {
+.window h2,
+.settingsContent h2,
+.taskManagerContent h2 {
+    margin-bottom: 20px;
 
-    margin-top: 0;
-
+    font-size: 24px;
 }
 
+
+.window h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   9. FILE MANAGER
+   ===================================================== */
 
 .fileArea {
-
     padding: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.10);
 
     border-radius: 10px;
 
-    background: #f3f4f6;
-
     line-height: 1.5;
 
+    font-size: 16px;
 }
 
 
 /* =====================================================
-   NOTES
+   10. NOTES
    ===================================================== */
 
-.notesContent {
-
-    height:
-        calc(100% - 45px);
-
-    display: flex;
-
-    flex-direction: column;
-
-    padding: 12px;
-
-}
-
-
 .notesToolbar {
-
     display: flex;
 
-    gap: 8px;
+    gap: 10px;
 
-    margin-bottom: 10px;
-
+    margin-bottom: 12px;
 }
 
 
 .notesToolbar button {
-
-    padding: 8px 12px;
+    padding: 9px 14px;
 
     border: none;
 
-    border-radius: 6px;
+    border-radius: 7px;
 
-    background: #e5e7eb;
+    background: #293653;
+
+    color: white;
 
     cursor: pointer;
-
 }
 
 
 .notesToolbar button:hover {
-
-    background: #d1d5db;
-
+    background: #3a4b70;
 }
 
 
 #notesEditor {
-
-    flex: 1;
-
     width: 100%;
+    height: 270px;
 
     resize: none;
 
-    padding: 12px;
+    padding: 14px;
 
     border:
         1px solid
-        #d1d5db;
+        rgba(255, 255, 255, 0.15);
 
-    border-radius: 7px;
+    border-radius: 8px;
 
     outline: none;
+
+    background: #0d1220;
+
+    color: white;
 
     font-family:
         Arial,
@@ -361,59 +346,42 @@ body {
         sans-serif;
 
     font-size: 15px;
-
 }
 
 
 #notesEditor:focus {
-
-    border-color:
-        #6366f1;
-
+    border-color: #5c8cff;
 }
 
 
 #saveStatus {
+    margin-top: 10px;
 
-    padding-top: 7px;
+    font-size: 13px;
 
-    font-size: 12px;
-
-    color: #6b7280;
-
+    opacity: 0.75;
 }
 
 
 /* =====================================================
-   CALCULATOR
+   11. CALCULATOR
    ===================================================== */
 
-#calculatorWindow {
-
-    width: 350px;
-
-    height: 500px;
-
-}
-
-
 .calculatorContent {
+    display: flex;
 
-    height:
-        calc(100% - 45px);
+    flex-direction: column;
 
-    padding: 15px;
-
+    align-items: center;
 }
 
 
 #calculatorDisplay {
-
     width: 100%;
 
     height: 65px;
 
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 
     padding: 10px;
 
@@ -421,18 +389,20 @@ body {
 
     border-radius: 8px;
 
-    background: #f3f4f6;
+    outline: none;
+
+    background: #080b13;
+
+    color: white;
 
     text-align: right;
 
-    font-size: 27px;
-
-    outline: none;
-
+    font-size: 28px;
 }
 
 
 .calculatorButtons {
+    width: 100%;
 
     display: grid;
 
@@ -440,158 +410,94 @@ body {
         repeat(4, 1fr);
 
     gap: 8px;
-
 }
 
 
 .calculatorButtons button {
-
-    height: 55px;
+    min-height: 55px;
 
     border: none;
 
     border-radius: 8px;
 
-    background: #e5e7eb;
+    background: #28334d;
+
+    color: white;
 
     font-size: 18px;
 
     cursor: pointer;
-
 }
 
 
 .calculatorButtons button:hover {
-
-    background: #d1d5db;
-
+    background: #3a4b70;
 }
 
 
 .calculatorButtons button:active {
-
     transform: scale(0.97);
-
 }
 
 
 .calculatorButtons .zero {
-
-    grid-column:
-        span 2;
-
+    grid-column: span 2;
 }
 
 
 .calculatorButtons .equals {
+    background: #355ca8;
+}
 
-    grid-column:
-        span 2;
 
-    background: #c7d2fe;
-
+.calculatorButtons .equals:hover {
+    background: #4673ca;
 }
 
 
 /* =====================================================
-   SETTINGS
+   12. SETTINGS
    ===================================================== */
 
-#settingsWindow {
-
-    width: 650px;
-
-    height: 550px;
-
-}
-
-
-.settingsContent {
-
-    height:
-        calc(100% - 45px);
-
-    padding: 20px;
-
-    overflow-y: auto;
-
-}
-
-
-.settingsContent h2 {
-
-    margin-top: 0;
-
-}
-
-
 .settingsSection {
+    margin-bottom: 18px;
 
-    margin-top: 15px;
+    padding: 16px;
 
-    padding: 15px;
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
 
     border-radius: 10px;
-
-    background: #f3f4f6;
-
 }
 
 
 .settingsSection h3 {
+    margin: 0 0 10px 0;
 
-    margin-top: 0;
-
-    margin-bottom: 10px;
-
+    font-size: 17px;
 }
 
 
 .settingsSection p {
-
     margin: 7px 0;
 
-    color: #4b5563;
+    font-size: 14px;
+
+    opacity: 0.85;
 
     word-break: break-word;
-
 }
 
 
 /* =====================================================
-   TASK MANAGER
+   13. TASK MANAGER
    ===================================================== */
 
-#taskManagerWindow {
-
-    width: 650px;
-
-    height: 520px;
-
-}
-
-
-.taskManagerContent {
-
-    height:
-        calc(100% - 45px);
-
-    padding: 20px;
-
-    overflow-y: auto;
-
-}
-
-
-.taskManagerContent h2 {
-
-    margin-top: 0;
-
-}
-
-
 .monitorCards {
-
     display: grid;
 
     grid-template-columns:
@@ -599,194 +505,163 @@ body {
 
     gap: 10px;
 
-    margin:
-        20px 0;
-
+    margin-bottom: 25px;
 }
 
 
 .monitorCard {
-
     padding: 15px;
 
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
     border-radius: 10px;
-
-    background: #f3f4f6;
-
 }
 
 
 .monitorCard span {
-
     display: block;
 
-    color: #6b7280;
+    margin-bottom: 10px;
 
     font-size: 13px;
 
+    opacity: 0.75;
 }
 
 
 .monitorCard strong {
-
     display: block;
 
-    margin-top: 8px;
-
     font-size: 16px;
-
 }
 
 
 #runningApps {
+    display: flex;
 
-    margin:
-        15px 0;
+    flex-direction: column;
 
+    gap: 8px;
+
+    margin-bottom: 15px;
 }
 
 
 .runningApp {
+    padding: 10px 12px;
 
-    display: flex;
+    background:
+        rgba(255, 255, 255, 0.06);
 
-    align-items: center;
+    border-radius: 7px;
 
-    justify-content: space-between;
-
-    padding: 12px;
-
-    margin-bottom: 8px;
-
-    border-radius: 8px;
-
-    background: #f3f4f6;
-
-}
-
-
-.appStatus {
-
-    color: #15803d;
-
-    font-size: 13px;
-
+    font-size: 14px;
 }
 
 
 #refreshTaskManager {
-
-    padding:
-        9px 14px;
+    padding: 9px 14px;
 
     border: none;
 
     border-radius: 7px;
 
-    background: #e5e7eb;
+    background: #293653;
+
+    color: white;
 
     cursor: pointer;
-
 }
 
 
 #refreshTaskManager:hover {
-
-    background: #d1d5db;
-
+    background: #3a4b70;
 }
 
 
 /* =====================================================
-   TASKBAR
+   14. TASKBAR
    ===================================================== */
 
 #taskbar {
-
     position: fixed;
 
     left: 0;
+    right: 0;
     bottom: 0;
 
-    width: 100%;
-
-    height: 55px;
+    height: 52px;
 
     display: flex;
 
     align-items: center;
 
-    gap: 8px;
-
-    padding:
-        6px 8px;
+    padding: 5px 8px;
 
     background:
-        rgba(15, 23, 42, 0.92);
+        rgba(10, 14, 26, 0.94);
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.12);
 
     backdrop-filter:
         blur(12px);
 
-    color: white;
-
     z-index: 10000;
-
 }
 
 
 /* =====================================================
-   START BUTTON
+   15. START BUTTON
    ===================================================== */
 
 #startButton {
-
-    width: 45px;
-
+    width: 42px;
     height: 42px;
 
     border: none;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
     background:
-        rgba(255, 255, 255, 0.12);
+        rgba(255, 255, 255, 0.08);
 
     color: white;
 
-    font-size: 25px;
+    font-size: 23px;
 
     cursor: pointer;
-
 }
 
 
 #startButton:hover {
-
     background:
-        rgba(255, 255, 255, 0.22);
-
+        rgba(255, 255, 255, 0.18);
 }
 
 
 /* =====================================================
-   START MENU
+   16. START MENU
    ===================================================== */
 
 #startMenu {
-
     position: absolute;
 
     left: 8px;
+    bottom: 58px;
 
-    bottom: 62px;
-
-    width: 330px;
-
-    max-height: 500px;
+    width: 350px;
 
     padding: 15px;
 
-    overflow-y: auto;
+    background:
+        rgba(20, 25, 42, 0.97);
 
     border:
         1px solid
@@ -794,59 +669,55 @@ body {
 
     border-radius: 12px;
 
-    background:
-        rgba(30, 41, 59, 0.97);
-
     box-shadow:
-        0 15px 40px
-        rgba(0, 0, 0, 0.4);
+        0 20px 50px
+        rgba(0, 0, 0, 0.55);
 
-    color: white;
+    backdrop-filter:
+        blur(15px);
 
     z-index: 20000;
-
 }
 
 
 /* =====================================================
-   SEARCH
+   17. START SEARCH
    ===================================================== */
 
 #searchBox {
+    width: 100%;
 
     padding: 12px;
 
-    margin-bottom: 12px;
+    margin-bottom: 15px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
 
     border-radius: 8px;
 
-    background:
-        rgba(255, 255, 255, 0.1);
+    color: #cdd4e7;
 
-    color: #cbd5e1;
-
+    font-size: 14px;
 }
 
 
 /* =====================================================
-   START APPS
+   18. START APPS
    ===================================================== */
 
 .startApps {
-
     display: grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(3, 1fr);
 
     gap: 8px;
-
 }
 
 
 .appButton {
-
-    min-height: 75px;
+    min-height: 80px;
 
     display: flex;
 
@@ -856,45 +727,39 @@ body {
 
     justify-content: center;
 
-    gap: 6px;
-
-    padding: 8px;
+    gap: 7px;
 
     border: none;
 
     border-radius: 9px;
 
     background:
-        rgba(255, 255, 255, 0.08);
+        rgba(255, 255, 255, 0.05);
 
     color: white;
 
     cursor: pointer;
 
-}
-
-
-.appButton:hover {
-
-    background:
-        rgba(255, 255, 255, 0.17);
-
+    font-size: 25px;
 }
 
 
 .appButton span {
-
     font-size: 12px;
+}
 
+
+.appButton:hover {
+    background:
+        rgba(255, 255, 255, 0.14);
 }
 
 
 /* =====================================================
-   START MENU BOTTOM
+   19. START MENU BOTTOM
    ===================================================== */
 
 #startBottom {
-
     display: flex;
 
     align-items: center;
@@ -907,15 +772,19 @@ body {
 
     border-top:
         1px solid
-        rgba(255, 255, 255, 0.1);
-
+        rgba(255, 255, 255, 0.10);
 }
 
 
-#startBottom button {
+#startBottom span {
+    font-size: 13px;
 
+    opacity: 0.8;
+}
+
+
+#powerButton {
     width: 35px;
-
     height: 35px;
 
     border: none;
@@ -923,261 +792,171 @@ body {
     border-radius: 7px;
 
     background:
-        rgba(255, 255, 255, 0.1);
+        rgba(255, 255, 255, 0.07);
 
     color: white;
 
     cursor: pointer;
-
 }
 
 
-#startBottom button:hover {
-
-    background:
-        rgba(239, 68, 68, 0.8);
-
+#powerButton:hover {
+    background: #b83232;
 }
 
 
 /* =====================================================
-   TASKBAR APPLICATIONS
+   20. TASKBAR RUNNING APPS
    ===================================================== */
 
 #taskbarApps {
-
     display: flex;
 
     align-items: center;
 
     gap: 5px;
 
-    flex: 1;
+    margin-left: 8px;
 
-    overflow-x: auto;
-
+    overflow: hidden;
 }
 
 
 .taskbarApp {
+    height: 38px;
 
-    height: 40px;
+    max-width: 150px;
 
-    max-width: 170px;
-
-    padding:
-        0 12px;
+    padding: 0 12px;
 
     border: none;
 
     border-radius: 7px;
 
     background:
-        rgba(255, 255, 255, 0.1);
+        rgba(255, 255, 255, 0.07);
 
     color: white;
 
-    white-space: nowrap;
-
     cursor: pointer;
 
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
 }
 
 
 .taskbarApp:hover {
-
     background:
-        rgba(255, 255, 255, 0.2);
-
+        rgba(255, 255, 255, 0.15);
 }
 
 
 /* =====================================================
-   SYSTEM TRAY
+   21. SYSTEM TRAY
    ===================================================== */
 
 #systemTray {
-
     display: flex;
 
     align-items: center;
 
     gap: 15px;
 
-    height: 100%;
+    margin-left: auto;
 
-    padding:
-        0 10px;
-
-    white-space: nowrap;
+    padding: 0 8px;
 
     font-size: 13px;
 
+    white-space: nowrap;
+}
+
+
+#battery,
+#clock {
+    opacity: 0.9;
 }
 
 
 /* =====================================================
-   SCROLLBARS
+   22. SCROLLBARS
    ===================================================== */
 
 ::-webkit-scrollbar {
-
     width: 8px;
-
     height: 8px;
-
 }
 
 
 ::-webkit-scrollbar-track {
-
     background:
-        rgba(0, 0, 0, 0.05);
-
+        rgba(255, 255, 255, 0.03);
 }
 
 
 ::-webkit-scrollbar-thumb {
-
     background:
-        rgba(100, 116, 139, 0.5);
+        rgba(255, 255, 255, 0.18);
 
     border-radius: 10px;
-
 }
 
 
 ::-webkit-scrollbar-thumb:hover {
-
     background:
-        rgba(100, 116, 139, 0.8);
-
+        rgba(255, 255, 255, 0.28);
 }
 
 
 /* =====================================================
-   RESPONSIVE DESIGN
+   23. RESPONSIVE DESIGN
    ===================================================== */
 
 @media (
     max-width: 700px
 ) {
 
-
     .window {
+        left: 10px;
+        top: 70px;
 
-        left: 5%;
+        width:
+            calc(100% - 20px);
 
-        top: 60px;
-
-        width: 90%;
-
-        height: 70%;
-
-    }
-
-
-    #settingsWindow,
-    #taskManagerWindow {
-
-        width: 90%;
-
-        height: 70%;
-
+        height:
+            calc(100% - 130px);
     }
 
 
     .monitorCards {
-
         grid-template-columns:
             1fr;
-
     }
 
 
     #startMenu {
-
-        width: 280px;
-
-    }
-
-
-}
-
-
-@media (
-    max-width: 450px
-) {
-
-
-    #startMenu {
-
-        left: 5px;
-
-        width: calc(100% - 10px);
-
+        width:
+            calc(100vw - 16px);
     }
 
 
     .startApps {
-
         grid-template-columns:
             repeat(2, 1fr);
-
-    }
-
-
-    #systemTray {
-
-        gap: 7px;
-
-        font-size: 11px;
-
     }
 
 
     .taskbarApp {
-
-        max-width: 120px;
-
-        padding:
-            0 8px;
-
+        max-width: 100px;
     }
 
 }
 
 
 /* =====================================================
-   WEBOS INITIALIZATION
-   ===================================================== */
-
-.window {
-
-    will-change:
-        left,
-        top;
-
-}
-
-
-button {
-
-    font-family:
-        inherit;
-
-}
-
-
-textarea,
-input {
-
-    user-select: text;
-
-}
-
-
-/* =====================================================
-   END OF WEBOS v1.0 CSS
+   24. WEBOS END
    ===================================================== */
 ```
