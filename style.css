@@ -432,3 +432,38 @@ body {
 .calculatorButtons .equals {
     grid-column: span 2;
 }
+/* =========================
+   SETTINGS
+   ========================= */
+
+#settingsWindow {
+    width: 650px;
+    height: 550px;
+}
+
+.settingsContent {
+    height: calc(100% - 45px);
+
+    padding: 20px;
+
+    overflow-y: auto;
+}
+
+.settingsSection {
+    margin-top: 15px;
+    padding: 15px;
+
+    background: #f1f1f1;
+
+    border-radius: 10px;
+}
+
+.settingsSection h3 {
+    margin-bottom: 10px;
+}
+
+.settingsSection p {
+    margin: 7px 0;
+
+    color: #444;
+}
