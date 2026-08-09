@@ -1252,3 +1252,386 @@ function removeSettingsTaskbarButton() {
     }
 
 }
+// =========================
+// TASK MANAGER
+// =========================
+
+const taskManagerApp =
+    document.getElementById("taskManagerApp");
+
+const taskManagerWindow =
+    document.getElementById("taskManagerWindow");
+
+const closeTaskManager =
+    document.getElementById("closeTaskManager");
+
+const minimizeTaskManager =
+    document.getElementById("minimizeTaskManager");
+
+const maximizeTaskManager =
+    document.getElementById("maximizeTaskManager");
+
+const webosUptime =
+    document.getElementById("webosUptime");
+
+const taskNetwork =
+    document.getElementById("taskNetwork");
+
+const taskStorage =
+    document.getElementById("taskStorage");
+
+const runningApps =
+    document.getElementById("runningApps");
+
+const refreshTaskManager =
+    document.getElementById(
+        "refreshTaskManager"
+    );
+
+let taskManagerTaskbarButton = null;
+
+const webosStartTime = Date.now();
+
+
+// =========================
+// OPEN
+// =========================
+
+taskManagerApp.addEventListener(
+    "click",
+    function () {
+
+        startMenu.style.display = "none";
+
+        taskManagerWindow.style.display =
+            "block";
+
+        taskManagerWindow.style.zIndex =
+            1004;
+
+        createTaskManagerTaskbarButton();
+
+        updateTaskManager();
+
+    }
+);
+
+
+// =========================
+// CLOSE
+// =========================
+
+closeTaskManager.addEventListener(
+    "click",
+    function () {
+
+        taskManagerWindow.style.display =
+            "none";
+
+        removeTaskManagerTaskbarButton();
+
+    }
+);
+
+
+// =========================
+// MINIMIZE
+// =========================
+
+minimizeTaskManager.addEventListener(
+    "click",
+    function () {
+
+        taskManagerWindow.style.display =
+            "none";
+
+        createTaskManagerTaskbarButton();
+
+    }
+);
+
+
+// =========================
+// MAXIMIZE
+// =========================
+
+maximizeTaskManager.addEventListener(
+    "click",
+    function () {
+
+        taskManagerWindow.classList.toggle(
+            "maximized"
+        );
+
+    }
+);
+
+
+// =========================
+// UPDATE MONITOR
+// =========================
+
+async function updateTaskManager() {
+
+    updateUptime();
+
+    updateNetwork();
+
+    await updateStorage();
+
+    updateRunningApps();
+
+}
+
+
+// =========================
+// UPTIME
+// =========================
+
+function updateUptime() {
+
+    const seconds =
+        Math.floor(
+            (Date.now() - webosStartTime) /
+            1000
+        );
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const hours =
+        Math.floor(minutes / 60);
+
+    if (hours > 0) {
+
+        webosUptime.textContent =
+            hours + "h " +
+            (minutes % 60) + "m";
+
+    } else if (minutes > 0) {
+
+        webosUptime.textContent =
+            minutes + "m " +
+            (seconds % 60) + "s";
+
+    } else {
+
+        webosUptime.textContent =
+            seconds + " seconds";
+
+    }
+
+}
+
+
+// =========================
+// NETWORK
+// =========================
+
+function updateNetwork() {
+
+    taskNetwork.textContent =
+        navigator.onLine
+            ? "Online"
+            : "Offline";
+
+}
+
+
+// =========================
+// STORAGE
+// =========================
+
+async function updateStorage() {
+
+    if (
+        navigator.storage &&
+        navigator.storage.estimate
+    ) {
+
+        try {
+
+            const estimate =
+                await navigator.storage.estimate();
+
+            const used =
+                estimate.usage || 0;
+
+            const quota =
+                estimate.quota || 0;
+
+            const usedMB =
+                (used / 1024 / 1024)
+                .toFixed(2);
+
+            const quotaMB =
+                (quota / 1024 / 1024)
+                .toFixed(0);
+
+            taskStorage.textContent =
+                usedMB +
+                " MB / " +
+                quotaMB +
+                " MB";
+
+        } catch {
+
+            taskStorage.textContent =
+                "Unavailable";
+
+        }
+
+    } else {
+
+        taskStorage.textContent =
+            "Unavailable";
+
+    }
+
+}
+
+
+// =========================
+// RUNNING WEBOS APPS
+// =========================
+
+function updateRunningApps() {
+
+    runningApps.innerHTML = "";
+
+    const apps = [
+        {
+            name: "📁 Files",
+            element: filesWindow
+        },
+        {
+            name: "📝 Notes",
+            element: notesWindow
+        },
+        {
+            name: "🧮 Calculator",
+            element: calculatorWindow
+        },
+        {
+            name: "⚙️ Settings",
+            element: settingsWindow
+        },
+        {
+            name: "📊 Task Manager",
+            element: taskManagerWindow
+        }
+    ];
+
+
+    apps.forEach(function (app) {
+
+        if (
+            app.element.style.display !==
+            "none"
+        ) {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+            row.className =
+                "runningApp";
+
+            row.innerHTML =
+                `<span>${app.name}</span>
+                 <span class="appStatus">
+                 ● Running
+                 </span>`;
+
+            runningApps.appendChild(row);
+
+        }
+
+    });
+
+}
+
+
+// =========================
+// REFRESH
+// =========================
+
+refreshTaskManager.addEventListener(
+    "click",
+    updateTaskManager
+);
+
+
+// Update uptime periodically
+
+setInterval(
+    updateTaskManager,
+    1000
+);
+
+
+// =========================
+// TASKBAR
+// =========================
+
+function createTaskManagerTaskbarButton() {
+
+    if (taskManagerTaskbarButton) {
+        return;
+    }
+
+    taskManagerTaskbarButton =
+        document.createElement("button");
+
+    taskManagerTaskbarButton.className =
+        "taskbarApp";
+
+    taskManagerTaskbarButton.textContent =
+        "📊 Task Manager";
+
+    taskManagerTaskbarButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                taskManagerWindow.style.display ===
+                "none"
+            ) {
+
+                taskManagerWindow.style.display =
+                    "block";
+
+                taskManagerWindow.style.zIndex =
+                    1004;
+
+                updateTaskManager();
+
+            } else {
+
+                taskManagerWindow.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+    taskbarApps.appendChild(
+        taskManagerTaskbarButton
+    );
+
+}
+
+
+function removeTaskManagerTaskbarButton() {
+
+    if (taskManagerTaskbarButton) {
+
+        taskManagerTaskbarButton.remove();
+
+        taskManagerTaskbarButton = null;
+
+    }
+
+}
