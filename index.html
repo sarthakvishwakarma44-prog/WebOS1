@@ -1,329 +1,858 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>WebOS</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <main id="desktop">
 
-        <div class="desktop-icon">
-            <div class="icon">📁</div>
-            <span>Files</span>
+<!-- =====================================================
+     WEBOS DESKTOP
+     ===================================================== -->
+
+<main id="desktop">
+
+
+    <!-- =================================================
+         DESKTOP ICONS
+         ================================================= -->
+
+    <div class="desktop-icon">
+
+        <div class="icon">
+            📁
         </div>
 
-        <div class="desktop-icon">
-            <div class="icon">📝</div>
-            <span>Notes</span>
-        </div>
-
-        <div class="desktop-icon">
-            <div class="icon">🧮</div>
-            <span>Calculator</span>
-        </div>
-        <div id="filesWindow" class="window">
-
-    <div class="windowHeader">
-        <span>📁 Files</span>
-
-        <div class="windowControls">
-            <button id="minimizeFiles">−</button>
-            <button id="maximizeFiles">□</button>
-            <button id="closeFiles">×</button>
-        </div>
-    </div>
-
-    <div class="windowContent">
-
-        <h2>File Manager</h2>
-
-        <div class="fileArea">
-            📄 Documents
-            <br><br>
-            🖼️ Pictures
-            <br><br>
-            🎵 Music
-            <br><br>
-            🎮 Games
-        </div>
+        <span>
+            Files
+        </span>
 
     </div>
 
-</div>
-<div id="notesWindow" class="window">
 
-    <div class="windowHeader">
-        <span>📝 Notes</span>
+    <div class="desktop-icon">
 
-        <div class="windowControls">
-            <button id="minimizeNotes">−</button>
-            <button id="maximizeNotes">□</button>
-            <button id="closeNotes">×</button>
-        </div>
-    </div>
-
-    <div class="notesContent">
-
-        <div class="notesToolbar">
-            <button id="saveNote">💾 Save</button>
-            <button id="clearNote">🗑️ Clear</button>
+        <div class="icon">
+            📝
         </div>
 
-        <textarea
-            id="notesEditor"
-            placeholder="Start writing..."
-        ></textarea>
-
-        <div id="saveStatus">
-            Ready
-        </div>
+        <span>
+            Notes
+        </span>
 
     </div>
 
-</div> 
-<div id="calculatorWindow" class="window">
 
-    <div class="windowHeader">
-        <span>🧮 Calculator</span>
+    <div class="desktop-icon">
 
-        <div class="windowControls">
-            <button id="minimizeCalculator">−</button>
-            <button id="maximizeCalculator">□</button>
-            <button id="closeCalculator">×</button>
+        <div class="icon">
+            🧮
         </div>
-    </div>
 
-    <div class="calculatorContent">
-
-        <input
-            id="calculatorDisplay"
-            type="text"
-            value="0"
-            readonly
-        >
-
-        <div class="calculatorButtons">
-
-            <button data-value="C">C</button>
-            <button data-value="(">(</button>
-            <button data-value=")">)</button>
-            <button data-value="/">÷</button>
-
-            <button data-value="7">7</button>
-            <button data-value="8">8</button>
-            <button data-value="9">9</button>
-            <button data-value="*">×</button>
-
-            <button data-value="4">4</button>
-            <button data-value="5">5</button>
-            <button data-value="6">6</button>
-            <button data-value="-">−</button>
-
-            <button data-value="1">1</button>
-            <button data-value="2">2</button>
-            <button data-value="3">3</button>
-            <button data-value="+">+</button>
-
-            <button data-value="0" class="zero">0</button>
-            <button data-value=".">.</button>
-            <button data-value="=" class="equals">=</button>
-
-        </div>
+        <span>
+            Calculator
+        </span>
 
     </div>
 
-</div>
-<div id="settingsWindow" class="window">
 
-    <div class="windowHeader">
-        <span>⚙️ Settings</span>
 
-        <div class="windowControls">
-            <button id="minimizeSettings">−</button>
-            <button id="maximizeSettings">□</button>
-            <button id="closeSettings">×</button>
-        </div>
-    </div>
+    <!-- =================================================
+         FILES WINDOW
+         ================================================= -->
 
-    <div class="settingsContent">
+    <div id="filesWindow"
+         class="window">
 
-        <h2>Settings</h2>
 
-        <div class="settingsSection">
+        <div class="windowHeader">
 
-            <h3>🔋 Battery</h3>
+            <span>
+                📁 Files
+            </span>
 
-            <p id="settingsBattery">
-                Checking battery...
-            </p>
 
-        </div>
+            <div class="windowControls">
 
-        <div class="settingsSection">
+                <button id="minimizeFiles">
+                    −
+                </button>
 
-            <h3>💻 System</h3>
+                <button id="maximizeFiles">
+                    □
+                </button>
 
-            <p id="systemPlatform">
-                Loading...
-            </p>
+                <button id="closeFiles">
+                    ×
+                </button>
 
-            <p id="systemBrowser">
-                Loading...
-            </p>
-
-            <p id="systemLanguage">
-                Loading...
-            </p>
-
-        </div>
-
-        <div class="settingsSection">
-
-            <h3>🖥️ Display</h3>
-
-            <p id="screenResolution">
-                Loading...
-            </p>
-
-            <p id="screenPixelRatio">
-                Loading...
-            </p>
-
-        </div>
-
-        <div class="settingsSection">
-
-            <h3>🌐 Network</h3>
-
-            <p id="networkStatus">
-                Checking...
-            </p>
-
-        </div>
-
-        <div class="settingsSection">
-
-            <h3>ℹ️ About WebOS</h3>
-
-            <p>WebOS Version: 0.9</p>
-            <p>Browser-based operating system project</p>
-
-        </div>
-
-    </div>
-
-</div>
-<div id="taskManagerWindow" class="window">
-
-    <div class="windowHeader">
-        <span>📊 Task Manager</span>
-
-        <div class="windowControls">
-            <button id="minimizeTaskManager">−</button>
-            <button id="maximizeTaskManager">□</button>
-            <button id="closeTaskManager">×</button>
-        </div>
-    </div>
-
-    <div class="taskManagerContent">
-
-        <h2>System Monitor</h2>
-
-        <div class="monitorCards">
-
-            <div class="monitorCard">
-                <span>🕐 Uptime</span>
-                <strong id="webosUptime">0 seconds</strong>
-            </div>
-
-            <div class="monitorCard">
-                <span>🌐 Network</span>
-                <strong id="taskNetwork">Checking...</strong>
-            </div>
-
-            <div class="monitorCard">
-                <span>📦 Storage</span>
-                <strong id="taskStorage">Checking...</strong>
             </div>
 
         </div>
 
-        <h3>Running WebOS Apps</h3>
 
-        <div id="runningApps"></div>
+        <div class="windowContent">
 
-        <button id="refreshTaskManager">
-            🔄 Refresh
-        </button>
+            <h2>
+                File Manager
+            </h2>
 
-    </div>
 
-</div>        
-    </main>
+            <div class="fileArea">
 
-    <footer id="taskbar">
+                📄 Documents
 
-        <button id="startButton">⊞</button>
-        <div id="startMenu">
+                <br><br>
 
-    <div id="searchBox">
-        🔎 Search apps...
-    </div>
+                🖼️ Pictures
 
-    <div class="startApps">
+                <br><br>
 
-        <button class="appButton" id="filesApp">
-    📁
-    <span>Files</span>
-</button>
+                🎵 Music
 
-        <button class="appButton" id="notesApp">
-    📝
-    <span>Notes</span>
-</button>
-        <button class="appButton" id="calculatorApp">
-    🧮
-    <span>Calculator</span>
-</button>
+                <br><br>
 
-        <button class="appButton" id="settingsApp">
-    ⚙️
-    <span>Settings</span>
-</button>
+                🎮 Games
 
-        <button class="appButton">
-            🎮
-            <span>Games</span>
-        </button>
+            </div>
 
-        <button class="appButton" id="taskManagerApp">
-    📊
-    <span>Task Manager</span>
-</button>
-
-    </div>
-
-    <div id="startBottom">
-        <span>👤 WebOS User</span>
-        <button>⏻</button>
-    </div>
-
-</div>
-        <div id="taskbarApps"></div>
-
-        <div id="systemTray">
-            <span id="battery">🔋 --%</span>
-            <span id="clock">00:00</span>
         </div>
 
-    </footer>
+    </div>
 
-    <script src="script.js"></script>
+
+
+    <!-- =================================================
+         NOTES WINDOW
+         ================================================= -->
+
+    <div id="notesWindow"
+         class="window">
+
+
+        <div class="windowHeader">
+
+            <span>
+                📝 Notes
+            </span>
+
+
+            <div class="windowControls">
+
+                <button id="minimizeNotes">
+                    −
+                </button>
+
+                <button id="maximizeNotes">
+                    □
+                </button>
+
+                <button id="closeNotes">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="notesContent">
+
+
+            <div class="notesToolbar">
+
+                <button id="saveNote">
+                    💾 Save
+                </button>
+
+
+                <button id="clearNote">
+                    🗑️ Clear
+                </button>
+
+            </div>
+
+
+            <textarea
+                id="notesEditor"
+                placeholder="Start writing..."
+            ></textarea>
+
+
+            <div id="saveStatus">
+                Ready
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         CALCULATOR WINDOW
+         ================================================= -->
+
+    <div id="calculatorWindow"
+         class="window">
+
+
+        <div class="windowHeader">
+
+            <span>
+                🧮 Calculator
+            </span>
+
+
+            <div class="windowControls">
+
+                <button id="minimizeCalculator">
+                    −
+                </button>
+
+                <button id="maximizeCalculator">
+                    □
+                </button>
+
+                <button id="closeCalculator">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="calculatorContent">
+
+
+            <input
+                id="calculatorDisplay"
+                type="text"
+                value="0"
+                readonly
+            >
+
+
+            <div class="calculatorButtons">
+
+
+                <button data-value="C">
+                    C
+                </button>
+
+
+                <button data-value="(">
+                    (
+                </button>
+
+
+                <button data-value=")">
+                    )
+                </button>
+
+
+                <button data-value="/">
+                    ÷
+                </button>
+
+
+
+                <button data-value="7">
+                    7
+                </button>
+
+
+                <button data-value="8">
+                    8
+                </button>
+
+
+                <button data-value="9">
+                    9
+                </button>
+
+
+                <button data-value="*">
+                    ×
+                </button>
+
+
+
+                <button data-value="4">
+                    4
+                </button>
+
+
+                <button data-value="5">
+                    5
+                </button>
+
+
+                <button data-value="6">
+                    6
+                </button>
+
+
+                <button data-value="-">
+                    −
+                </button>
+
+
+
+                <button data-value="1">
+                    1
+                </button>
+
+
+                <button data-value="2">
+                    2
+                </button>
+
+
+                <button data-value="3">
+                    3
+                </button>
+
+
+                <button data-value="+">
+                    +
+                </button>
+
+
+
+                <button
+                    data-value="0"
+                    class="zero">
+
+                    0
+
+                </button>
+
+
+                <button data-value=".">
+                    .
+                </button>
+
+
+                <button
+                    data-value="="
+                    class="equals">
+
+                    =
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SETTINGS WINDOW
+         ================================================= -->
+
+    <div id="settingsWindow"
+         class="window">
+
+
+        <div class="windowHeader">
+
+            <span>
+                ⚙️ Settings
+            </span>
+
+
+            <div class="windowControls">
+
+                <button id="minimizeSettings">
+                    −
+                </button>
+
+                <button id="maximizeSettings">
+                    □
+                </button>
+
+                <button id="closeSettings">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="settingsContent">
+
+
+            <h2>
+                Settings
+            </h2>
+
+
+
+            <!-- BATTERY -->
+
+            <div class="settingsSection">
+
+                <h3>
+                    🔋 Battery
+                </h3>
+
+
+                <p id="settingsBattery">
+                    Checking battery...
+                </p>
+
+            </div>
+
+
+
+            <!-- SYSTEM -->
+
+            <div class="settingsSection">
+
+                <h3>
+                    💻 System
+                </h3>
+
+
+                <p id="systemPlatform">
+                    Loading...
+                </p>
+
+
+                <p id="systemBrowser">
+                    Loading...
+                </p>
+
+
+                <p id="systemLanguage">
+                    Loading...
+                </p>
+
+            </div>
+
+
+
+            <!-- DISPLAY -->
+
+            <div class="settingsSection">
+
+                <h3>
+                    🖥️ Display
+                </h3>
+
+
+                <p id="screenResolution">
+                    Loading...
+                </p>
+
+
+                <p id="screenPixelRatio">
+                    Loading...
+                </p>
+
+            </div>
+
+
+
+            <!-- NETWORK -->
+
+            <div class="settingsSection">
+
+                <h3>
+                    🌐 Network
+                </h3>
+
+
+                <p id="networkStatus">
+                    Checking...
+                </p>
+
+            </div>
+
+
+
+            <!-- ABOUT -->
+
+            <div class="settingsSection">
+
+                <h3>
+                    ℹ️ About WebOS
+                </h3>
+
+
+                <p>
+                    WebOS Version: 1.0
+                </p>
+
+
+                <p>
+                    Browser-based operating system project
+                </p>
+
+
+                <p>
+                    WebOS v1.0
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         TASK MANAGER WINDOW
+         ================================================= -->
+
+    <div id="taskManagerWindow"
+         class="window">
+
+
+        <div class="windowHeader">
+
+            <span>
+                📊 Task Manager
+            </span>
+
+
+            <div class="windowControls">
+
+                <button id="minimizeTaskManager">
+                    −
+                </button>
+
+                <button id="maximizeTaskManager">
+                    □
+                </button>
+
+                <button id="closeTaskManager">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="taskManagerContent">
+
+
+            <h2>
+                System Monitor
+            </h2>
+
+
+
+            <!-- MONITOR CARDS -->
+
+            <div class="monitorCards">
+
+
+                <div class="monitorCard">
+
+                    <span>
+                        🕐 Uptime
+                    </span>
+
+
+                    <strong id="webosUptime">
+                        0 seconds
+                    </strong>
+
+                </div>
+
+
+
+                <div class="monitorCard">
+
+                    <span>
+                        🌐 Network
+                    </span>
+
+
+                    <strong id="taskNetwork">
+                        Checking...
+                    </strong>
+
+                </div>
+
+
+
+                <div class="monitorCard">
+
+                    <span>
+                        📦 Storage
+                    </span>
+
+
+                    <strong id="taskStorage">
+                        Checking...
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- RUNNING APPS -->
+
+            <h3>
+                Running WebOS Apps
+            </h3>
+
+
+            <div id="runningApps">
+            </div>
+
+
+
+            <!-- REFRESH -->
+
+            <button id="refreshTaskManager">
+
+                🔄 Refresh
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     TASKBAR
+     ===================================================== -->
+
+<footer id="taskbar">
+
+
+    <!-- START BUTTON -->
+
+    <button id="startButton">
+        ⊞
+    </button>
+
+
+
+    <!-- =================================================
+         START MENU
+         ================================================= -->
+
+    <div id="startMenu">
+
+
+        <!-- SEARCH -->
+
+        <div id="searchBox">
+
+            🔎 Search apps...
+
+        </div>
+
+
+
+        <!-- =================================================
+             APPLICATIONS
+             ================================================= -->
+
+        <div class="startApps">
+
+
+            <!-- FILES -->
+
+            <button
+                class="appButton"
+                id="filesApp">
+
+                📁
+
+                <span>
+                    Files
+                </span>
+
+            </button>
+
+
+
+            <!-- NOTES -->
+
+            <button
+                class="appButton"
+                id="notesApp">
+
+                📝
+
+                <span>
+                    Notes
+                </span>
+
+            </button>
+
+
+
+            <!-- CALCULATOR -->
+
+            <button
+                class="appButton"
+                id="calculatorApp">
+
+                🧮
+
+                <span>
+                    Calculator
+                </span>
+
+            </button>
+
+
+
+            <!-- SETTINGS -->
+
+            <button
+                class="appButton"
+                id="settingsApp">
+
+                ⚙️
+
+                <span>
+                    Settings
+                </span>
+
+            </button>
+
+
+
+            <!-- GAMES -->
+
+            <button
+                class="appButton"
+                id="gamesApp">
+
+                🎮
+
+                <span>
+                    Games
+                </span>
+
+            </button>
+
+
+
+            <!-- TASK MANAGER -->
+
+            <button
+                class="appButton"
+                id="taskManagerApp">
+
+                📊
+
+                <span>
+                    Task Manager
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             START MENU BOTTOM
+             ================================================= -->
+
+        <div id="startBottom">
+
+
+            <span>
+                👤 WebOS User
+            </span>
+
+
+            <button id="powerButton">
+                ⏻
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         TASKBAR APPLICATIONS
+         ================================================= -->
+
+    <div id="taskbarApps">
+    </div>
+
+
+
+    <!-- =================================================
+         SYSTEM TRAY
+         ================================================= -->
+
+    <div id="systemTray">
+
+
+        <span id="battery">
+            🔋 --%
+        </span>
+
+
+        <span id="clock">
+            00:00
+        </span>
+
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="script.js"></script>
+
 
 </body>
+
 </html>
+```
