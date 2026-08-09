@@ -242,7 +242,15 @@ body {
     padding: 20px;
 
     background: #f1f1f1;
+.window.maximized {
+    top: 0;
+    left: 0;
 
+    width: 100%;
+    height: calc(100% - 55px);
+
+    border-radius: 0;
+}
     border-radius: 8px;
 
     line-height: 1.5;
