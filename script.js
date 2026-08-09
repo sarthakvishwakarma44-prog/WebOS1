@@ -38,3 +38,15 @@ async function updateBattery() {
 }
 
 updateBattery();
+const startButton = document.getElementById("startButton");
+const startMenu = document.getElementById("startMenu");
+
+startButton.addEventListener("click", function () {
+
+    if (startMenu.style.display === "block") {
+        startMenu.style.display = "none";
+    } else {
+        startMenu.style.display = "block";
+    }
+
+});
