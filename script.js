@@ -281,3 +281,213 @@ function removeFilesTaskbarButton() {
 
     }
 }
+// =========================
+// NOTES APP
+// =========================
+
+const notesApp = document.getElementById("notesApp");
+const notesWindow = document.getElementById("notesWindow");
+
+const closeNotes = document.getElementById("closeNotes");
+const minimizeNotes = document.getElementById("minimizeNotes");
+const maximizeNotes = document.getElementById("maximizeNotes");
+
+const notesEditor = document.getElementById("notesEditor");
+const saveNote = document.getElementById("saveNote");
+const clearNote = document.getElementById("clearNote");
+const saveStatus = document.getElementById("saveStatus");
+
+let notesTaskbarButton = null;
+
+
+// =========================
+// LOAD SAVED NOTE
+// =========================
+
+const savedNote = localStorage.getItem("webos-note");
+
+if (savedNote !== null) {
+    notesEditor.value = savedNote;
+}
+
+
+// =========================
+// SAVE NOTE
+// =========================
+
+function saveNotes() {
+
+    localStorage.setItem(
+        "webos-note",
+        notesEditor.value
+    );
+
+    saveStatus.textContent = "Saved ✓";
+}
+
+
+// =========================
+// OPEN NOTES
+// =========================
+
+notesApp.addEventListener("click", function () {
+
+    startMenu.style.display = "none";
+
+    notesWindow.style.display = "block";
+
+    notesWindow.style.zIndex = 1001;
+
+    createNotesTaskbarButton();
+
+});
+
+
+// =========================
+// CLOSE NOTES
+// =========================
+
+closeNotes.addEventListener("click", function () {
+
+    saveNotes();
+
+    notesWindow.style.display = "none";
+
+    removeNotesTaskbarButton();
+
+});
+
+
+// =========================
+// MINIMIZE NOTES
+// =========================
+
+minimizeNotes.addEventListener("click", function () {
+
+    notesWindow.style.display = "none";
+
+    createNotesTaskbarButton();
+
+});
+
+
+// =========================
+// MAXIMIZE NOTES
+// =========================
+
+maximizeNotes.addEventListener("click", function () {
+
+    notesWindow.classList.toggle("maximized");
+
+});
+
+
+// =========================
+// SAVE BUTTON
+// =========================
+
+saveNote.addEventListener("click", function () {
+
+    saveNotes();
+
+});
+
+
+// =========================
+// CLEAR BUTTON
+// =========================
+
+clearNote.addEventListener("click", function () {
+
+    const confirmation = confirm(
+        "Clear this note?"
+    );
+
+    if (confirmation) {
+
+        notesEditor.value = "";
+
+        localStorage.removeItem("webos-note");
+
+        saveStatus.textContent = "Note cleared";
+
+    }
+
+});
+
+
+// =========================
+// AUTO SAVE
+// =========================
+
+notesEditor.addEventListener("input", function () {
+
+    localStorage.setItem(
+        "webos-note",
+        notesEditor.value
+    );
+
+    saveStatus.textContent = "Saving...";
+
+});
+
+
+// =========================
+// NOTES TASKBAR BUTTON
+// =========================
+
+function createNotesTaskbarButton() {
+
+    if (notesTaskbarButton) {
+        return;
+    }
+
+    notesTaskbarButton = document.createElement("button");
+
+    notesTaskbarButton.className = "taskbarApp";
+
+    notesTaskbarButton.textContent = "📝 Notes";
+
+    notesTaskbarButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                notesWindow.style.display === "none"
+            ) {
+
+                notesWindow.style.display = "block";
+
+                notesWindow.style.zIndex = 1001;
+
+            } else {
+
+                notesWindow.style.display = "none";
+
+            }
+
+        }
+    );
+
+    taskbarApps.appendChild(
+        notesTaskbarButton
+    );
+
+}
+
+
+// =========================
+// REMOVE NOTES TASKBAR BUTTON
+// =========================
+
+function removeNotesTaskbarButton() {
+
+    if (notesTaskbarButton) {
+
+        notesTaskbarButton.remove();
+
+        notesTaskbarButton = null;
+
+    }
+
+}
