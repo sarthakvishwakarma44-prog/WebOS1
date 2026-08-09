@@ -737,3 +737,188 @@ function removeCalculatorTaskbarButton() {
     }
 
 }
+// =========================
+// WEBOS WINDOW MANAGER
+// =========================
+
+const WebOSWindowManager = {
+
+    windows: new Map(),
+
+    register(id, windowElement) {
+
+        this.windows.set(id, {
+            element: windowElement,
+            minimized: false,
+            maximized: false
+        });
+
+        this.makeDraggable(windowElement);
+    },
+
+
+    open(id) {
+
+        const app = this.windows.get(id);
+
+        if (!app) return;
+
+        app.element.style.display = "block";
+
+        app.minimized = false;
+
+        this.focus(id);
+    },
+
+
+    close(id) {
+
+        const app = this.windows.get(id);
+
+        if (!app) return;
+
+        app.element.style.display = "none";
+
+        app.minimized = false;
+    },
+
+
+    minimize(id) {
+
+        const app = this.windows.get(id);
+
+        if (!app) return;
+
+        app.element.style.display = "none";
+
+        app.minimized = true;
+    },
+
+
+    restore(id) {
+
+        const app = this.windows.get(id);
+
+        if (!app) return;
+
+        app.element.style.display = "block";
+
+        app.minimized = false;
+
+        this.focus(id);
+    },
+
+
+    focus(id) {
+
+        const app = this.windows.get(id);
+
+        if (!app) return;
+
+        let highestZ = 100;
+
+        this.windows.forEach(function (item) {
+
+            const z =
+                parseInt(
+                    item.element.style.zIndex
+                ) || 100;
+
+            if (z > highestZ) {
+                highestZ = z;
+            }
+
+        });
+
+        app.element.style.zIndex =
+            highestZ + 1;
+    },
+
+
+    maximize(id) {
+
+        const app = this.windows.get(id);
+
+        if (!app) return;
+
+        app.maximized =
+            !app.maximized;
+
+        app.element.classList.toggle(
+            "maximized"
+        );
+    },
+
+
+    makeDraggable(windowElement) {
+
+        const header =
+            windowElement.querySelector(
+                ".windowHeader"
+            );
+
+        if (!header) return;
+
+        let dragging = false;
+
+        let offsetX = 0;
+        let offsetY = 0;
+
+
+        header.addEventListener(
+            "mousedown",
+            function (event) {
+
+                if (
+                    windowElement.classList.contains(
+                        "maximized"
+                    )
+                ) {
+                    return;
+                }
+
+                dragging = true;
+
+                const rect =
+                    windowElement.getBoundingClientRect();
+
+                offsetX =
+                    event.clientX - rect.left;
+
+                offsetY =
+                    event.clientY - rect.top;
+
+            }
+        );
+
+
+        document.addEventListener(
+            "mousemove",
+            function (event) {
+
+                if (!dragging) return;
+
+                windowElement.style.left =
+                    (event.clientX - offsetX) +
+                    "px";
+
+                windowElement.style.top =
+                    (event.clientY - offsetY) +
+                    "px";
+
+            }
+        );
+
+
+        document.addEventListener(
+            "mouseup",
+            function () {
+
+                dragging = false;
+
+            }
+        );
+
+    }
+
+};
