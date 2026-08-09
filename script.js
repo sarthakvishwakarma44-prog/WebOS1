@@ -225,3 +225,54 @@ document.addEventListener("mouseup", function () {
     isDragging = false;
 
 });
+// =========================
+// TASKBAR WINDOW MANAGEMENT
+// =========================
+
+const taskbarApps = document.getElementById("taskbarApps");
+
+let filesTaskbarButton = null;
+
+
+// Create the Files taskbar button
+function createFilesTaskbarButton() {
+
+    if (filesTaskbarButton) {
+        return;
+    }
+
+    filesTaskbarButton = document.createElement("button");
+
+    filesTaskbarButton.className = "taskbarApp";
+    filesTaskbarButton.textContent = "📁 Files";
+
+    filesTaskbarButton.addEventListener("click", function () {
+
+        if (filesWindow.style.display === "none") {
+
+            filesWindow.style.display = "block";
+            bringToFront();
+
+        } else {
+
+            filesWindow.style.display = "none";
+
+        }
+
+    });
+
+    taskbarApps.appendChild(filesTaskbarButton);
+}
+
+
+// Remove the Files taskbar button
+function removeFilesTaskbarButton() {
+
+    if (filesTaskbarButton) {
+
+        filesTaskbarButton.remove();
+
+        filesTaskbarButton = null;
+
+    }
+}
