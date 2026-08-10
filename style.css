@@ -1,11 +1,10 @@
 /* =====================================================
-   WEBOS v1.0
-   COMPLETE CSS
+   WebOS v1.0 — COMPLETE CSS
    ===================================================== */
 
 
 /* =====================================================
-   0.1 — GLOBAL RESET
+   1. RESET
    ===================================================== */
 
 * {
@@ -14,47 +13,33 @@
     padding: 0;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
-
 body {
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
-
     background: #070b16;
-
     color: white;
-
-    user-select: none;
 }
 
 
 /* =====================================================
-   0.2 — WELCOME / BOOT SCREEN
+   2. WELCOME SCREEN
    ===================================================== */
 
 #welcomeScreen {
     position: fixed;
-
     inset: 0;
 
     z-index: 99999;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
 
     text-align: center;
@@ -62,15 +47,14 @@ body {
     background:
         radial-gradient(
             circle at center,
-            #243b70 0%,
-            #10182f 45%,
+            #29457d 0%,
+            #121d39 45%,
             #050811 100%
         );
 
     color: white;
 
     opacity: 1;
-
     visibility: visible;
 
     transition:
@@ -78,97 +62,71 @@ body {
         visibility 0.5s ease;
 }
 
-
 #welcomeScreen.hidden {
     opacity: 0;
-
     visibility: hidden;
-
     pointer-events: none;
 }
 
-
 .welcomeLogo {
     font-size: 90px;
-
     margin-bottom: 20px;
 
-    animation:
-        welcomePulse 2s
-        infinite;
+    animation: logoPulse 2s infinite;
 }
-
 
 #welcomeScreen h1 {
     font-size: 48px;
-
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
-
 
 .welcomeVersion {
     font-size: 20px;
-
     opacity: 0.8;
-
     margin-bottom: 10px;
 }
 
-
 .welcomeMessage {
     font-size: 18px;
-
     opacity: 0.7;
-
     margin-bottom: 30px;
 }
 
-
 #startWebOS {
     border: none;
-
     border-radius: 10px;
 
     padding: 14px 30px;
 
     font-size: 18px;
-
     font-weight: bold;
 
-    cursor: pointer;
-
+    background: #31599c;
     color: white;
 
-    background: #31599c;
+    cursor: pointer;
 
     transition:
         transform 0.2s,
         background 0.2s;
 }
 
-
 #startWebOS:hover {
-    background: #3d6fbe;
-
+    background: #4775c1;
     transform: scale(1.05);
 }
-
 
 #startWebOS:active {
     transform: scale(0.97);
 }
 
-
 #welcomeLoading {
     margin-top: 25px;
-
     font-size: 14px;
-
     opacity: 0.55;
 }
 
-
-@keyframes welcomePulse {
+@keyframes logoPulse {
 
     0% {
         transform: scale(1);
@@ -181,59 +139,54 @@ body {
     100% {
         transform: scale(1);
     }
-
 }
 
 
 /* =====================================================
-   0.3 — DESKTOP
+   3. DESKTOP
    ===================================================== */
 
 #desktop {
     position: fixed;
 
-    inset: 0;
-
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: 58px;
 
     overflow: hidden;
 
+    padding: 20px;
+
     background:
         radial-gradient(
             circle at 20% 20%,
-            #243b70 0%,
-            #10182f 35%,
+            #29457d 0%,
+            #121d39 35%,
             #070b16 100%
         );
-
-    padding: 20px;
 
     z-index: 1;
 }
 
 
 /* =====================================================
-   0.4 — DESKTOP ICONS
+   4. DESKTOP ICONS
    ===================================================== */
 
 .desktop-icon {
     width: 110px;
-
     min-height: 120px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
+
+    padding: 10px;
 
     display: flex;
-
     flex-direction: column;
-
-    justify-content: flex-start;
-
     align-items: center;
 
     border-radius: 12px;
-
-    padding: 10px;
 
     cursor: pointer;
 
@@ -241,22 +194,16 @@ body {
         background 0.15s;
 }
 
-
 .desktop-icon:hover {
-    background:
-        rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.10);
 }
-
 
 .desktop-icon .icon {
     width: 80px;
-
     height: 80px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 16px;
@@ -269,13 +216,12 @@ body {
     margin-bottom: 6px;
 }
 
-
 .desktop-icon span {
+    color: white;
+
     font-size: 15px;
 
     text-align: center;
-
-    color: white;
 
     text-shadow:
         0 1px 3px black;
@@ -283,52 +229,45 @@ body {
 
 
 /* =====================================================
-   0.5 — WINDOWS
+   5. WINDOWS
    ===================================================== */
 
 .window {
     position: absolute;
 
     top: 100px;
-
     left: 260px;
 
     width: 650px;
-
-    max-width: calc(100vw - 300px);
-
     height: 450px;
 
+    max-width: calc(100vw - 300px);
     max-height: calc(100vh - 180px);
 
+    overflow: hidden;
+
     background:
-        rgba(22, 28, 43, 0.97);
+        rgba(22, 28, 43, 0.98);
 
     border:
-        1px solid
-        rgba(255, 255, 255, 0.15);
+        1px solid rgba(255, 255, 255, 0.15);
 
     border-radius: 12px;
 
     box-shadow:
-        0 20px 60px
-        rgba(0, 0, 0, 0.55);
-
-    overflow: hidden;
+        0 20px 60px rgba(0, 0, 0, 0.55);
 }
 
 
 /* =====================================================
-   0.6 — WINDOW HEADER
+   6. WINDOW HEADER
    ===================================================== */
 
 .windowHeader {
     height: 48px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     padding: 0 12px;
@@ -337,29 +276,21 @@ body {
         rgba(255, 255, 255, 0.08);
 
     border-bottom:
-        1px solid
-        rgba(255, 255, 255, 0.10);
+        1px solid rgba(255, 255, 255, 0.10);
 
     font-weight: bold;
-
-    cursor: default;
 }
-
 
 .windowControls {
     display: flex;
-
     gap: 5px;
 }
 
-
 .windowControls button {
     width: 34px;
-
     height: 30px;
 
     border: none;
-
     border-radius: 6px;
 
     background:
@@ -372,28 +303,24 @@ body {
     cursor: pointer;
 }
 
-
 .windowControls button:hover {
     background:
-        rgba(255, 255, 255, 0.18);
+        rgba(255, 255, 255, 0.20);
 }
 
 
 /* =====================================================
-   0.7 — MAXIMIZED WINDOW
+   7. MAXIMIZED WINDOWS
    ===================================================== */
 
 .window.maximized {
     top: 0 !important;
-
     left: 0 !important;
 
     width: 100% !important;
-
     height: calc(100% - 58px) !important;
 
     max-width: none !important;
-
     max-height: none !important;
 
     border-radius: 0;
@@ -401,22 +328,20 @@ body {
 
 
 /* =====================================================
-   0.8 — FILES
+   8. FILE MANAGER
    ===================================================== */
 
 .windowContent {
-    padding: 25px;
-
     height: calc(100% - 48px);
+
+    padding: 25px;
 
     overflow: auto;
 }
 
-
 .windowContent h2 {
     margin-bottom: 25px;
 }
-
 
 .fileArea {
     padding: 20px;
@@ -433,48 +358,40 @@ body {
 
 
 /* =====================================================
-   0.9 — NOTES
+   9. NOTES
    ===================================================== */
 
 .notesContent {
     height: calc(100% - 48px);
 
     display: flex;
-
     flex-direction: column;
 
     padding: 15px;
 }
 
-
 .notesToolbar {
     display: flex;
-
     gap: 10px;
 
     margin-bottom: 12px;
 }
 
-
 .notesToolbar button {
     border: none;
-
     border-radius: 7px;
 
     padding: 9px 14px;
 
     background: #31599c;
-
     color: white;
 
     cursor: pointer;
 }
 
-
 .notesToolbar button:hover {
-    background: #3d6fbe;
+    background: #4775c1;
 }
-
 
 #notesEditor {
     flex: 1;
@@ -483,17 +400,16 @@ body {
 
     resize: none;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.12);
+    outline: none;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
 
     border-radius: 8px;
 
-    outline: none;
-
     padding: 15px;
 
-    background:
-        #0b1020;
+    background: #080d19;
 
     color: white;
 
@@ -501,7 +417,6 @@ body {
 
     font-size: 16px;
 }
-
 
 #saveStatus {
     margin-top: 8px;
@@ -513,7 +428,7 @@ body {
 
 
 /* =====================================================
-   1.0 — CALCULATOR
+   10. CALCULATOR
    ===================================================== */
 
 .calculatorContent {
@@ -522,36 +437,29 @@ body {
     padding: 20px;
 
     display: flex;
-
     flex-direction: column;
 
     gap: 15px;
 }
 
-
 #calculatorDisplay {
     width: 100%;
-
     height: 65px;
 
     border: none;
-
     border-radius: 10px;
 
     padding: 10px 15px;
+
+    outline: none;
 
     text-align: right;
 
     font-size: 30px;
 
-    background:
-        #080d19;
-
+    background: #080d19;
     color: white;
-
-    outline: none;
 }
-
 
 .calculatorButtons {
     flex: 1;
@@ -564,10 +472,8 @@ body {
     gap: 10px;
 }
 
-
 .calculatorButtons button {
     border: none;
-
     border-radius: 10px;
 
     background:
@@ -584,35 +490,30 @@ body {
         transform 0.1s;
 }
 
-
 .calculatorButtons button:hover {
     background:
         rgba(255, 255, 255, 0.18);
 }
 
-
 .calculatorButtons button:active {
     transform: scale(0.95);
 }
-
 
 .calculatorButtons .zero {
     grid-column: span 2;
 }
 
-
 .calculatorButtons .equals {
     background: #31599c;
 }
 
-
 .calculatorButtons .equals:hover {
-    background: #3d6fbe;
+    background: #4775c1;
 }
 
 
 /* =====================================================
-   1.1 — SETTINGS
+   11. SETTINGS
    ===================================================== */
 
 .settingsContent {
@@ -623,11 +524,9 @@ body {
     overflow-y: auto;
 }
 
-
 .settingsContent h2 {
     margin-bottom: 20px;
 }
-
 
 .settingsSection {
     margin-bottom: 20px;
@@ -640,25 +539,23 @@ body {
         rgba(255, 255, 255, 0.05);
 }
 
-
 .settingsSection h3 {
     margin-bottom: 10px;
 }
 
-
 .settingsSection p {
     margin-top: 7px;
 
-    opacity: 0.75;
-
     font-size: 14px;
+
+    opacity: 0.75;
 
     word-break: break-word;
 }
 
 
 /* =====================================================
-   1.2 — TASK MANAGER
+   12. TASK MANAGER
    ===================================================== */
 
 .taskManagerContent {
@@ -669,7 +566,6 @@ body {
     overflow-y: auto;
 }
 
-
 .monitorCards {
     display: grid;
 
@@ -678,10 +574,8 @@ body {
 
     gap: 12px;
 
-    margin:
-        20px 0 25px;
+    margin: 20px 0 25px;
 }
-
 
 .monitorCard {
     padding: 18px;
@@ -692,24 +586,19 @@ body {
         rgba(255, 255, 255, 0.06);
 
     display: flex;
-
     flex-direction: column;
 
     gap: 10px;
 }
 
-
 .monitorCard span {
-    opacity: 0.65;
-
     font-size: 14px;
+    opacity: 0.65;
 }
-
 
 .monitorCard strong {
     font-size: 18px;
 }
-
 
 #runningApps {
     display: flex;
@@ -718,10 +607,8 @@ body {
 
     gap: 8px;
 
-    margin:
-        12px 0 20px;
+    margin: 12px 0 20px;
 }
-
 
 .runningApp {
     padding: 12px;
@@ -731,7 +618,6 @@ body {
     background:
         rgba(255, 255, 255, 0.06);
 }
-
 
 #refreshTaskManager {
     border: none;
@@ -747,18 +633,20 @@ body {
     cursor: pointer;
 }
 
+#refreshTaskManager:hover {
+    background: #4775c1;
+}
+
 
 /* =====================================================
-   1.3 — TASKBAR
+   13. TASKBAR
    ===================================================== */
 
 #taskbar {
     position: fixed;
 
     left: 0;
-
     right: 0;
-
     bottom: 0;
 
     height: 58px;
@@ -774,17 +662,14 @@ body {
     padding: 7px 9px;
 
     background:
-        rgba(9, 13, 24, 0.96);
+        rgba(9, 13, 24, 0.97);
 
     border-top:
-        1px solid
-        rgba(255, 255, 255, 0.12);
+        1px solid rgba(255, 255, 255, 0.12);
 }
-
 
 #startButton {
     width: 44px;
-
     height: 44px;
 
     border: none;
@@ -801,15 +686,14 @@ body {
     cursor: pointer;
 }
 
-
 #startButton:hover {
     background:
-        rgba(255, 255, 255, 0.16);
+        rgba(255, 255, 255, 0.18);
 }
 
 
 /* =====================================================
-   1.4 — RUNNING APPLICATIONS
+   14. TASKBAR APPLICATIONS
    ===================================================== */
 
 #taskbarApps {
@@ -821,7 +705,6 @@ body {
 
     height: 100%;
 }
-
 
 .taskbarApp {
     height: 42px;
@@ -842,33 +725,29 @@ body {
     cursor: pointer;
 }
 
-
 .taskbarApp:hover {
     background:
-        rgba(255, 255, 255, 0.14);
+        rgba(255, 255, 255, 0.15);
 }
 
 
 /* =====================================================
-   1.5 — START MENU
+   15. START MENU
    ===================================================== */
 
 #startMenu {
     position: absolute;
 
     left: 8px;
-
     bottom: 66px;
 
     width: 330px;
-
     min-height: 420px;
 
     padding: 15px;
 
     border:
-        1px solid
-        rgba(255, 255, 255, 0.14);
+        1px solid rgba(255, 255, 255, 0.14);
 
     border-radius: 14px;
 
@@ -876,20 +755,18 @@ body {
         rgba(18, 24, 39, 0.98);
 
     box-shadow:
-        0 20px 60px
-        rgba(0, 0, 0, 0.55);
+        0 20px 60px rgba(0, 0, 0, 0.55);
 }
 
 
 /* =====================================================
-   1.6 — SEARCH BOX
+   16. SEARCH
    ===================================================== */
 
 #searchBox {
     height: 42px;
 
     display: flex;
-
     align-items: center;
 
     padding: 0 12px;
@@ -907,7 +784,7 @@ body {
 
 
 /* =====================================================
-   1.7 — START APPS
+   17. START MENU APPS
    ===================================================== */
 
 .startApps {
@@ -918,7 +795,6 @@ body {
 
     gap: 8px;
 }
-
 
 .appButton {
     min-height: 85px;
@@ -939,7 +815,6 @@ body {
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 6px;
@@ -947,11 +822,9 @@ body {
     font-size: 28px;
 }
 
-
 .appButton span {
     font-size: 12px;
 }
-
 
 .appButton:hover {
     background:
@@ -960,31 +833,26 @@ body {
 
 
 /* =====================================================
-   1.8 — START MENU BOTTOM
+   18. START MENU BOTTOM
    ===================================================== */
 
 #startBottom {
     position: absolute;
 
     left: 15px;
-
     right: 15px;
-
     bottom: 15px;
 
     display: flex;
 
     justify-content: space-between;
-
     align-items: center;
 
     padding-top: 12px;
 
     border-top:
-        1px solid
-        rgba(255, 255, 255, 0.10);
+        1px solid rgba(255, 255, 255, 0.10);
 }
-
 
 #startBottom span {
     font-size: 14px;
@@ -992,10 +860,8 @@ body {
     opacity: 0.75;
 }
 
-
 #powerButton {
     width: 38px;
-
     height: 38px;
 
     border: none;
@@ -1012,7 +878,6 @@ body {
     cursor: pointer;
 }
 
-
 #powerButton:hover {
     background:
         rgba(255, 80, 80, 0.25);
@@ -1020,7 +885,7 @@ body {
 
 
 /* =====================================================
-   1.9 — SYSTEM TRAY
+   19. SYSTEM TRAY
    ===================================================== */
 
 #systemTray {
@@ -1037,7 +902,6 @@ body {
     font-size: 14px;
 }
 
-
 #battery,
 #clock {
     white-space: nowrap;
@@ -1047,21 +911,18 @@ body {
 
 
 /* =====================================================
-   2.0 — SCROLLBARS
+   20. SCROLLBAR
    ===================================================== */
 
 ::-webkit-scrollbar {
     width: 8px;
-
     height: 8px;
 }
-
 
 ::-webkit-scrollbar-track {
     background:
         rgba(255, 255, 255, 0.03);
 }
-
 
 ::-webkit-scrollbar-thumb {
     background:
@@ -1070,7 +931,6 @@ body {
     border-radius: 10px;
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
     background:
         rgba(255, 255, 255, 0.30);
@@ -1078,7 +938,7 @@ body {
 
 
 /* =====================================================
-   2.1 — RESPONSIVE DISPLAY
+   21. RESPONSIVE
    ===================================================== */
 
 @media (max-width: 800px) {
@@ -1093,12 +953,9 @@ body {
         max-width: none;
     }
 
-
     .monitorCards {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
-
 
     #startMenu {
         width: 300px;
