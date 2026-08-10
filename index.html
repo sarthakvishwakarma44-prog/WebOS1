@@ -3,10 +3,6 @@
 
 <head>
 
-    <!-- =================================================
-         WEBOS v1.0
-         ================================================= -->
-
     <meta charset="UTF-8">
 
     <meta
@@ -14,18 +10,9 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="description"
-        content="WebOS - A browser-based operating system"
-    >
-
     <title>WebOS v1.0</title>
 
-    <!-- CSS -->
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -34,7 +21,7 @@
 
 
 <!-- =====================================================
-     0.1 — WELCOME / BOOT SCREEN
+     WELCOME SCREEN
      ===================================================== -->
 
 <div id="welcomeScreen">
@@ -47,35 +34,33 @@
         Welcome to WebOS
     </h1>
 
-    <p class="welcomeVersion">
+    <div class="welcomeVersion">
         WebOS v1.0
-    </p>
+    </div>
 
-    <p class="welcomeMessage">
+    <div class="welcomeMessage">
         Your browser-based operating system
-    </p>
+    </div>
 
     <button id="startWebOS">
         🚀 Start WebOS
     </button>
 
-    <p id="welcomeLoading">
+    <div id="welcomeLoading">
         Initializing system...
-    </p>
+    </div>
 
 </div>
 
 
 <!-- =====================================================
-     0.2 — DESKTOP
+     DESKTOP
      ===================================================== -->
 
 <main id="desktop">
 
 
-    <!-- =================================================
-         0.3 — FILES DESKTOP ICON
-         ================================================= -->
+    <!-- FILES DESKTOP ICON -->
 
     <div
         class="desktop-icon"
@@ -93,9 +78,7 @@
     </div>
 
 
-    <!-- =================================================
-         0.4 — NOTES DESKTOP ICON
-         ================================================= -->
+    <!-- NOTES DESKTOP ICON -->
 
     <div
         class="desktop-icon"
@@ -113,9 +96,7 @@
     </div>
 
 
-    <!-- =================================================
-         0.5 — CALCULATOR DESKTOP ICON
-         ================================================= -->
+    <!-- CALCULATOR DESKTOP ICON -->
 
     <div
         class="desktop-icon"
@@ -133,9 +114,10 @@
     </div>
 
 
-    <!-- =====================================================
-         0.6 — FILE MANAGER WINDOW
-         ===================================================== -->
+
+    <!-- =================================================
+         FILES WINDOW
+         ================================================= -->
 
     <div
         id="filesWindow"
@@ -177,18 +159,15 @@
 
                 📄 Documents
 
-                <br>
-                <br>
+                <br><br>
 
                 🖼️ Pictures
 
-                <br>
-                <br>
+                <br><br>
 
                 🎵 Music
 
-                <br>
-                <br>
+                <br><br>
 
                 🎮 Games
 
@@ -200,9 +179,9 @@
 
 
 
-    <!-- =====================================================
-         0.7 — NOTES WINDOW
-         ===================================================== -->
+    <!-- =================================================
+         NOTES WINDOW
+         ================================================= -->
 
     <div
         id="notesWindow"
@@ -265,9 +244,9 @@
 
 
 
-    <!-- =====================================================
-         0.8 — CALCULATOR WINDOW
-         ===================================================== -->
+    <!-- =================================================
+         CALCULATOR WINDOW
+         ================================================= -->
 
     <div
         id="calculatorWindow"
@@ -310,7 +289,6 @@
 
 
             <div class="calculatorButtons">
-
 
                 <button data-value="C">
                     C
@@ -406,9 +384,9 @@
 
 
 
-    <!-- =====================================================
-         0.9 — SETTINGS WINDOW
-         ===================================================== -->
+    <!-- =================================================
+         SETTINGS WINDOW
+         ================================================= -->
 
     <div
         id="settingsWindow"
@@ -447,8 +425,6 @@
             </h2>
 
 
-            <!-- Battery -->
-
             <div class="settingsSection">
 
                 <h3>
@@ -461,8 +437,6 @@
 
             </div>
 
-
-            <!-- System -->
 
             <div class="settingsSection">
 
@@ -485,8 +459,6 @@
             </div>
 
 
-            <!-- Display -->
-
             <div class="settingsSection">
 
                 <h3>
@@ -504,8 +476,6 @@
             </div>
 
 
-            <!-- Network -->
-
             <div class="settingsSection">
 
                 <h3>
@@ -518,8 +488,6 @@
 
             </div>
 
-
-            <!-- About -->
 
             <div class="settingsSection">
 
@@ -543,9 +511,9 @@
 
 
 
-    <!-- =====================================================
-         1.0 — TASK MANAGER
-         ===================================================== -->
+    <!-- =================================================
+         TASK MANAGER WINDOW
+         ================================================= -->
 
     <div
         id="taskManagerWindow"
@@ -665,33 +633,31 @@
     </button>
 
 
-    <!-- RUNNING APPS -->
+
+    <!-- TASKBAR RUNNING APPS -->
 
     <div id="taskbarApps">
     </div>
 
 
 
-    <!-- =================================================
-         START MENU
-         ================================================= -->
+    <!-- START MENU -->
 
     <div id="startMenu">
 
 
-        <!-- Search -->
+        <!-- SEARCH -->
 
         <div id="searchBox">
             🔎 Search apps...
         </div>
 
 
-        <!-- Applications -->
+
+        <!-- APPLICATIONS -->
 
         <div class="startApps">
 
-
-            <!-- Files -->
 
             <button
                 class="appButton"
@@ -707,8 +673,6 @@
             </button>
 
 
-            <!-- Notes -->
-
             <button
                 class="appButton"
                 id="notesApp"
@@ -722,8 +686,6 @@
 
             </button>
 
-
-            <!-- Calculator -->
 
             <button
                 class="appButton"
@@ -739,8 +701,6 @@
             </button>
 
 
-            <!-- Settings -->
-
             <button
                 class="appButton"
                 id="settingsApp"
@@ -755,8 +715,6 @@
             </button>
 
 
-            <!-- Games -->
-
             <button
                 class="appButton"
                 id="gamesApp"
@@ -770,8 +728,6 @@
 
             </button>
 
-
-            <!-- Task Manager -->
 
             <button
                 class="appButton"
@@ -791,14 +747,13 @@
 
 
 
-        <!-- Start Menu Bottom -->
+        <!-- START MENU BOTTOM -->
 
         <div id="startBottom">
 
             <span>
                 👤 WebOS User
             </span>
-
 
             <button id="powerButton">
                 ⏻
@@ -811,22 +766,17 @@
 
 
 
-    <!-- =================================================
-         SYSTEM TRAY
-         ================================================= -->
+    <!-- SYSTEM TRAY -->
 
     <div id="systemTray">
 
-
         <span id="battery">
-            🔋 --%
+            🔋 --
         </span>
-
 
         <span id="clock">
             00:00
         </span>
-
 
     </div>
 
