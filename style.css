@@ -1,1151 +1,1611 @@
-```css
 /* =====================================================
-   WebOS v1.0
-   COMPLETE STYLE SHEET
+   WEBOS v1.0
+   COMPLETE JAVASCRIPT
    ===================================================== */
 
 
 /* =====================================================
-   1. GLOBAL RESET
+   0.1 — MAIN ELEMENTS
    ===================================================== */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+const desktop =
+    document.getElementById("desktop");
 
+const taskbar =
+    document.getElementById("taskbar");
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-}
+const startButton =
+    document.getElementById("startButton");
 
+const startMenu =
+    document.getElementById("startMenu");
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
-    background: #0b1020;
-    color: white;
-}
+const taskbarApps =
+    document.getElementById("taskbarApps");
+
+const battery =
+    document.getElementById("battery");
+
+const clock =
+    document.getElementById("clock");
 
 
 /* =====================================================
-   2. DESKTOP
+   0.2 — WELCOME SCREEN
    ===================================================== */
 
-#desktop {
-    position: fixed;
-    inset: 0;
+const welcomeScreen =
+    document.getElementById("welcomeScreen");
 
-    padding: 25px;
+const startWebOS =
+    document.getElementById("startWebOS");
 
-    background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.25)
-        ),
-        url("images/wallpaper.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    overflow: hidden;
-}
+const welcomeLoading =
+    document.getElementById("welcomeLoading");
 
 
 /* =====================================================
-   3. DESKTOP ICONS
+   0.3 — WEBOS WINDOWS
    ===================================================== */
 
-.desktop-icon {
-    width: 90px;
+const windows = {
 
-    margin-bottom: 20px;
+    files:
+        document.getElementById("filesWindow"),
 
-    padding: 10px 5px;
+    notes:
+        document.getElementById("notesWindow"),
 
-    border-radius: 10px;
+    calculator:
+        document.getElementById("calculatorWindow"),
 
-    text-align: center;
+    settings:
+        document.getElementById("settingsWindow"),
 
-    cursor: pointer;
+    taskManager:
+        document.getElementById("taskManagerWindow")
 
-    user-select: none;
-
-    transition:
-        background 0.15s,
-        transform 0.15s;
-}
-
-
-.desktop-icon:hover {
-    background: rgba(255, 255, 255, 0.12);
-
-    transform: scale(1.03);
-}
-
-
-.desktop-icon:active {
-    background: rgba(255, 255, 255, 0.20);
-}
-
-
-.desktop-icon .icon {
-    font-size: 42px;
-
-    margin-bottom: 6px;
-}
-
-
-.desktop-icon span {
-    display: block;
-
-    font-size: 14px;
-
-    color: white;
-
-    text-shadow:
-        0 1px 3px black;
-}
+};
 
 
 /* =====================================================
-   4. WINDOWS
+   0.4 — WINDOW Z-INDEX
    ===================================================== */
 
-.window {
-    position: absolute;
-
-    top: 100px;
-    left: 180px;
-
-    width: 620px;
-    height: 430px;
-
-    background: #151a2b;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.20);
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 20px 60px
-        rgba(0, 0, 0, 0.55);
-
-    overflow: hidden;
-
-    color: white;
-}
+let highestZIndex = 100;
 
 
 /* =====================================================
-   5. WINDOW HEADER
+   0.5 — HIDE WINDOWS AT START
    ===================================================== */
 
-.windowHeader {
-    height: 48px;
+Object.values(windows).forEach(
+    function(windowElement) {
 
-    display: flex;
+        if (windowElement) {
 
-    align-items: center;
+            windowElement.style.display =
+                "none";
 
-    justify-content: space-between;
+        }
 
-    padding: 0 10px 0 16px;
+    }
+);
 
-    background:
-        linear-gradient(
-            180deg,
-            #29314b,
-            #1c2236
+
+/* =====================================================
+   0.6 — START MENU
+   ===================================================== */
+
+startMenu.style.display =
+    "none";
+
+
+startButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        if (
+            startMenu.style.display ===
+            "block"
+        ) {
+
+            startMenu.style.display =
+                "none";
+
+        } else {
+
+            startMenu.style.display =
+                "block";
+
+        }
+
+    }
+);
+
+
+startMenu.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function() {
+
+        startMenu.style.display =
+            "none";
+
+    }
+);
+
+
+/* =====================================================
+   0.7 — CLOCK
+   ===================================================== */
+
+function updateClock() {
+
+    const now =
+        new Date();
+
+
+    const hours =
+        String(
+            now.getHours()
+        ).padStart(2, "0");
+
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(2, "0");
+
+
+    clock.textContent =
+        hours + ":" + minutes;
+
+}
+
+
+updateClock();
+
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+/* =====================================================
+   0.8 — BATTERY
+   ===================================================== */
+
+async function initializeBattery() {
+
+    if (
+        !navigator.getBattery
+    ) {
+
+        battery.textContent =
+            "🔋 N/A";
+
+        return;
+
+    }
+
+
+    try {
+
+        const batteryManager =
+            await navigator.getBattery();
+
+
+        function updateBattery() {
+
+            const percentage =
+                Math.round(
+                    batteryManager.level * 100
+                );
+
+
+            if (
+                batteryManager.charging
+            ) {
+
+                battery.textContent =
+                    "⚡ " +
+                    percentage +
+                    "%";
+
+            } else {
+
+                battery.textContent =
+                    "🔋 " +
+                    percentage +
+                    "%";
+
+            }
+
+        }
+
+
+        updateBattery();
+
+
+        batteryManager.addEventListener(
+            "levelchange",
+            updateBattery
         );
 
-    border-bottom:
-        1px solid
-        rgba(255, 255, 255, 0.12);
 
-    user-select: none;
+        batteryManager.addEventListener(
+            "chargingchange",
+            updateBattery
+        );
+
+
+    } catch {
+
+        battery.textContent =
+            "🔋 N/A";
+
+    }
+
 }
 
 
-.windowHeader > span {
-    font-size: 15px;
-
-    font-weight: bold;
-}
+initializeBattery();
 
 
 /* =====================================================
-   6. WINDOW CONTROLS
+   0.9 — OPEN WINDOW
    ===================================================== */
 
-.windowControls {
-    display: flex;
-
-    gap: 5px;
-}
-
-
-.windowControls button {
-    width: 32px;
-    height: 30px;
-
-    border: none;
-
-    border-radius: 6px;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    color: white;
-
-    font-size: 16px;
-
-    cursor: pointer;
-}
-
-
-.windowControls button:hover {
-    background:
-        rgba(255, 255, 255, 0.18);
-}
-
-
-.windowControls button:last-child:hover {
-    background: #d83b3b;
-}
-
-
-/* =====================================================
-   7. MAXIMIZED WINDOW
-   ===================================================== */
-
-.window.maximized {
-    top: 0 !important;
-    left: 0 !important;
-
-    width: 100% !important;
-    height: calc(100% - 52px) !important;
-
-    border-radius: 0;
-}
-
-
-/* =====================================================
-   8. GENERAL WINDOW CONTENT
-   ===================================================== */
-
-.windowContent,
-.notesContent,
-.calculatorContent,
-.settingsContent,
-.taskManagerContent {
-    height: calc(100% - 48px);
-
-    padding: 20px;
-
-    overflow: auto;
-}
-
-
-.window h2,
-.settingsContent h2,
-.taskManagerContent h2 {
-    margin-bottom: 20px;
-
-    font-size: 24px;
-}
-
-
-.window h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-
-/* =====================================================
-   9. FILE MANAGER
-   ===================================================== */
-
-.fileArea {
-    padding: 20px;
-
-    background:
-        rgba(255, 255, 255, 0.05);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.10);
-
-    border-radius: 10px;
-
-    line-height: 1.5;
-
-    font-size: 16px;
-}
-
-
-/* =====================================================
-   10. NOTES
-   ===================================================== */
-
-.notesToolbar {
-    display: flex;
-
-    gap: 10px;
-
-    margin-bottom: 12px;
-}
-
-
-.notesToolbar button {
-    padding: 9px 14px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #293653;
-
-    color: white;
-
-    cursor: pointer;
-}
-
-
-.notesToolbar button:hover {
-    background: #3a4b70;
-}
-
-
-#notesEditor {
-    width: 100%;
-    height: 270px;
-
-    resize: none;
-
-    padding: 14px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.15);
-
-    border-radius: 8px;
-
-    outline: none;
-
-    background: #0d1220;
-
-    color: white;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 15px;
-}
-
-
-#notesEditor:focus {
-    border-color: #5c8cff;
-}
-
-
-#saveStatus {
-    margin-top: 10px;
-
-    font-size: 13px;
-
-    opacity: 0.75;
-}
-
-
-/* =====================================================
-   11. CALCULATOR
-   ===================================================== */
-
-.calculatorContent {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-}
-
-
-#calculatorDisplay {
-    width: 100%;
-
-    height: 65px;
-
-    margin-bottom: 15px;
-
-    padding: 10px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    outline: none;
-
-    background: #080b13;
-
-    color: white;
-
-    text-align: right;
-
-    font-size: 28px;
-}
-
-
-.calculatorButtons {
-    width: 100%;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 8px;
-}
-
-
-.calculatorButtons button {
-    min-height: 55px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #28334d;
-
-    color: white;
-
-    font-size: 18px;
-
-    cursor: pointer;
-}
-
-
-.calculatorButtons button:hover {
-    background: #3a4b70;
-}
-
-
-.calculatorButtons button:active {
-    transform: scale(0.97);
-}
-
-
-.calculatorButtons .zero {
-    grid-column: span 2;
-}
-
-
-.calculatorButtons .equals {
-    background: #355ca8;
-}
-
-
-.calculatorButtons .equals:hover {
-    background: #4673ca;
-}
-
-
-/* =====================================================
-   12. SETTINGS
-   ===================================================== */
-
-.settingsSection {
-    margin-bottom: 18px;
-
-    padding: 16px;
-
-    background:
-        rgba(255, 255, 255, 0.05);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-    border-radius: 10px;
-}
-
-
-.settingsSection h3 {
-    margin: 0 0 10px 0;
-
-    font-size: 17px;
-}
-
-
-.settingsSection p {
-    margin: 7px 0;
-
-    font-size: 14px;
-
-    opacity: 0.85;
-
-    word-break: break-word;
-}
-
-
-/* =====================================================
-   13. TASK MANAGER
-   ===================================================== */
-
-.monitorCards {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 10px;
-
-    margin-bottom: 25px;
-}
-
-
-.monitorCard {
-    padding: 15px;
-
-    background:
-        rgba(255, 255, 255, 0.05);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-    border-radius: 10px;
-}
-
-
-.monitorCard span {
-    display: block;
-
-    margin-bottom: 10px;
-
-    font-size: 13px;
-
-    opacity: 0.75;
-}
-
-
-.monitorCard strong {
-    display: block;
-
-    font-size: 16px;
-}
-
-
-#runningApps {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-
-    margin-bottom: 15px;
-}
-
-
-.runningApp {
-    padding: 10px 12px;
-
-    background:
-        rgba(255, 255, 255, 0.06);
-
-    border-radius: 7px;
-
-    font-size: 14px;
-}
-
-
-#refreshTaskManager {
-    padding: 9px 14px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #293653;
-
-    color: white;
-
-    cursor: pointer;
-}
-
-
-#refreshTaskManager:hover {
-    background: #3a4b70;
-}
-
-
-/* =====================================================
-   14. TASKBAR
-   ===================================================== */
-
-#taskbar {
-    position: fixed;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 52px;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 5px 8px;
-
-    background:
-        rgba(10, 14, 26, 0.94);
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.12);
-
-    backdrop-filter:
-        blur(12px);
-
-    z-index: 10000;
-}
-
-
-/* =====================================================
-   15. START BUTTON
-   ===================================================== */
-
-#startButton {
-    width: 42px;
-    height: 42px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    color: white;
-
-    font-size: 23px;
-
-    cursor: pointer;
-}
-
-
-#startButton:hover {
-    background:
-        rgba(255, 255, 255, 0.18);
-}
-
-
-/* =====================================================
-   16. START MENU
-   ===================================================== */
-
-#startMenu {
-    position: absolute;
-
-    left: 8px;
-    bottom: 58px;
-
-    width: 350px;
-
-    padding: 15px;
-
-    background:
-        rgba(20, 25, 42, 0.97);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.15);
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, 0.55);
-
-    backdrop-filter:
-        blur(15px);
-
-    z-index: 20000;
-}
-
-
-/* =====================================================
-   17. START SEARCH
-   ===================================================== */
-
-#searchBox {
-    width: 100%;
-
-    padding: 12px;
-
-    margin-bottom: 15px;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    border-radius: 8px;
-
-    color: #cdd4e7;
-
-    font-size: 14px;
-}
-
-
-/* =====================================================
-   18. START APPS
-   ===================================================== */
-
-.startApps {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 8px;
-}
-
-
-.appButton {
-    min-height: 80px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background:
-        rgba(255, 255, 255, 0.05);
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 25px;
-}
-
-
-.appButton span {
-    font-size: 12px;
-}
-
-
-.appButton:hover {
-    background:
-        rgba(255, 255, 255, 0.14);
-}
-
-
-/* =====================================================
-   19. START MENU BOTTOM
-   ===================================================== */
-
-#startBottom {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-top: 15px;
-
-    padding-top: 12px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.10);
-}
-
-
-#startBottom span {
-    font-size: 13px;
-
-    opacity: 0.8;
-}
-
-
-#powerButton {
-    width: 35px;
-    height: 35px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background:
-        rgba(255, 255, 255, 0.07);
-
-    color: white;
-
-    cursor: pointer;
-}
-
-
-#powerButton:hover {
-    background: #b83232;
-}
-
-
-/* =====================================================
-   20. TASKBAR RUNNING APPS
-   ===================================================== */
-
-#taskbarApps {
-    display: flex;
-
-    align-items: center;
-
-    gap: 5px;
-
-    margin-left: 8px;
-
-    overflow: hidden;
-}
-
-
-.taskbarApp {
-    height: 38px;
-
-    max-width: 150px;
-
-    padding: 0 12px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background:
-        rgba(255, 255, 255, 0.07);
-
-    color: white;
-
-    cursor: pointer;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-
-.taskbarApp:hover {
-    background:
-        rgba(255, 255, 255, 0.15);
-}
-
-
-/* =====================================================
-   21. SYSTEM TRAY
-   ===================================================== */
-
-#systemTray {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-left: auto;
-
-    padding: 0 8px;
-
-    font-size: 13px;
-
-    white-space: nowrap;
-}
-
-
-#battery,
-#clock {
-    opacity: 0.9;
-}
-
-
-/* =====================================================
-   22. SCROLLBARS
-   ===================================================== */
-
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-
-::-webkit-scrollbar-track {
-    background:
-        rgba(255, 255, 255, 0.03);
-}
-
-
-::-webkit-scrollbar-thumb {
-    background:
-        rgba(255, 255, 255, 0.18);
-
-    border-radius: 10px;
-}
-
-
-::-webkit-scrollbar-thumb:hover {
-    background:
-        rgba(255, 255, 255, 0.28);
-}
-
-
-/* =====================================================
-   23. RESPONSIVE DESIGN
-   ===================================================== */
-
-@media (
-    max-width: 700px
+function openWindow(
+    windowName
 ) {
 
-    .window {
-        left: 10px;
-        top: 70px;
+    const windowElement =
+        windows[windowName];
 
-        width:
-            calc(100% - 20px);
 
-        height:
-            calc(100% - 130px);
+    if (!windowElement) {
+        return;
     }
 
 
-    .monitorCards {
-        grid-template-columns:
-            1fr;
-    }
+    windowElement.style.display =
+        "block";
 
 
-    #startMenu {
-        width:
-            calc(100vw - 16px);
-    }
+    highestZIndex++;
 
 
-    .startApps {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
+    windowElement.style.zIndex =
+        highestZIndex;
 
 
-    .taskbarApp {
-        max-width: 100px;
-    }
+    startMenu.style.display =
+        "none";
 
 }
 
 
 /* =====================================================
-   24. WEBOS END
+   1.0 — CLOSE WINDOW
    ===================================================== */
-```
-```css
+
+function closeWindow(
+    windowName
+) {
+
+    const windowElement =
+        windows[windowName];
+
+
+    if (!windowElement) {
+        return;
+    }
+
+
+    windowElement.style.display =
+        "none";
+
+
+    removeTaskbarButton(
+        windowName
+    );
+
+}
+
+
 /* =====================================================
-   WEBOS WELCOME SCREEN
+   1.1 — MINIMIZE WINDOW
    ===================================================== */
 
-#welcomeScreen {
-    position: fixed;
+function minimizeWindow(
+    windowName
+) {
 
-    inset: 0;
+    const windowElement =
+        windows[windowName];
 
-    z-index: 99999;
 
-    display: flex;
+    if (!windowElement) {
+        return;
+    }
 
-    flex-direction: column;
 
-    align-items: center;
+    windowElement.style.display =
+        "none";
 
-    justify-content: center;
+}
 
-    text-align: center;
 
-    background:
-        radial-gradient(
-            circle at center,
-            #243b70 0%,
-            #10182f 45%,
-            #050811 100%
+/* =====================================================
+   1.2 — MAXIMIZE WINDOW
+   ===================================================== */
+
+function maximizeWindow(
+    windowName
+) {
+
+    const windowElement =
+        windows[windowName];
+
+
+    if (!windowElement) {
+        return;
+    }
+
+
+    windowElement.classList.toggle(
+        "maximized"
+    );
+
+
+    highestZIndex++;
+
+
+    windowElement.style.zIndex =
+        highestZIndex;
+
+}
+
+
+/* =====================================================
+   1.3 — WINDOW FOCUS
+   ===================================================== */
+
+Object.values(windows).forEach(
+    function(windowElement) {
+
+        if (!windowElement) {
+            return;
+        }
+
+
+        windowElement.addEventListener(
+            "mousedown",
+            function() {
+
+                highestZIndex++;
+
+
+                windowElement.style.zIndex =
+                    highestZIndex;
+
+            }
         );
 
-    color: white;
-
-    transition:
-        opacity 0.7s ease,
-        visibility 0.7s ease;
-}
+    }
+);
 
 
-#welcomeScreen.hidden {
-    opacity: 0;
+/* =====================================================
+   1.4 — TASKBAR APP BUTTONS
+   ===================================================== */
 
-    visibility: hidden;
-
-    pointer-events: none;
-}
+const taskbarButtons = {};
 
 
-.welcomeLogo {
-    width: 110px;
+function addTaskbarButton(
+    name,
+    title,
+    icon
+) {
 
-    height: 110px;
+    if (
+        taskbarButtons[name]
+    ) {
 
-    display: flex;
+        return;
 
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 25px;
-
-    border-radius: 28px;
-
-    background:
-        rgba(255, 255, 255, 0.10);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.20);
-
-    box-shadow:
-        0 15px 50px
-        rgba(0, 0, 0, 0.40);
-
-    font-size: 60px;
-
-    animation:
-        welcomeLogoFloat 2.5s
-        ease-in-out infinite;
-}
-
-
-#welcomeScreen h1 {
-    margin-bottom: 8px;
-
-    font-size: 42px;
-
-    letter-spacing: 1px;
-}
-
-
-.welcomeVersion {
-    margin-bottom: 15px;
-
-    font-size: 15px;
-
-    opacity: 0.65;
-}
-
-
-.welcomeMessage {
-    margin-bottom: 30px;
-
-    font-size: 16px;
-
-    opacity: 0.80;
-}
-
-
-#startWebOS {
-    padding: 13px 28px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background: #355ca8;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s,
-        background 0.15s;
-}
-
-
-#startWebOS:hover {
-    background: #4673ca;
-
-    transform: translateY(-2px);
-}
-
-
-#startWebOS:active {
-    transform: scale(0.97);
-}
-
-
-#welcomeLoading {
-    margin-top: 20px;
-
-    font-size: 12px;
-
-    opacity: 0.45;
-}
-
-
-@keyframes welcomeLogoFloat {
-
-    0% {
-        transform: translateY(0);
     }
 
-    50% {
-        transform: translateY(-8px);
-    }
 
-    100% {
-        transform: translateY(0);
+    const button =
+        document.createElement(
+            "button"
+        );
+
+
+    button.className =
+        "taskbarApp";
+
+
+    button.textContent =
+        icon + " " + title;
+
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            const windowElement =
+                windows[name];
+
+
+            if (!windowElement) {
+                return;
+            }
+
+
+            if (
+                windowElement.style.display ===
+                "none"
+            ) {
+
+                openWindow(name);
+
+            } else {
+
+                minimizeWindow(name);
+
+            }
+
+        }
+    );
+
+
+    taskbarApps.appendChild(
+        button
+    );
+
+
+    taskbarButtons[name] =
+        button;
+
+}
+
+
+function removeTaskbarButton(
+    name
+) {
+
+    if (
+        taskbarButtons[name]
+    ) {
+
+        taskbarButtons[name].remove();
+
+
+        delete taskbarButtons[name];
+
     }
 
 }
 
 
-/* Mobile */
+/* =====================================================
+   1.5 — OPEN APPLICATION
+   ===================================================== */
 
-@media (max-width: 600px) {
+function openApp(
+    name,
+    title,
+    icon
+) {
 
-    #welcomeScreen h1 {
-        font-size: 32px;
+    openWindow(name);
+
+
+    addTaskbarButton(
+        name,
+        title,
+        icon
+    );
+
+}
+
+
+/* =====================================================
+   1.6 — FILES APPLICATION
+   ===================================================== */
+
+const filesApp =
+    document.getElementById(
+        "filesApp"
+    );
+
+const filesDesktopIcon =
+    document.getElementById(
+        "filesDesktopIcon"
+    );
+
+
+filesApp.addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "files",
+            "Files",
+            "📁"
+        );
+
     }
+);
 
-    .welcomeLogo {
-        width: 90px;
-        height: 90px;
 
-        font-size: 48px;
+filesDesktopIcon.addEventListener(
+    "dblclick",
+    function() {
+
+        openApp(
+            "files",
+            "Files",
+            "📁"
+        );
+
+    }
+);
+
+
+/* Files controls */
+
+document.getElementById(
+    "minimizeFiles"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow("files");
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeFiles"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow("files");
+
+    }
+);
+
+
+document.getElementById(
+    "closeFiles"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow("files");
+
+    }
+);
+
+
+/* =====================================================
+   1.7 — NOTES APPLICATION
+   ===================================================== */
+
+const notesApp =
+    document.getElementById(
+        "notesApp"
+    );
+
+const notesDesktopIcon =
+    document.getElementById(
+        "notesDesktopIcon"
+    );
+
+const notesEditor =
+    document.getElementById(
+        "notesEditor"
+    );
+
+const saveStatus =
+    document.getElementById(
+        "saveStatus"
+    );
+
+
+function loadNote() {
+
+    const savedNote =
+        localStorage.getItem(
+            "webosNote"
+        );
+
+
+    if (
+        savedNote !== null
+    ) {
+
+        notesEditor.value =
+            savedNote;
+
     }
 
 }
-```
+
+
+notesApp.addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "notes",
+            "Notes",
+            "📝"
+        );
+
+
+        loadNote();
+
+    }
+);
+
+
+notesDesktopIcon.addEventListener(
+    "dblclick",
+    function() {
+
+        openApp(
+            "notes",
+            "Notes",
+            "📝"
+        );
+
+
+        loadNote();
+
+    }
+);
+
+
+/* Save note */
+
+document.getElementById(
+    "saveNote"
+).addEventListener(
+    "click",
+    function() {
+
+        localStorage.setItem(
+            "webosNote",
+            notesEditor.value
+        );
+
+
+        saveStatus.textContent =
+            "Saved ✓";
+
+    }
+);
+
+
+/* Clear note */
+
+document.getElementById(
+    "clearNote"
+).addEventListener(
+    "click",
+    function() {
+
+        notesEditor.value =
+            "";
+
+
+        localStorage.removeItem(
+            "webosNote"
+        );
+
+
+        saveStatus.textContent =
+            "Cleared";
+
+    }
+);
+
+
+/* Notes controls */
+
+document.getElementById(
+    "minimizeNotes"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow("notes");
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeNotes"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow("notes");
+
+    }
+);
+
+
+document.getElementById(
+    "closeNotes"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow("notes");
+
+    }
+);
+
+
+/* =====================================================
+   1.8 — CALCULATOR APPLICATION
+   ===================================================== */
+
+const calculatorApp =
+    document.getElementById(
+        "calculatorApp"
+    );
+
+const calculatorDesktopIcon =
+    document.getElementById(
+        "calculatorDesktopIcon"
+    );
+
+const calculatorDisplay =
+    document.getElementById(
+        "calculatorDisplay"
+    );
+
+
+calculatorApp.addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "calculator",
+            "Calculator",
+            "🧮"
+        );
+
+    }
+);
+
+
+calculatorDesktopIcon.addEventListener(
+    "dblclick",
+    function() {
+
+        openApp(
+            "calculator",
+            "Calculator",
+            "🧮"
+        );
+
+    }
+);
+
+
+/* Calculator buttons */
+
+const calculatorButtons =
+    document.querySelectorAll(
+        ".calculatorButtons button"
+    );
+
+
+calculatorButtons.forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const value =
+                    button.dataset.value;
+
+
+                if (
+                    value === "C"
+                ) {
+
+                    calculatorDisplay.value =
+                        "0";
+
+                    return;
+
+                }
+
+
+                if (
+                    value === "="
+                ) {
+
+                    calculateResult();
+
+                    return;
+
+                }
+
+
+                if (
+                    calculatorDisplay.value ===
+                    "0"
+                ) {
+
+                    calculatorDisplay.value =
+                        value;
+
+                } else {
+
+                    calculatorDisplay.value +=
+                        value;
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* Calculator calculation */
+
+function calculateResult() {
+
+    const expression =
+        calculatorDisplay.value;
+
+
+    if (
+        !/^[0-9+\-*/().\s]+$/
+        .test(expression)
+    ) {
+
+        calculatorDisplay.value =
+            "Error";
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            Function(
+                '"use strict"; return (' +
+                expression +
+                ')'
+            )();
+
+
+        if (
+            typeof result !== "number" ||
+            !Number.isFinite(result)
+        ) {
+
+            calculatorDisplay.value =
+                "Error";
+
+            return;
+
+        }
+
+
+        calculatorDisplay.value =
+            result;
+
+    } catch {
+
+        calculatorDisplay.value =
+            "Error";
+
+    }
+
+}
+
+
+/* Calculator controls */
+
+document.getElementById(
+    "minimizeCalculator"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow(
+            "calculator"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeCalculator"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow(
+            "calculator"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "closeCalculator"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow(
+            "calculator"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   1.9 — SETTINGS APPLICATION
+   ===================================================== */
+
+const settingsApp =
+    document.getElementById(
+        "settingsApp"
+    );
+
+
+settingsApp.addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "settings",
+            "Settings",
+            "⚙️"
+        );
+
+
+        updateSettings();
+
+    }
+);
+
+
+async function updateSettings() {
+
+    document.getElementById(
+        "systemPlatform"
+    ).textContent =
+        "Platform: " +
+        navigator.platform;
+
+
+    document.getElementById(
+        "systemBrowser"
+    ).textContent =
+        "Browser: " +
+        navigator.userAgent;
+
+
+    document.getElementById(
+        "systemLanguage"
+    ).textContent =
+        "Language: " +
+        navigator.language;
+
+
+    document.getElementById(
+        "screenResolution"
+    ).textContent =
+        "Screen: " +
+        screen.width +
+        " × " +
+        screen.height;
+
+
+    document.getElementById(
+        "screenPixelRatio"
+    ).textContent =
+        "Pixel ratio: " +
+        window.devicePixelRatio;
+
+
+    document.getElementById(
+        "networkStatus"
+    ).textContent =
+        navigator.onLine
+            ? "Status: Online"
+            : "Status: Offline";
+
+
+    if (
+        navigator.getBattery
+    ) {
+
+        try {
+
+            const batteryManager =
+                await navigator.getBattery();
+
+
+            const percentage =
+                Math.round(
+                    batteryManager.level * 100
+                );
+
+
+            document.getElementById(
+                "settingsBattery"
+            ).textContent =
+                percentage +
+                "% — " +
+                (
+                    batteryManager.charging
+                        ? "Charging"
+                        : "Not charging"
+                );
+
+        } catch {
+
+            document.getElementById(
+                "settingsBattery"
+            ).textContent =
+                "Unavailable";
+
+        }
+
+    } else {
+
+        document.getElementById(
+            "settingsBattery"
+        ).textContent =
+            "Unavailable";
+
+    }
+
+}
+
+
+/* Settings controls */
+
+document.getElementById(
+    "minimizeSettings"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow(
+            "settings"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeSettings"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow(
+            "settings"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "closeSettings"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow(
+            "settings"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   2.0 — TASK MANAGER
+   ===================================================== */
+
+const taskManagerApp =
+    document.getElementById(
+        "taskManagerApp"
+    );
+
+
+const webosStartTime =
+    Date.now();
+
+
+taskManagerApp.addEventListener(
+    "click",
+    function() {
+
+        openApp(
+            "taskManager",
+            "Task Manager",
+            "📊"
+        );
+
+
+        updateTaskManager();
+
+    }
+);
+
+
+function updateTaskManager() {
+
+    /* Uptime */
+
+    const uptimeSeconds =
+        Math.floor(
+            (
+                Date.now() -
+                webosStartTime
+            ) / 1000
+        );
+
+
+    document.getElementById(
+        "webosUptime"
+    ).textContent =
+        uptimeSeconds +
+        " seconds";
+
+
+    /* Network */
+
+    document.getElementById(
+        "taskNetwork"
+    ).textContent =
+        navigator.onLine
+            ? "Online"
+            : "Offline";
+
+
+    /* Storage */
+
+    if (
+        navigator.storage &&
+        navigator.storage.estimate
+    ) {
+
+        navigator.storage
+            .estimate()
+            .then(
+                function(info) {
+
+                    const usedMB =
+                        (
+                            info.usage || 0
+                        ) /
+                        1024 /
+                        1024;
+
+
+                    document.getElementById(
+                        "taskStorage"
+                    ).textContent =
+                        usedMB.toFixed(2) +
+                        " MB used";
+
+                }
+            );
+
+    } else {
+
+        document.getElementById(
+            "taskStorage"
+        ).textContent =
+            "Unavailable";
+
+    }
+
+
+    /* Running apps */
+
+    const runningApps =
+        document.getElementById(
+            "runningApps"
+        );
+
+
+    runningApps.innerHTML =
+        "";
+
+
+    const appList = [
+
+        ["files", "📁 Files"],
+
+        ["notes", "📝 Notes"],
+
+        ["calculator", "🧮 Calculator"],
+
+        ["settings", "⚙️ Settings"],
+
+        ["taskManager", "📊 Task Manager"]
+
+    ];
+
+
+    appList.forEach(
+        function(app) {
+
+            const windowElement =
+                windows[app[0]];
+
+
+            if (
+                windowElement &&
+                windowElement.style.display !==
+                "none"
+            ) {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "runningApp";
+
+
+                row.textContent =
+                    app[1] +
+                    " — Running";
+
+
+                runningApps.appendChild(
+                    row
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* Refresh */
+
+document.getElementById(
+    "refreshTaskManager"
+).addEventListener(
+    "click",
+    updateTaskManager
+);
+
+
+/* Update every second */
+
+setInterval(
+    updateTaskManager,
+    1000
+);
+
+
+/* Task Manager controls */
+
+document.getElementById(
+    "minimizeTaskManager"
+).addEventListener(
+    "click",
+    function() {
+
+        minimizeWindow(
+            "taskManager"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "maximizeTaskManager"
+).addEventListener(
+    "click",
+    function() {
+
+        maximizeWindow(
+            "taskManager"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "closeTaskManager"
+).addEventListener(
+    "click",
+    function() {
+
+        closeWindow(
+            "taskManager"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   2.1 — GAMES
+   ===================================================== */
+
+const gamesApp =
+    document.getElementById(
+        "gamesApp"
+    );
+
+
+gamesApp.addEventListener(
+    "click",
+    function() {
+
+        startMenu.style.display =
+            "none";
+
+
+        alert(
+            "🎮 Games Hub is coming soon!"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   2.2 — POWER BUTTON
+   ===================================================== */
+
+const powerButton =
+    document.getElementById(
+        "powerButton"
+    );
+
+
+powerButton.addEventListener(
+    "click",
+    function() {
+
+        startMenu.style.display =
+            "none";
+
+
+        alert(
+            "WebOS cannot shut down the real computer from a normal webpage."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   2.3 — NETWORK EVENTS
+   ===================================================== */
+
+window.addEventListener(
+    "online",
+    function() {
+
+        updateSettings();
+
+    }
+);
+
+
+window.addEventListener(
+    "offline",
+    function() {
+
+        updateSettings();
+
+    }
+);
+
+
+/* =====================================================
+   2.4 — DESKTOP ICON SELECTION
+   ===================================================== */
+
+document.querySelectorAll(
+    ".desktop-icon"
+).forEach(
+    function(icon) {
+
+        icon.addEventListener(
+            "click",
+            function() {
+
+                document
+                    .querySelectorAll(
+                        ".desktop-icon"
+                    )
+                    .forEach(
+                        function(otherIcon) {
+
+                            otherIcon.style.background =
+                                "";
+
+                        }
+                    );
+
+
+                icon.style.background =
+                    "rgba(255,255,255,0.15)";
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   2.5 — WELCOME SCREEN
+   ===================================================== */
+
+function enterWebOS() {
+
+    if (!welcomeScreen) {
+        return;
+    }
+
+
+    welcomeLoading.textContent =
+        "Starting WebOS...";
+
+
+    setTimeout(
+        function() {
+
+            welcomeScreen.classList.add(
+                "hidden"
+            );
+
+        },
+        500
+    );
+
+}
+
+
+/* Start WebOS button */
+
+startWebOS.addEventListener(
+    "click",
+    function() {
+
+        enterWebOS();
+
+    }
+);
+
+
+/* Automatic startup after 3 seconds */
+
+setTimeout(
+    function() {
+
+        enterWebOS();
+
+    },
+    3000
+);
+
+
+/* =====================================================
+   2.6 — WEBOS INITIALIZATION
+   ===================================================== */
+
+function initializeWebOS() {
+
+    /* Hide all application windows */
+
+    Object.values(windows).forEach(
+        function(windowElement) {
+
+            if (windowElement) {
+
+                windowElement.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    /* Start menu closed */
+
+    startMenu.style.display =
+        "none";
+
+
+    /* Start clock */
+
+    updateClock();
+
+
+    /* Start task manager */
+
+    updateTaskManager();
+
+
+    console.log(
+        "================================="
+    );
+
+
+    console.log(
+        "WebOS v1.0"
+    );
+
+
+    console.log(
+        "System initialized successfully."
+    );
+
+
+    console.log(
+        "================================="
+    );
+
+}
+
+
+/* =====================================================
+   2.7 — START WEBOS
+   ===================================================== */
+
+initializeWebOS();
