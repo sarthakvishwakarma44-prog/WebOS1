@@ -1,4 +1,3 @@
-```javascript
 /* =====================================================
    WEBOS v1.0
    COMPLETE JAVASCRIPT
@@ -6,11 +5,14 @@
 
 
 /* =====================================================
-   1. MAIN ELEMENTS
+   0.1 — MAIN ELEMENTS
    ===================================================== */
 
 const desktop =
     document.getElementById("desktop");
+
+const taskbar =
+    document.getElementById("taskbar");
 
 const startButton =
     document.getElementById("startButton");
@@ -21,15 +23,29 @@ const startMenu =
 const taskbarApps =
     document.getElementById("taskbarApps");
 
-const clock =
-    document.getElementById("clock");
-
 const battery =
     document.getElementById("battery");
 
+const clock =
+    document.getElementById("clock");
+
 
 /* =====================================================
-   2. WEBOS WINDOWS
+   0.2 — WELCOME SCREEN
+   ===================================================== */
+
+const welcomeScreen =
+    document.getElementById("welcomeScreen");
+
+const startWebOS =
+    document.getElementById("startWebOS");
+
+const welcomeLoading =
+    document.getElementById("welcomeLoading");
+
+
+/* =====================================================
+   0.3 — WEBOS WINDOWS
    ===================================================== */
 
 const windows = {
@@ -53,7 +69,14 @@ const windows = {
 
 
 /* =====================================================
-   3. INITIAL WINDOW STATE
+   0.4 — WINDOW Z-INDEX
+   ===================================================== */
+
+let highestZIndex = 100;
+
+
+/* =====================================================
+   0.5 — HIDE WINDOWS AT START
    ===================================================== */
 
 Object.values(windows).forEach(
@@ -70,14 +93,12 @@ Object.values(windows).forEach(
 );
 
 
-let highestZIndex = 100;
-
-
 /* =====================================================
-   4. START MENU
+   0.6 — START MENU
    ===================================================== */
 
-startMenu.style.display = "none";
+startMenu.style.display =
+    "none";
 
 
 startButton.addEventListener(
@@ -87,7 +108,8 @@ startButton.addEventListener(
         event.stopPropagation();
 
         if (
-            startMenu.style.display === "block"
+            startMenu.style.display ===
+            "block"
         ) {
 
             startMenu.style.display =
@@ -126,7 +148,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   5. CLOCK
+   0.7 — CLOCK
    ===================================================== */
 
 function updateClock() {
@@ -134,15 +156,18 @@ function updateClock() {
     const now =
         new Date();
 
+
     const hours =
         String(
             now.getHours()
         ).padStart(2, "0");
 
+
     const minutes =
         String(
             now.getMinutes()
         ).padStart(2, "0");
+
 
     clock.textContent =
         hours + ":" + minutes;
@@ -160,7 +185,7 @@ setInterval(
 
 
 /* =====================================================
-   6. BATTERY
+   0.8 — BATTERY
    ===================================================== */
 
 async function initializeBattery() {
@@ -241,7 +266,7 @@ initializeBattery();
 
 
 /* =====================================================
-   7. OPEN WINDOW
+   0.9 — OPEN WINDOW
    ===================================================== */
 
 function openWindow(
@@ -275,7 +300,7 @@ function openWindow(
 
 
 /* =====================================================
-   8. CLOSE WINDOW
+   1.0 — CLOSE WINDOW
    ===================================================== */
 
 function closeWindow(
@@ -303,7 +328,7 @@ function closeWindow(
 
 
 /* =====================================================
-   9. MINIMIZE WINDOW
+   1.1 — MINIMIZE WINDOW
    ===================================================== */
 
 function minimizeWindow(
@@ -326,7 +351,7 @@ function minimizeWindow(
 
 
 /* =====================================================
-   10. MAXIMIZE WINDOW
+   1.2 — MAXIMIZE WINDOW
    ===================================================== */
 
 function maximizeWindow(
@@ -357,7 +382,7 @@ function maximizeWindow(
 
 
 /* =====================================================
-   11. WINDOW FOCUS
+   1.3 — WINDOW FOCUS
    ===================================================== */
 
 Object.values(windows).forEach(
@@ -386,7 +411,7 @@ Object.values(windows).forEach(
 
 
 /* =====================================================
-   12. TASKBAR APP BUTTONS
+   1.4 — TASKBAR APP BUTTONS
    ===================================================== */
 
 const taskbarButtons = {};
@@ -481,7 +506,7 @@ function removeTaskbarButton(
 
 
 /* =====================================================
-   13. OPEN APP
+   1.5 — OPEN APPLICATION
    ===================================================== */
 
 function openApp(
@@ -503,14 +528,13 @@ function openApp(
 
 
 /* =====================================================
-   14. FILES APP
+   1.6 — FILES APPLICATION
    ===================================================== */
 
 const filesApp =
     document.getElementById(
         "filesApp"
     );
-
 
 const filesDesktopIcon =
     document.getElementById(
@@ -585,7 +609,7 @@ document.getElementById(
 
 
 /* =====================================================
-   15. NOTES APP
+   1.7 — NOTES APPLICATION
    ===================================================== */
 
 const notesApp =
@@ -593,18 +617,15 @@ const notesApp =
         "notesApp"
     );
 
-
 const notesDesktopIcon =
     document.getElementById(
         "notesDesktopIcon"
     );
 
-
 const notesEditor =
     document.getElementById(
         "notesEditor"
     );
-
 
 const saveStatus =
     document.getElementById(
@@ -666,7 +687,7 @@ notesDesktopIcon.addEventListener(
 );
 
 
-/* Save */
+/* Save note */
 
 document.getElementById(
     "saveNote"
@@ -687,7 +708,7 @@ document.getElementById(
 );
 
 
-/* Clear */
+/* Clear note */
 
 document.getElementById(
     "clearNote"
@@ -750,7 +771,7 @@ document.getElementById(
 
 
 /* =====================================================
-   16. CALCULATOR
+   1.8 — CALCULATOR APPLICATION
    ===================================================== */
 
 const calculatorApp =
@@ -758,12 +779,10 @@ const calculatorApp =
         "calculatorApp"
     );
 
-
 const calculatorDesktopIcon =
     document.getElementById(
         "calculatorDesktopIcon"
     );
-
 
 const calculatorDisplay =
     document.getElementById(
@@ -871,12 +890,6 @@ function calculateResult() {
         calculatorDisplay.value;
 
 
-    /*
-       Only allow numbers,
-       operators, decimal points
-       and parentheses.
-    */
-
     if (
         !/^[0-9+\-*/().\s]+$/
         .test(expression)
@@ -901,8 +914,7 @@ function calculateResult() {
 
 
         if (
-            typeof result !==
-            "number" ||
+            typeof result !== "number" ||
             !Number.isFinite(result)
         ) {
 
@@ -972,7 +984,7 @@ document.getElementById(
 
 
 /* =====================================================
-   17. SETTINGS
+   1.9 — SETTINGS APPLICATION
    ===================================================== */
 
 const settingsApp =
@@ -1138,7 +1150,7 @@ document.getElementById(
 
 
 /* =====================================================
-   18. TASK MANAGER
+   2.0 — TASK MANAGER
    ===================================================== */
 
 const taskManagerApp =
@@ -1237,7 +1249,7 @@ function updateTaskManager() {
     }
 
 
-    /* Running applications */
+    /* Running apps */
 
     const runningApps =
         document.getElementById(
@@ -1314,7 +1326,7 @@ document.getElementById(
 );
 
 
-/* Live update */
+/* Update every second */
 
 setInterval(
     updateTaskManager,
@@ -1367,12 +1379,16 @@ document.getElementById(
 
 
 /* =====================================================
-   19. GAMES
+   2.1 — GAMES
    ===================================================== */
 
-document.getElementById(
-    "gamesApp"
-).addEventListener(
+const gamesApp =
+    document.getElementById(
+        "gamesApp"
+    );
+
+
+gamesApp.addEventListener(
     "click",
     function() {
 
@@ -1389,12 +1405,16 @@ document.getElementById(
 
 
 /* =====================================================
-   20. POWER BUTTON
+   2.2 — POWER BUTTON
    ===================================================== */
 
-document.getElementById(
-    "powerButton"
-).addEventListener(
+const powerButton =
+    document.getElementById(
+        "powerButton"
+    );
+
+
+powerButton.addEventListener(
     "click",
     function() {
 
@@ -1411,7 +1431,7 @@ document.getElementById(
 
 
 /* =====================================================
-   21. NETWORK EVENTS
+   2.3 — NETWORK EVENTS
    ===================================================== */
 
 window.addEventListener(
@@ -1435,7 +1455,7 @@ window.addEventListener(
 
 
 /* =====================================================
-   22. DOUBLE-CLICK DESKTOP ICON BEHAVIOR
+   2.4 — DESKTOP ICON SELECTION
    ===================================================== */
 
 document.querySelectorAll(
@@ -1452,9 +1472,9 @@ document.querySelectorAll(
                         ".desktop-icon"
                     )
                     .forEach(
-                        function(other) {
+                        function(otherIcon) {
 
-                            other.style.background =
+                            otherIcon.style.background =
                                 "";
 
                         }
@@ -1472,14 +1492,65 @@ document.querySelectorAll(
 
 
 /* =====================================================
-   23. WEBOS STARTUP
+   2.5 — WELCOME SCREEN
+   ===================================================== */
+
+function enterWebOS() {
+
+    if (!welcomeScreen) {
+        return;
+    }
+
+
+    welcomeLoading.textContent =
+        "Starting WebOS...";
+
+
+    setTimeout(
+        function() {
+
+            welcomeScreen.classList.add(
+                "hidden"
+            );
+
+        },
+        500
+    );
+
+}
+
+
+/* Start WebOS button */
+
+startWebOS.addEventListener(
+    "click",
+    function() {
+
+        enterWebOS();
+
+    }
+);
+
+
+/* Automatic startup after 3 seconds */
+
+setTimeout(
+    function() {
+
+        enterWebOS();
+
+    },
+    3000
+);
+
+
+/* =====================================================
+   2.6 — WEBOS INITIALIZATION
    ===================================================== */
 
 function initializeWebOS() {
 
-    startMenu.style.display =
-        "none";
-
+    /* Hide all application windows */
 
     Object.values(windows).forEach(
         function(windowElement) {
@@ -1495,8 +1566,18 @@ function initializeWebOS() {
     );
 
 
+    /* Start menu closed */
+
+    startMenu.style.display =
+        "none";
+
+
+    /* Start clock */
+
     updateClock();
 
+
+    /* Start task manager */
 
     updateTaskManager();
 
@@ -1521,73 +1602,10 @@ function initializeWebOS() {
     );
 
 }
-```javascript
+
+
 /* =====================================================
-   WEBOS WELCOME SCREEN
+   2.7 — START WEBOS
    ===================================================== */
 
-const welcomeScreen =
-    document.getElementById(
-        "welcomeScreen"
-    );
-
-
-const startWebOS =
-    document.getElementById(
-        "startWebOS"
-    );
-
-
-const welcomeLoading =
-    document.getElementById(
-        "welcomeLoading"
-    );
-
-
-function enterWebOS() {
-
-    welcomeLoading.textContent =
-        "Starting WebOS...";
-
-
-    setTimeout(
-        function() {
-
-            welcomeScreen.classList.add(
-                "hidden"
-            );
-
-        },
-        500
-    );
-
-}
-
-
-/* Start button */
-
-startWebOS.addEventListener(
-    "click",
-    function() {
-
-        enterWebOS();
-
-    }
-);
-
-
-/* Automatic startup */
-
-setTimeout(
-    function() {
-
-        enterWebOS();
-
-    },
-    3000
-);
-```
-
-
 initializeWebOS();
-```
