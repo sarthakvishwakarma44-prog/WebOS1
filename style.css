@@ -960,3 +960,189 @@ body {
    24. WEBOS END
    ===================================================== */
 ```
+```css
+/* =====================================================
+   WEBOS WELCOME SCREEN
+   ===================================================== */
+
+#welcomeScreen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #243b70 0%,
+            #10182f 45%,
+            #050811 100%
+        );
+
+    color: white;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+
+#welcomeScreen.hidden {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+.welcomeLogo {
+    width: 110px;
+
+    height: 110px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255, 255, 255, 0.10);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.20);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0, 0, 0, 0.40);
+
+    font-size: 60px;
+
+    animation:
+        welcomeLogoFloat 2.5s
+        ease-in-out infinite;
+}
+
+
+#welcomeScreen h1 {
+    margin-bottom: 8px;
+
+    font-size: 42px;
+
+    letter-spacing: 1px;
+}
+
+
+.welcomeVersion {
+    margin-bottom: 15px;
+
+    font-size: 15px;
+
+    opacity: 0.65;
+}
+
+
+.welcomeMessage {
+    margin-bottom: 30px;
+
+    font-size: 16px;
+
+    opacity: 0.80;
+}
+
+
+#startWebOS {
+    padding: 13px 28px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #355ca8;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        background 0.15s;
+}
+
+
+#startWebOS:hover {
+    background: #4673ca;
+
+    transform: translateY(-2px);
+}
+
+
+#startWebOS:active {
+    transform: scale(0.97);
+}
+
+
+#welcomeLoading {
+    margin-top: 20px;
+
+    font-size: 12px;
+
+    opacity: 0.45;
+}
+
+
+@keyframes welcomeLogoFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    #welcomeScreen h1 {
+        font-size: 32px;
+    }
+
+    .welcomeLogo {
+        width: 90px;
+        height: 90px;
+
+        font-size: 48px;
+    }
+
+}
+```
