@@ -42,12 +42,15 @@ body {
     padding: 25px;
 
     background:
-        radial-gradient(
-            circle at 20% 20%,
-            #243b70 0%,
-            #10182f 35%,
-            #070b16 100%
-        );
+        linear-gradient(
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("images/wallpaper.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
     overflow: hidden;
 }
