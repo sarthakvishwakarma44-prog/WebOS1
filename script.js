@@ -1521,6 +1521,72 @@ function initializeWebOS() {
     );
 
 }
+```javascript
+/* =====================================================
+   WEBOS WELCOME SCREEN
+   ===================================================== */
+
+const welcomeScreen =
+    document.getElementById(
+        "welcomeScreen"
+    );
+
+
+const startWebOS =
+    document.getElementById(
+        "startWebOS"
+    );
+
+
+const welcomeLoading =
+    document.getElementById(
+        "welcomeLoading"
+    );
+
+
+function enterWebOS() {
+
+    welcomeLoading.textContent =
+        "Starting WebOS...";
+
+
+    setTimeout(
+        function() {
+
+            welcomeScreen.classList.add(
+                "hidden"
+            );
+
+        },
+        500
+    );
+
+}
+
+
+/* Start button */
+
+startWebOS.addEventListener(
+    "click",
+    function() {
+
+        enterWebOS();
+
+    }
+);
+
+
+/* Automatic startup */
+
+setTimeout(
+    function() {
+
+        enterWebOS();
+
+    },
+    3000
+);
+```
 
 
 initializeWebOS();
