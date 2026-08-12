@@ -1218,3 +1218,45 @@ function initializeWebOS() {
 
 
 initializeWebOS();
+let draggedWindow = null;
+let offsetX = 0;
+let offsetY = 0;
+
+document.querySelectorAll(".windowHeader").forEach(header => {
+
+    header.addEventListener("mousedown", function(e) {
+
+        if (e.target.closest("button")) return;
+
+        const win = header.closest(".window");
+
+        draggedWindow = win;
+
+        const rect = win.getBoundingClientRect();
+
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        win.style.position = "absolute";
+        win.style.zIndex = ++window.highestZIndex;
+    });
+});
+
+
+document.addEventListener("mousemove", function(e) {
+
+    if (!draggedWindow) return;
+
+    draggedWindow.style.left =
+        (e.clientX - offsetX) + "px";
+
+    draggedWindow.style.top =
+        (e.clientY - offsetY) + "px";
+});
+
+
+document.addEventListener("mouseup", function() {
+
+    draggedWindow = null;
+
+});
