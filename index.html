@@ -12,7 +12,10 @@
 
     <title>WebOS v1.0</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -53,6 +56,7 @@
 </div>
 
 
+
 <!-- =====================================================
      DESKTOP
      ===================================================== -->
@@ -60,7 +64,9 @@
 <main id="desktop">
 
 
-    <!-- FILES DESKTOP ICON -->
+    <!-- =================================================
+         DESKTOP ICON — FILES
+         ================================================= -->
 
     <div
         class="desktop-icon"
@@ -78,7 +84,10 @@
     </div>
 
 
-    <!-- NOTES DESKTOP ICON -->
+
+    <!-- =================================================
+         DESKTOP ICON — NOTES
+         ================================================= -->
 
     <div
         class="desktop-icon"
@@ -96,7 +105,10 @@
     </div>
 
 
-    <!-- CALCULATOR DESKTOP ICON -->
+
+    <!-- =================================================
+         DESKTOP ICON — CALCULATOR
+         ================================================= -->
 
     <div
         class="desktop-icon"
@@ -425,6 +437,11 @@
             </h2>
 
 
+
+            <!-- =========================================
+                 EXISTING BATTERY
+                 ========================================= -->
+
             <div class="settingsSection">
 
                 <h3>
@@ -437,6 +454,11 @@
 
             </div>
 
+
+
+            <!-- =========================================
+                 EXISTING SYSTEM
+                 ========================================= -->
 
             <div class="settingsSection">
 
@@ -459,6 +481,11 @@
             </div>
 
 
+
+            <!-- =========================================
+                 EXISTING DISPLAY
+                 ========================================= -->
+
             <div class="settingsSection">
 
                 <h3>
@@ -476,6 +503,11 @@
             </div>
 
 
+
+            <!-- =========================================
+                 EXISTING NETWORK
+                 ========================================= -->
+
             <div class="settingsSection">
 
                 <h3>
@@ -488,6 +520,96 @@
 
             </div>
 
+
+
+            <!-- =========================================
+                 NEW FEATURE 2
+                 DARK / LIGHT MODE
+                 ========================================= -->
+
+            <div class="settingsSection">
+
+                <h3>
+                    🎨 Appearance
+                </h3>
+
+                <p>
+                    Change WebOS theme
+                </p>
+
+                <button
+                    id="themeToggle"
+                    type="button"
+                >
+                    🌙 Dark / ☀️ Light
+                </button>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 NEW FEATURE 3
+                 WALLPAPER SELECTOR
+                 ========================================= -->
+
+            <div class="settingsSection">
+
+                <h3>
+                    🖼️ Wallpaper
+                </h3>
+
+                <p>
+                    Choose your desktop wallpaper
+                </p>
+
+
+                <div class="wallpaperButtons">
+
+                    <button
+                        class="wallpaperButton"
+                        data-wallpaper="space"
+                        type="button"
+                    >
+                        🌌 Space
+                    </button>
+
+
+                    <button
+                        class="wallpaperButton"
+                        data-wallpaper="ocean"
+                        type="button"
+                    >
+                        🌊 Ocean
+                    </button>
+
+
+                    <button
+                        class="wallpaperButton"
+                        data-wallpaper="forest"
+                        type="button"
+                    >
+                        🌲 Forest
+                    </button>
+
+
+                    <button
+                        class="wallpaperButton"
+                        data-wallpaper="night"
+                        type="button"
+                    >
+                        🌙 Night
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 EXISTING ABOUT
+                 ========================================= -->
 
             <div class="settingsSection">
 
@@ -568,6 +690,7 @@
                 </div>
 
 
+
                 <div class="monitorCard">
 
                     <span>
@@ -579,6 +702,7 @@
                     </strong>
 
                 </div>
+
 
 
                 <div class="monitorCard">
@@ -626,7 +750,9 @@
 <footer id="taskbar">
 
 
-    <!-- START BUTTON -->
+    <!-- ================================================
+         START BUTTON
+         ================================================ -->
 
     <button id="startButton">
         ⊞
@@ -634,30 +760,44 @@
 
 
 
-    <!-- TASKBAR RUNNING APPS -->
+    <!-- ================================================
+         RUNNING APPLICATIONS
+         ================================================ -->
 
     <div id="taskbarApps">
     </div>
 
 
 
-    <!-- START MENU -->
+    <!-- ================================================
+         START MENU
+         ================================================ -->
 
     <div id="startMenu">
 
 
-        <!-- SEARCH -->
+        <!-- ============================================
+             NEW FEATURE 1
+             APP SEARCH
+             ============================================ -->
 
-        <div id="searchBox">
-            🔎 Search apps...
-        </div>
+        <input
+            id="searchBox"
+            type="text"
+            placeholder="🔎 Search apps..."
+            autocomplete="off"
+        >
 
 
 
-        <!-- APPLICATIONS -->
+        <!-- ============================================
+             APPLICATIONS
+             ============================================ -->
 
         <div class="startApps">
 
+
+            <!-- FILES -->
 
             <button
                 class="appButton"
@@ -673,6 +813,9 @@
             </button>
 
 
+
+            <!-- NOTES -->
+
             <button
                 class="appButton"
                 id="notesApp"
@@ -686,6 +829,9 @@
 
             </button>
 
+
+
+            <!-- CALCULATOR -->
 
             <button
                 class="appButton"
@@ -701,6 +847,9 @@
             </button>
 
 
+
+            <!-- SETTINGS -->
+
             <button
                 class="appButton"
                 id="settingsApp"
@@ -715,6 +864,9 @@
             </button>
 
 
+
+            <!-- GAMES -->
+
             <button
                 class="appButton"
                 id="gamesApp"
@@ -728,6 +880,9 @@
 
             </button>
 
+
+
+            <!-- TASK MANAGER -->
 
             <button
                 class="appButton"
@@ -747,7 +902,9 @@
 
 
 
-        <!-- START MENU BOTTOM -->
+        <!-- ============================================
+             START MENU BOTTOM
+             ============================================ -->
 
         <div id="startBottom">
 
@@ -766,7 +923,9 @@
 
 
 
-    <!-- SYSTEM TRAY -->
+    <!-- ================================================
+         SYSTEM TRAY
+         ================================================ -->
 
     <div id="systemTray">
 
