@@ -1,30 +1,42 @@
 /* =====================================================
    WebOS v1.0 — COMPLETE JAVASCRIPT
-   v0.1 → v1.0
    ===================================================== */
 
 
 /* =====================================================
-   0.1 — ELEMENTS
+   1. ELEMENTS
    ===================================================== */
 
-const welcomeScreen = document.getElementById("welcomeScreen");
-const startWebOS = document.getElementById("startWebOS");
-const welcomeLoading = document.getElementById("welcomeLoading");
+const welcomeScreen =
+    document.getElementById("welcomeScreen");
 
-const desktop = document.getElementById("desktop");
+const startWebOS =
+    document.getElementById("startWebOS");
 
-const startButton = document.getElementById("startButton");
-const startMenu = document.getElementById("startMenu");
+const welcomeLoading =
+    document.getElementById("welcomeLoading");
 
-const taskbarApps = document.getElementById("taskbarApps");
+const desktop =
+    document.getElementById("desktop");
 
-const battery = document.getElementById("battery");
-const clock = document.getElementById("clock");
+const startButton =
+    document.getElementById("startButton");
+
+const startMenu =
+    document.getElementById("startMenu");
+
+const taskbarApps =
+    document.getElementById("taskbarApps");
+
+const battery =
+    document.getElementById("battery");
+
+const clock =
+    document.getElementById("clock");
 
 
 /* =====================================================
-   0.2 — WINDOWS
+   2. WINDOWS
    ===================================================== */
 
 const filesWindow =
@@ -62,7 +74,7 @@ let highestZIndex = 100;
 
 
 /* =====================================================
-   0.3 — HIDE WINDOWS AT START
+   3. HIDE WINDOWS AT START
    ===================================================== */
 
 Object.values(windows).forEach(function (windowElement) {
@@ -77,26 +89,18 @@ Object.values(windows).forEach(function (windowElement) {
 
 
 /* =====================================================
-   0.4 — CLOCK
+   4. CLOCK
    ===================================================== */
 
 function updateClock() {
 
-    if (!clock) {
-        return;
-    }
-
     const now = new Date();
 
-    let hours = now.getHours();
+    let hours =
+        String(now.getHours()).padStart(2, "0");
 
-    let minutes = now.getMinutes();
-
-    hours =
-        String(hours).padStart(2, "0");
-
-    minutes =
-        String(minutes).padStart(2, "0");
+    let minutes =
+        String(now.getMinutes()).padStart(2, "0");
 
     clock.textContent =
         hours + ":" + minutes;
@@ -106,19 +110,17 @@ function updateClock() {
 
 updateClock();
 
-setInterval(updateClock, 1000);
+setInterval(
+    updateClock,
+    1000
+);
 
 
 /* =====================================================
-   0.5 — BATTERY
+   5. BATTERY
    ===================================================== */
 
 async function setupBattery() {
-
-    if (!battery) {
-        return;
-    }
-
 
     if (!navigator.getBattery) {
 
@@ -188,68 +190,31 @@ setupBattery();
 
 
 /* =====================================================
-   0.6 — START MENU
+   6. START MENU
    ===================================================== */
 
-if (startMenu) {
-
-    startMenu.style.display = "none";
-
-}
+startMenu.style.display = "none";
 
 
-if (startButton) {
-
-    startButton.addEventListener(
-        "click",
-        function (event) {
-
-            event.stopPropagation();
-
-
-            if (
-                startMenu.style.display ===
-                "block"
-            ) {
-
-                startMenu.style.display =
-                    "none";
-
-            } else {
-
-                startMenu.style.display =
-                    "block";
-
-            }
-
-        }
-    );
-
-}
-
-
-if (startMenu) {
-
-    startMenu.addEventListener(
-        "click",
-        function (event) {
-
-            event.stopPropagation();
-
-        }
-    );
-
-}
-
-
-document.addEventListener(
+startButton.addEventListener(
     "click",
-    function () {
+    function (event) {
 
-        if (startMenu) {
+        event.stopPropagation();
+
+
+        if (
+            startMenu.style.display ===
+            "block"
+        ) {
 
             startMenu.style.display =
                 "none";
+
+        } else {
+
+            startMenu.style.display =
+                "block";
 
         }
 
@@ -257,8 +222,29 @@ document.addEventListener(
 );
 
 
+startMenu.addEventListener(
+    "click",
+    function (event) {
+
+        event.stopPropagation();
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function () {
+
+        startMenu.style.display =
+            "none";
+
+    }
+);
+
+
 /* =====================================================
-   0.7 — WINDOW FUNCTIONS
+   7. WINDOW FUNCTIONS
    ===================================================== */
 
 function openWindow(name) {
@@ -268,7 +254,9 @@ function openWindow(name) {
 
 
     if (!windowElement) {
+
         return;
+
     }
 
 
@@ -292,7 +280,9 @@ function closeWindow(name) {
 
 
     if (!windowElement) {
+
         return;
+
     }
 
 
@@ -312,7 +302,9 @@ function minimizeWindow(name) {
 
 
     if (!windowElement) {
+
         return;
+
     }
 
 
@@ -329,7 +321,9 @@ function maximizeWindow(name) {
 
 
     if (!windowElement) {
+
         return;
+
     }
 
 
@@ -348,36 +342,36 @@ function maximizeWindow(name) {
 
 
 /* =====================================================
-   0.8 — BRING WINDOW TO FRONT
+   8. BRING WINDOW TO FRONT
    ===================================================== */
 
-Object.values(windows).forEach(
-    function (windowElement) {
+document.addEventListener(
+    "mousedown",
+    function (event) {
+
+        const windowElement =
+            event.target.closest(".window");
+
 
         if (!windowElement) {
+
             return;
+
         }
 
 
-        windowElement.addEventListener(
-            "mousedown",
-            function () {
-
-                highestZIndex++;
+        highestZIndex++;
 
 
-                windowElement.style.zIndex =
-                    highestZIndex;
-
-            }
-        );
+        windowElement.style.zIndex =
+            highestZIndex;
 
     }
 );
 
 
 /* =====================================================
-   0.9 — TASKBAR APP BUTTONS
+   9. TASKBAR APP BUTTONS
    ===================================================== */
 
 const taskbarButtons = {};
@@ -389,13 +383,10 @@ function addTaskbarButton(
     icon
 ) {
 
-    if (!taskbarApps) {
-        return;
-    }
-
-
     if (taskbarButtons[name]) {
+
         return;
+
     }
 
 
@@ -420,7 +411,9 @@ function addTaskbarButton(
 
 
             if (!windowElement) {
+
                 return;
+
             }
 
 
@@ -456,6 +449,7 @@ function removeTaskbarButton(name) {
 
         taskbarButtons[name].remove();
 
+
         delete taskbarButtons[name];
 
     }
@@ -464,7 +458,7 @@ function removeTaskbarButton(name) {
 
 
 /* =====================================================
-   1.0 — OPEN APP
+   10. OPEN APP
    ===================================================== */
 
 function openApp(
@@ -483,22 +477,20 @@ function openApp(
     );
 
 
-    if (startMenu) {
-
-        startMenu.style.display =
-            "none";
-
-    }
+    startMenu.style.display =
+        "none";
 
 }
 
 
 /* =====================================================
-   FILES — OPEN
+   11. FILES APP
    ===================================================== */
 
 const filesApp =
-    document.getElementById("filesApp");
+    document.getElementById(
+        "filesApp"
+    );
 
 
 if (filesApp) {
@@ -543,8 +535,6 @@ if (filesDesktopIcon) {
 }
 
 
-/* FILES CONTROLS */
-
 const minimizeFiles =
     document.getElementById(
         "minimizeFiles"
@@ -557,7 +547,9 @@ if (minimizeFiles) {
         "click",
         function () {
 
-            minimizeWindow("files");
+            minimizeWindow(
+                "files"
+            );
 
         }
     );
@@ -577,7 +569,9 @@ if (maximizeFiles) {
         "click",
         function () {
 
-            maximizeWindow("files");
+            maximizeWindow(
+                "files"
+            );
 
         }
     );
@@ -597,7 +591,9 @@ if (closeFiles) {
         "click",
         function () {
 
-            closeWindow("files");
+            closeWindow(
+                "files"
+            );
 
         }
     );
@@ -606,7 +602,7 @@ if (closeFiles) {
 
 
 /* =====================================================
-   NOTES
+   12. NOTES APP
    ===================================================== */
 
 const notesEditor =
@@ -630,7 +626,9 @@ const notesApp =
 function loadNote() {
 
     if (!notesEditor) {
+
         return;
+
     }
 
 
@@ -698,8 +696,6 @@ if (notesDesktopIcon) {
 }
 
 
-/* SAVE NOTE */
-
 const saveNote =
     document.getElementById(
         "saveNote"
@@ -712,31 +708,20 @@ if (saveNote) {
         "click",
         function () {
 
-            if (!notesEditor) {
-                return;
-            }
-
-
             localStorage.setItem(
                 "webosNote",
                 notesEditor.value
             );
 
 
-            if (saveStatus) {
-
-                saveStatus.textContent =
-                    "Saved ✓";
-
-            }
+            saveStatus.textContent =
+                "Saved ✓";
 
         }
     );
 
 }
 
-
-/* CLEAR NOTE */
 
 const clearNote =
     document.getElementById(
@@ -750,12 +735,8 @@ if (clearNote) {
         "click",
         function () {
 
-            if (notesEditor) {
-
-                notesEditor.value =
-                    "";
-
-            }
+            notesEditor.value =
+                "";
 
 
             localStorage.removeItem(
@@ -763,20 +744,14 @@ if (clearNote) {
             );
 
 
-            if (saveStatus) {
-
-                saveStatus.textContent =
-                    "Cleared";
-
-            }
+            saveStatus.textContent =
+                "Cleared";
 
         }
     );
 
 }
 
-
-/* NOTES CONTROLS */
 
 const minimizeNotes =
     document.getElementById(
@@ -790,7 +765,9 @@ if (minimizeNotes) {
         "click",
         function () {
 
-            minimizeWindow("notes");
+            minimizeWindow(
+                "notes"
+            );
 
         }
     );
@@ -810,7 +787,9 @@ if (maximizeNotes) {
         "click",
         function () {
 
-            maximizeWindow("notes");
+            maximizeWindow(
+                "notes"
+            );
 
         }
     );
@@ -830,7 +809,9 @@ if (closeNotes) {
         "click",
         function () {
 
-            closeWindow("notes");
+            closeWindow(
+                "notes"
+            );
 
         }
     );
@@ -839,7 +820,7 @@ if (closeNotes) {
 
 
 /* =====================================================
-   CALCULATOR
+   13. CALCULATOR
    ===================================================== */
 
 const calculatorDisplay =
@@ -896,8 +877,6 @@ if (calculatorDesktopIcon) {
 }
 
 
-/* CALCULATOR BUTTONS */
-
 const calculatorButtons =
     document.querySelectorAll(
         ".calculatorButtons button"
@@ -910,11 +889,6 @@ calculatorButtons.forEach(
         button.addEventListener(
             "click",
             function () {
-
-                if (!calculatorDisplay) {
-                    return;
-                }
-
 
                 const value =
                     button.dataset.value;
@@ -941,18 +915,9 @@ calculatorButtons.forEach(
 
                 if (
                     calculatorDisplay.value ===
-                    "Error"
-                ) {
-
-                    calculatorDisplay.value =
-                        "0";
-
-                }
-
-
-                if (
+                    "0" ||
                     calculatorDisplay.value ===
-                    "0"
+                    "Error"
                 ) {
 
                     calculatorDisplay.value =
@@ -973,11 +938,6 @@ calculatorButtons.forEach(
 
 
 function calculate() {
-
-    if (!calculatorDisplay) {
-        return;
-    }
-
 
     const expression =
         calculatorDisplay.value;
@@ -1024,7 +984,7 @@ function calculate() {
         calculatorDisplay.value =
             result;
 
-    } catch (error) {
+    } catch {
 
         calculatorDisplay.value =
             "Error";
@@ -1033,8 +993,6 @@ function calculate() {
 
 }
 
-
-/* CALCULATOR CONTROLS */
 
 const minimizeCalculator =
     document.getElementById(
@@ -1103,7 +1061,7 @@ if (closeCalculator) {
 
 
 /* =====================================================
-   SETTINGS
+   14. SETTINGS
    ===================================================== */
 
 const settingsApp =
@@ -1171,12 +1129,6 @@ async function updateSettings() {
         );
 
 
-    const settingsBattery =
-        document.getElementById(
-            "settingsBattery"
-        );
-
-
     if (systemPlatform) {
 
         systemPlatform.textContent =
@@ -1234,6 +1186,12 @@ async function updateSettings() {
     }
 
 
+    const settingsBattery =
+        document.getElementById(
+            "settingsBattery"
+        );
+
+
     if (
         navigator.getBattery &&
         settingsBattery
@@ -1247,7 +1205,8 @@ async function updateSettings() {
 
             const percent =
                 Math.round(
-                    batteryManager.level * 100
+                    batteryManager.level *
+                    100
                 );
 
 
@@ -1260,24 +1219,17 @@ async function updateSettings() {
                         : "Not charging"
                 );
 
-        } catch (error) {
+        } catch {
 
             settingsBattery.textContent =
                 "Unavailable";
 
         }
 
-    } else if (settingsBattery) {
-
-        settingsBattery.textContent =
-            "Unavailable";
-
     }
 
 }
 
-
-/* SETTINGS CONTROLS */
 
 const minimizeSettings =
     document.getElementById(
@@ -1346,7 +1298,7 @@ if (closeSettings) {
 
 
 /* =====================================================
-   TASK MANAGER
+   15. TASK MANAGER
    ===================================================== */
 
 const webosStartTime =
@@ -1382,10 +1334,28 @@ if (taskManagerApp) {
 
 function updateTaskManager() {
 
-    const uptime =
+    const seconds =
+        Math.floor(
+            (
+                Date.now() -
+                webosStartTime
+            ) / 1000
+        );
+
+
+    const webosUptime =
         document.getElementById(
             "webosUptime"
         );
+
+
+    if (webosUptime) {
+
+        webosUptime.textContent =
+            seconds +
+            " seconds";
+
+    }
 
 
     const taskNetwork =
@@ -1393,39 +1363,6 @@ function updateTaskManager() {
             "taskNetwork"
         );
 
-
-    const taskStorage =
-        document.getElementById(
-            "taskStorage"
-        );
-
-
-    const runningApps =
-        document.getElementById(
-            "runningApps"
-        );
-
-
-    /* UPTIME */
-
-    if (uptime) {
-
-        const seconds =
-            Math.floor(
-                (Date.now() -
-                    webosStartTime) /
-                1000
-            );
-
-
-        uptime.textContent =
-            seconds +
-            " seconds";
-
-    }
-
-
-    /* NETWORK */
 
     if (taskNetwork) {
 
@@ -1437,46 +1374,54 @@ function updateTaskManager() {
     }
 
 
-    /* STORAGE */
+    const taskStorage =
+        document.getElementById(
+            "taskStorage"
+        );
+
 
     if (
-        taskStorage &&
         navigator.storage &&
-        navigator.storage.estimate
+        navigator.storage.estimate &&
+        taskStorage
     ) {
 
         navigator.storage
             .estimate()
-            .then(function (data) {
+            .then(
+                function (data) {
 
-                const usedMB =
-                    (data.usage || 0) /
-                    1024 /
-                    1024;
+                    const usedMB =
+                        (data.usage || 0) /
+                        1024 /
+                        1024;
 
 
-                taskStorage.textContent =
-                    usedMB.toFixed(2) +
-                    " MB used";
+                    taskStorage.textContent =
+                        usedMB.toFixed(2) +
+                        " MB used";
 
-            });
-
-    } else if (taskStorage) {
-
-        taskStorage.textContent =
-            "Unavailable";
+                }
+            );
 
     }
 
 
-    /* RUNNING APPS */
+    const runningApps =
+        document.getElementById(
+            "runningApps"
+        );
+
 
     if (!runningApps) {
+
         return;
+
     }
 
 
-    runningApps.innerHTML = "";
+    runningApps.innerHTML =
+        "";
 
 
     const appList = [
@@ -1489,10 +1434,7 @@ function updateTaskManager() {
 
         ["settings", "⚙️ Settings"],
 
-        [
-            "taskManager",
-            "📊 Task Manager"
-        ]
+        ["taskManager", "📊 Task Manager"]
 
     ];
 
@@ -1507,7 +1449,7 @@ function updateTaskManager() {
             if (
                 windowElement &&
                 windowElement.style.display !==
-                "none"
+                    "none"
             ) {
 
                 const row =
@@ -1556,8 +1498,6 @@ if (refreshTaskManager) {
 
 }
 
-
-/* TASK MANAGER CONTROLS */
 
 const minimizeTaskManager =
     document.getElementById(
@@ -1622,6 +1562,7 @@ if (closeTaskManager) {
         }
     );
 
+
 }
 
 
@@ -1632,7 +1573,7 @@ setInterval(
 
 
 /* =====================================================
-   GAMES
+   16. GAMES
    ===================================================== */
 
 const gamesApp =
@@ -1647,12 +1588,8 @@ if (gamesApp) {
         "click",
         function () {
 
-            if (startMenu) {
-
-                startMenu.style.display =
-                    "none";
-
-            }
+            startMenu.style.display =
+                "none";
 
 
             alert(
@@ -1666,7 +1603,7 @@ if (gamesApp) {
 
 
 /* =====================================================
-   POWER BUTTON
+   17. POWER BUTTON
    ===================================================== */
 
 const powerButton =
@@ -1681,12 +1618,8 @@ if (powerButton) {
         "click",
         function () {
 
-            if (startMenu) {
-
-                startMenu.style.display =
-                    "none";
-
-            }
+            startMenu.style.display =
+                "none";
 
 
             alert(
@@ -1700,7 +1633,7 @@ if (powerButton) {
 
 
 /* =====================================================
-   NETWORK STATUS
+   18. NETWORK STATUS
    ===================================================== */
 
 window.addEventListener(
@@ -1724,48 +1657,52 @@ window.addEventListener(
 
 
 /* =====================================================
-   DESKTOP ICON SELECTION
+   19. DESKTOP ICON SELECTION
    ===================================================== */
 
 document
     .querySelectorAll(".desktop-icon")
-    .forEach(function (icon) {
+    .forEach(
+        function (icon) {
 
-        icon.addEventListener(
-            "click",
-            function () {
+            icon.addEventListener(
+                "click",
+                function () {
 
-                document
-                    .querySelectorAll(
-                        ".desktop-icon"
-                    )
-                    .forEach(
-                        function (other) {
+                    document
+                        .querySelectorAll(
+                            ".desktop-icon"
+                        )
+                        .forEach(
+                            function (other) {
 
-                            other.style.background =
-                                "";
+                                other.style.background =
+                                    "";
 
-                        }
-                    );
+                            }
+                        );
 
 
-                icon.style.background =
-                    "rgba(255,255,255,0.15)";
+                    icon.style.background =
+                        "rgba(255,255,255,0.15)";
 
-            }
-        );
+                }
+            );
 
-    });
+        }
+    );
 
 
 /* =====================================================
-   WELCOME SCREEN
+   20. WELCOME SCREEN
    ===================================================== */
 
 function enterWebOS() {
 
     if (!welcomeScreen) {
+
         return;
+
     }
 
 
@@ -1805,8 +1742,6 @@ if (startWebOS) {
 }
 
 
-/* Automatically enter after 5 seconds */
-
 setTimeout(
     function () {
 
@@ -1818,7 +1753,224 @@ setTimeout(
 
 
 /* =====================================================
-   DRAGGABLE WINDOWS — v1.0
+   21. FEATURE 1 — APP SEARCH
+   ===================================================== */
+
+const searchBox =
+    document.getElementById(
+        "searchBox"
+    );
+
+
+const startApps =
+    document.querySelector(
+        ".startApps"
+    );
+
+
+if (
+    searchBox &&
+    startApps
+) {
+
+    searchBox.addEventListener(
+        "input",
+        function () {
+
+            const search =
+                searchBox.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const apps =
+                startApps.querySelectorAll(
+                    ".appButton"
+                );
+
+
+            apps.forEach(
+                function (app) {
+
+                    const text =
+                        app.textContent
+                            .toLowerCase();
+
+
+                    if (
+                        search === "" ||
+                        text.includes(search)
+                    ) {
+
+                        app.style.display =
+                            "flex";
+
+                    } else {
+
+                        app.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   22. FEATURE 2 — DARK / LIGHT MODE
+   ===================================================== */
+
+const themeToggle =
+    document.getElementById(
+        "themeToggle"
+    );
+
+
+function applyTheme(theme) {
+
+    if (theme === "light") {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+    } else {
+
+        document.body.classList.remove(
+            "light-mode"
+        );
+
+    }
+
+}
+
+
+if (themeToggle) {
+
+    themeToggle.addEventListener(
+        "click",
+        function () {
+
+            const isLight =
+                document.body.classList.contains(
+                    "light-mode"
+                );
+
+
+            const newTheme =
+                isLight
+                    ? "dark"
+                    : "light";
+
+
+            applyTheme(
+                newTheme
+            );
+
+
+            localStorage.setItem(
+                "webosTheme",
+                newTheme
+            );
+
+        }
+    );
+
+}
+
+
+const savedTheme =
+    localStorage.getItem(
+        "webosTheme"
+    );
+
+
+if (savedTheme) {
+
+    applyTheme(
+        savedTheme
+    );
+
+}
+
+
+/* =====================================================
+   23. FEATURE 3 — WALLPAPER SELECTOR
+   ===================================================== */
+
+const wallpaperButtons =
+    document.querySelectorAll(
+        ".wallpaperButton"
+    );
+
+
+function setWallpaper(name) {
+
+    document.body.classList.remove(
+        "wallpaper-space",
+        "wallpaper-ocean",
+        "wallpaper-forest",
+        "wallpaper-night"
+    );
+
+
+    document.body.classList.add(
+        "wallpaper-" + name
+    );
+
+
+    localStorage.setItem(
+        "webosWallpaper",
+        name
+    );
+
+}
+
+
+wallpaperButtons.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const wallpaper =
+                    button.dataset.wallpaper;
+
+
+                setWallpaper(
+                    wallpaper
+                );
+
+            }
+        );
+
+    }
+);
+
+
+const savedWallpaper =
+    localStorage.getItem(
+        "webosWallpaper"
+    );
+
+
+if (savedWallpaper) {
+
+    setWallpaper(
+        savedWallpaper
+    );
+
+}
+
+
+/* =====================================================
+   24. DRAGGABLE WINDOWS
    ===================================================== */
 
 let draggedWindow = null;
@@ -1828,183 +1980,136 @@ let offsetX = 0;
 let offsetY = 0;
 
 
-/*
-   Every .windowHeader becomes a
-   draggable area.
-*/
-
 document
-    .querySelectorAll(".windowHeader")
-    .forEach(function (header) {
+    .querySelectorAll(
+        ".windowHeader"
+    )
+    .forEach(
+        function (header) {
 
-        header.addEventListener(
-            "mousedown",
-            function (event) {
+            header.addEventListener(
+                "mousedown",
+                function (event) {
 
-                /*
-                   Don't drag when clicking
-                   minimize, maximize or close.
-                */
+                    /*
+                     Don't drag when clicking
+                     window control buttons.
+                    */
 
-                if (
-                    event.target.closest(
-                        "button"
-                    )
-                ) {
+                    if (
+                        event.target.closest(
+                            "button"
+                        )
+                    ) {
 
-                    return;
+                        return;
+
+                    }
+
+
+                    const win =
+                        header.closest(
+                            ".window"
+                        );
+
+
+                    if (!win) {
+
+                        return;
+
+                    }
+
+
+                    /*
+                     Don't start normal
+                     dragging from a maximized window.
+                    */
+
+                    if (
+                        win.classList.contains(
+                            "maximized"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    draggedWindow =
+                        win;
+
+
+                    const rect =
+                        win.getBoundingClientRect();
+
+
+                    offsetX =
+                        event.clientX -
+                        rect.left;
+
+
+                    offsetY =
+                        event.clientY -
+                        rect.top;
+
+
+                    win.style.position =
+                        "absolute";
+
+
+                    highestZIndex++;
+
+
+                    win.style.zIndex =
+                        highestZIndex;
+
+
+                    /*
+                     Prevent text selection
+                     while dragging.
+                    */
+
+                    event.preventDefault();
 
                 }
+            );
 
+        }
+    );
 
-                const win =
-                    header.closest(
-                        ".window"
-                    );
-
-
-                if (!win) {
-                    return;
-                }
-
-
-                /*
-                   Bring the window
-                   to the front.
-                */
-
-                highestZIndex++;
-
-
-                win.style.zIndex =
-                    highestZIndex;
-
-
-                /*
-                   Get current position.
-                */
-
-                const rect =
-                    win.getBoundingClientRect();
-
-
-                offsetX =
-                    event.clientX -
-                    rect.left;
-
-
-                offsetY =
-                    event.clientY -
-                    rect.top;
-
-
-                /*
-                   Make the window
-                   absolutely positioned.
-                */
-
-                win.style.position =
-                    "absolute";
-
-
-                win.style.left =
-                    rect.left + "px";
-
-
-                win.style.top =
-                    rect.top + "px";
-
-
-                draggedWindow =
-                    win;
-
-
-                event.preventDefault();
-
-            }
-        );
-
-    });
-
-
-/* =====================================================
-   DRAG WINDOW
-   ===================================================== */
 
 document.addEventListener(
     "mousemove",
     function (event) {
 
         if (!draggedWindow) {
+
             return;
+
         }
 
 
-        let newX =
+        const newLeft =
             event.clientX -
             offsetX;
 
 
-        let newY =
+        const newTop =
             event.clientY -
             offsetY;
 
 
-        /*
-           Keep the window
-           inside the screen.
-        */
-
-        const maxX =
-            Math.max(
-                0,
-                window.innerWidth -
-                draggedWindow.offsetWidth
-            );
-
-
-        const maxY =
-            Math.max(
-                0,
-                window.innerHeight -
-                draggedWindow.offsetHeight
-            );
-
-
-        newX =
-            Math.max(
-                0,
-                Math.min(
-                    newX,
-                    maxX
-                )
-            );
-
-
-        newY =
-            Math.max(
-                0,
-                Math.min(
-                    newY,
-                    maxY
-                )
-            );
-
-
         draggedWindow.style.left =
-            newX + "px";
+            newLeft + "px";
 
 
         draggedWindow.style.top =
-            newY + "px";
+            newTop + "px";
 
     }
 );
 
-
-/* =====================================================
-   STOP DRAGGING
-   ===================================================== */
 
 document.addEventListener(
     "mouseup",
@@ -2017,7 +2122,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   INITIALIZE WEBOS
+   25. INITIALIZE WEBOS
    ===================================================== */
 
 function initializeWebOS() {
@@ -2036,12 +2141,8 @@ function initializeWebOS() {
     );
 
 
-    if (startMenu) {
-
-        startMenu.style.display =
-            "none";
-
-    }
+    startMenu.style.display =
+        "none";
 
 
     updateClock();
@@ -2058,36 +2159,3 @@ function initializeWebOS() {
 
 
 initializeWebOS();
-
-
-/* =====================================================
-   WEBOS READY
-   ===================================================== */
-
-console.log(
-    "🖥️ WebOS v1.0 — READY"
-);
-
-console.log(
-    "🪟 Draggable windows — ENABLED"
-);
-
-console.log(
-    "📁 Files — READY"
-);
-
-console.log(
-    "📝 Notes — READY"
-);
-
-console.log(
-    "🧮 Calculator — READY"
-);
-
-console.log(
-    "⚙️ Settings — READY"
-);
-
-console.log(
-    "📊 Task Manager — READY"
-);
